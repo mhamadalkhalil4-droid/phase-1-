@@ -832,6 +832,93 @@
       box-shadow: 0 0 0 2px var(--focus-ring-ultraviolet), inset 0 1px 2px var(--inset-input-soft);
     }
 
+    .pay-type-dropdown {
+      position: relative;
+      min-width: 168px;
+      max-width: 100%;
+    }
+    .pay-type-dd-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      text-align: left;
+      cursor: pointer;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 8px;
+      border: 1px solid var(--input-border);
+      background: var(--white);
+      color: var(--near-black);
+      box-shadow: inset 0 1px 2px var(--inset-shadow-soft);
+    }
+    .pay-type-dd-trigger::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--graphite-plum);
+      flex-shrink: 0;
+      opacity: 0.75;
+    }
+    .pay-type-dd-panel {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 4px);
+      z-index: 80;
+      background: var(--white);
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(var(--rgb-midnight-plum), 0.12);
+      padding: 4px 0;
+      max-height: none;
+      overflow: visible;
+    }
+    .pay-type-opt {
+      display: block;
+      width: 100%;
+      padding: 8px 12px;
+      border: none;
+      background: none;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--near-black);
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .pay-type-opt:hover:not(.pay-type-opt--disabled) {
+      background: var(--row-hover);
+    }
+    .pay-type-opt--disabled.type-option {
+      position: relative;
+      color: #9ca3af;
+      cursor: not-allowed;
+      padding-right: 12px;
+    }
+    .pay-type-opt--disabled.type-option:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      background: #1f2937;
+      color: #ffffff;
+      font-size: 11px;
+      padding: 5px 8px;
+      border-radius: 5px;
+      white-space: normal;
+      max-width: 280px;
+      z-index: 999;
+      bottom: 100%;
+      left: 0;
+      pointer-events: none;
+      margin-bottom: 4px;
+      line-height: 1.35;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
     /* PP-002 plan detail drawer (read-only) */
     .pp002-drawer-backdrop {
       position: fixed;
@@ -1043,10 +1130,16 @@
       padding: 4px;
     }
     .full-cal-grid button.cal-day.blocked {
-      background: var(--mist-lavender);
-      color: var(--graphite-plum);
+      background: #f3f4f6;
+      color: #6b7280;
       cursor: not-allowed;
-      opacity: 0.55;
+      font-size: 9px;
+      line-height: 1.2;
+      padding: 2px 3px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-height: auto;
+      opacity: 1;
     }
     .full-cal-grid button.cal-day.available:hover {
       border-color: var(--ultraviolet);
@@ -1084,10 +1177,15 @@
       background: var(--row-hover);
     }
     .pay-rel-period-btn.blocked {
-      opacity: 0.45;
+      opacity: 1;
       cursor: not-allowed;
-      background: var(--mist-lavender);
-      color: var(--graphite-plum);
+      background: #f3f4f6;
+      color: #6b7280;
+      font-size: 9px;
+      line-height: 1.2;
+      padding: 8px 10px;
+      text-align: left;
+      white-space: normal;
     }
     .pay-rel-period-btn.selected {
       border-color: var(--ultraviolet);
@@ -2111,6 +2209,19 @@
                 <tr><td>Month 6 Day 12</td><td>Discount</td><td>−40.00</td><td>Mid-year adjustment</td></tr>
                 <tr><td>Month 6 Day 5</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
                 <tr class="row-total"><td colspan="2">TOTAL</td><td>660.00</td><td>Same day stack</td></tr>
+                <tr><td colspan="4" style="font-weight:700;padding-top:16px;border-top:2px solid var(--mist-lavender)">Fixed mode preview (demo): Monthly · Collection day 5 · AED 500</td></tr>
+                <tr><td>Month 1 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>Month 2 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>Month 3 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>Month 4 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>Month 5 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>Month 6 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>Month 7 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>Month 8 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>Month 9 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>Month 10 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>Month 11 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>Month 12 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
               </tbody>
             </table>
           </div>
@@ -2144,6 +2255,19 @@
                 <tr><td>12/06/2026</td><td>Discount</td><td>−40.00</td><td>Mid-year adjustment</td></tr>
                 <tr><td>05/06/2026</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
                 <tr class="row-total"><td colspan="2">TOTAL</td><td>660.00</td><td>Same day stack</td></tr>
+                <tr><td colspan="4" style="font-weight:700;padding-top:16px;border-top:2px solid var(--mist-lavender)">Fixed mode preview (demo): Monthly · Collection day 5 · AED 500 · 01/09/2026 → 01/09/2027</td></tr>
+                <tr><td>05/09/2026</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>05/10/2026</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>05/11/2026</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>05/12/2026</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>05/01/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>05/02/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>05/03/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>05/04/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>05/05/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>05/06/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>05/07/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
+                <tr><td>05/08/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
               </tbody>
             </table>
           </div>
@@ -2587,59 +2711,224 @@
     return free2;
   }
 
-  function shouldOfferExtraRecurring(ctx, pfx) {
-    return freqWeight(getRecFreq(pfx)) > freqWeight(mandateFreqEl(ctx).value);
+  var PAY_TYPE_LABELS = {
+    "": "Select type",
+    recurring2: "Recurring Payment",
+    addon: "Add-On",
+    discount: "Discount",
+    onetime: "One-Time",
+  };
+
+  var TOOLTIP_EQ =
+    "This option is not available because the frequency of the recurring payment is equal to the frequency of the mandate";
+  var TOOLTIP_FULL = "This option is not available because all collection periods are occupied";
+
+  function syncPayTypeDropdownTrigger(row) {
+    var root = row.querySelector("[data-pay-type-dropdown]");
+    if (!root) return;
+    var trigger = root.querySelector(".pay-type-dd-trigger");
+    if (!trigger) return;
+    var k = row.getAttribute("data-pay-kind") || "";
+    trigger.textContent = PAY_TYPE_LABELS.hasOwnProperty(k) ? PAY_TYPE_LABELS[k] : PAY_TYPE_LABELS[""];
   }
 
-  function shouldOfferOneTime(ctx, pfx) {
-    var fr = getRecFreq(pfx),
-      mf = mandateFreqEl(ctx).value;
-    if (freqWeight(fr) <= freqWeight(mf)) return false;
-    return countFreePeriods(ctx, pfx) > 0;
-  }
-
-  function populatePayTypeSelect(sel, ctx, pfx) {
-    if (!sel) return;
-    var cur = sel.value;
-    sel.innerHTML = "";
-    var o0 = document.createElement("option");
-    o0.value = "";
-    o0.textContent = "Select type";
-    sel.appendChild(o0);
-    if (shouldOfferExtraRecurring(ctx, pfx)) {
-      var or = document.createElement("option");
-      or.value = "recurring2";
-      or.textContent = "Recurring Payment";
-      sel.appendChild(or);
-    }
-    ["addon", "discount"].forEach(function (v) {
-      var o = document.createElement("option");
-      o.value = v;
-      o.textContent = v === "addon" ? "Add-On" : "Discount";
-      sel.appendChild(o);
+  function closeAllPayTypeDropdowns() {
+    document.querySelectorAll(".pay-type-dd-panel").forEach(function (p) {
+      p.hidden = true;
     });
-    if (shouldOfferOneTime(ctx, pfx)) {
-      var ot = document.createElement("option");
-      ot.value = "onetime";
-      ot.textContent = "One-Time";
-      sel.appendChild(ot);
+  }
+
+  if (!window.__autoraPayTypeDdDoc) {
+    window.__autoraPayTypeDdDoc = true;
+    document.addEventListener("click", function () {
+      closeAllPayTypeDropdowns();
+    });
+  }
+
+  function populatePayTypeDropdown(row, ctx, pfx, payTbl) {
+    var root = row.querySelector("[data-pay-type-dropdown]");
+    if (!root || !payTbl) return;
+    var panel = root.querySelector(".pay-type-dd-panel");
+    if (!panel) return;
+    panel.hidden = true;
+
+    var mf = mandateFreqEl(ctx).value;
+    var fr = getRecFreq(pfx);
+    var fw = freqWeight(fr);
+    var mw = freqWeight(mf);
+    if (!fr || fw < 0) fw = mw;
+    var free = countFreePeriods(ctx, pfx);
+
+    var recOk = fw > mw && free > 0;
+    var otOk = fw > mw && free > 0;
+    var recTip = fw <= mw ? TOOLTIP_EQ : TOOLTIP_FULL;
+    var otTip = fw <= mw ? TOOLTIP_EQ : TOOLTIP_FULL;
+
+    var cur = row.getAttribute("data-pay-kind") || "";
+
+    panel.innerHTML = "";
+
+    function appendChoice(val, label, disabled, tip) {
+      var el = document.createElement(disabled ? "div" : "button");
+      if (!disabled) el.type = "button";
+      el.className = "pay-type-opt" + (disabled ? " pay-type-opt--disabled type-option" : "");
+      el.setAttribute("data-pay-value", val);
+      el.textContent = label;
+      if (disabled && tip) el.setAttribute("data-tooltip", tip);
+      if (!disabled) {
+        el.addEventListener("click", function (ev) {
+          ev.stopPropagation();
+          closeAllPayTypeDropdowns();
+          payTbl.applyPaymentKindChange(row, val, ctx, pfx);
+        });
+      }
+      panel.appendChild(el);
     }
-    var ok = false;
-    for (var i = 0; i < sel.options.length; i++) if (sel.options[i].value === cur) ok = true;
-    sel.value = ok ? cur : "";
+
+    appendChoice("", PAY_TYPE_LABELS[""], false, null);
+
+    if (recOk) appendChoice("recurring2", PAY_TYPE_LABELS.recurring2, false, null);
+    else appendChoice("recurring2", PAY_TYPE_LABELS.recurring2, true, recTip);
+
+    appendChoice("addon", PAY_TYPE_LABELS.addon, false, null);
+    appendChoice("discount", PAY_TYPE_LABELS.discount, false, null);
+
+    if (otOk) appendChoice("onetime", PAY_TYPE_LABELS.onetime, false, null);
+    else appendChoice("onetime", PAY_TYPE_LABELS.onetime, true, otTip);
+
+    var selOk =
+      !cur ||
+      cur === "addon" ||
+      cur === "discount" ||
+      (cur === "recurring2" && recOk) ||
+      (cur === "onetime" && otOk);
+    if (!selOk) {
+      payTbl.applyPaymentKindChange(row, "", ctx, pfx);
+    } else {
+      syncPayTypeDropdownTrigger(row);
+    }
   }
 
   function updateNamePlaceholders(pfx) {
-    var counts = { recurring2: 0, addon: 0, discount: 0, onetime: 0 };
     document.querySelectorAll("#" + pfx + "-payTableBody tr").forEach(function (row, ix) {
       if (ix === 0) return;
-      var k = row.getAttribute("data-pay-kind") || "";
-      if (!k || !counts.hasOwnProperty(k)) return;
-      counts[k]++;
       var inp = row.querySelector(".pay-name");
       if (!inp) return;
-      inp.placeholder = counts[k] <= 1 ? "Optional label" : "Required *";
+      inp.placeholder = "Optional label";
     });
+  }
+
+  function findPeriodBlockDescriptor(ctx, pfx, periodIx, excludeOpts) {
+    excludeOpts = excludeOpts || {};
+    var mf = mandateFreqEl(ctx).value;
+    var fq0,
+      nm0,
+      ds0,
+      i,
+      j,
+      dt,
+      dt2,
+      fs,
+      fq,
+      anch,
+      ad,
+      arr,
+      nmi,
+      rname,
+      tro,
+      ot,
+      dto,
+      nmo,
+      pix,
+      pm,
+      o;
+
+    if (ctx === "mnd") {
+      var range = getMandateRange(ctx);
+      var st = range.start,
+        en = range.end;
+      if (!st || !en) return null;
+      fq0 = getRecFreq(pfx);
+      nm0 = document.getElementById(pfx + "-rec-name");
+      var firstName = nm0 ? nm0.value.trim() : "";
+      ds0 = genDatesFirstRecurringMandate(st, en, fq0, recCdVal(pfx, fq0));
+      for (i = 0; i < ds0.length; i++) {
+        dt = parseDMY(ds0[i]);
+        if (dt && mandatePeriodIndex(dt, st, mf) === periodIx) return { typeLabel: "Recurring Payment", name: firstName };
+      }
+      var rows2 = document.querySelectorAll("#" + pfx + "-payTableBody tr[data-pay-kind=recurring2]");
+      for (i = 0; i < rows2.length; i++) {
+        var rowR = rows2[i];
+        if (excludeOpts.excludeRecurring2Row && rowR === excludeOpts.excludeRecurring2Row) continue;
+        fs = rowR.querySelector(".pay-rec2-freq");
+        fq = fs ? fs.value : "";
+        anch = ((rowR.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+        ad = parseDMY(anch);
+        nmi = rowR.querySelector(".pay-name");
+        rname = nmi ? nmi.value.trim() : "";
+        if (ad && fq) {
+          arr = genDatesFromAnchorMandate(ad, en, fq);
+          for (j = 0; j < arr.length; j++) {
+            dt2 = parseDMY(arr[j]);
+            if (dt2 && mandatePeriodIndex(dt2, st, mf) === periodIx) return { typeLabel: "Recurring Payment", name: rname };
+          }
+        }
+      }
+      var rowsOt = document.querySelectorAll("#" + pfx + "-payTableBody tr[data-pay-kind=onetime]");
+      for (i = 0; i < rowsOt.length; i++) {
+        tro = rowsOt[i];
+        if (excludeOpts.excludeOneTimeRow && tro === excludeOpts.excludeOneTimeRow) continue;
+        ot = ((tro.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+        dto = parseDMY(ot);
+        nmo = tro.querySelector(".pay-name");
+        if (dto && mandatePeriodIndex(dto, st, mf) === periodIx) return { typeLabel: "One-Time", name: nmo ? nmo.value.trim() : "" };
+      }
+      return null;
+    }
+
+    pm = getMandateRange(ctx).planMonths || 12;
+    fq0 = getRecFreq(pfx);
+    nm0 = document.getElementById(pfx + "-rec-name");
+    var firstNameP = nm0 ? nm0.value.trim() : "";
+    var occFirst = genPlanOccurrencesFirst(pm, fq0, recCdVal(pfx, fq0));
+    for (i = 0; i < occFirst.length; i++) {
+      o = occFirst[i];
+      if (planPeriodIndexFromLabel(ctx, o.label, mf) === periodIx) return { typeLabel: "Recurring Payment", name: firstNameP };
+    }
+    var rows2p = document.querySelectorAll("#" + pfx + "-payTableBody tr[data-pay-kind=recurring2]");
+    for (i = 0; i < rows2p.length; i++) {
+      var rowRp = rows2p[i];
+      if (excludeOpts.excludeRecurring2Row && rowRp === excludeOpts.excludeRecurring2Row) continue;
+      fs = rowRp.querySelector(".pay-rec2-freq");
+      fq = fs ? fs.value : "";
+      anch = ((rowRp.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+      nmi = rowRp.querySelector(".pay-name");
+      rname = nmi ? nmi.value.trim() : "";
+      var occ2 = genPlanOccurrencesRecurring2(pm, fq, anch);
+      for (j = 0; j < occ2.length; j++) {
+        if (planPeriodIndexFromLabel(ctx, occ2[j].label, mf) === periodIx) return { typeLabel: "Recurring Payment", name: rname };
+      }
+    }
+    var rowsOtp = document.querySelectorAll("#" + pfx + "-payTableBody tr[data-pay-kind=onetime]");
+    for (i = 0; i < rowsOtp.length; i++) {
+      tro = rowsOtp[i];
+      if (excludeOpts.excludeOneTimeRow && tro === excludeOpts.excludeOneTimeRow) continue;
+      ot = ((tro.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+      nmo = tro.querySelector(".pay-name");
+      var oname = nmo ? nmo.value.trim() : "";
+      if (ot.indexOf("PP|") === 0) {
+        pix = parseInt(ot.split("|")[1], 10);
+        if (!isNaN(pix) && pix === periodIx) return { typeLabel: "One-Time", name: oname };
+      } else if (ot && planPeriodIndexFromLabel(ctx, ot, mf) === periodIx) return { typeLabel: "One-Time", name: oname };
+    }
+    return null;
+  }
+
+  function formatBlockedPaymentHtml(desc) {
+    if (!desc) return "This period is not available.";
+    var s = "This period is not available because we will collect the payment " + desc.typeLabel;
+    if (desc.name) s += ' <span style="color:#9CA3AF">(' + esc(desc.name) + ")</span>";
+    return s;
   }
 
   function compareCases(pfx, ctx) {
@@ -2657,12 +2946,12 @@
       var fq0 = getRecFreq(pfx);
       var nm0 = document.getElementById(pfx + "-rec-name");
       var amt0 = document.getElementById(pfx + "-rec-amt");
-      var name0 = nm0 && nm0.value.trim() ? nm0.value.trim() : "Recurring Payment";
+      var payName0 = nm0 && nm0.value.trim() ? nm0.value.trim() : "";
       var ds0 = genDatesFirstRecurringMandate(st, en, fq0, recCdVal(pfx, fq0));
       ds0.forEach(function (dm, i) {
         rows.push({
           key: "rec0|" + dm + "|" + i,
-          recurName: name0,
+          payName: payName0,
           amount: amt0 ? amt0.value : "",
           dateLabel: dm,
         });
@@ -2674,12 +2963,12 @@
         var ad = parseDMY(anch);
         var nmi = tr.querySelector(".pay-name");
         var ami = tr.querySelector(".pay-amt");
-        var rname = nmi && nmi.value.trim() ? nmi.value.trim() : "Recurring Payment";
+        var payNameR = nmi && nmi.value.trim() ? nmi.value.trim() : "";
         if (ad && fq) {
           genDatesFromAnchorMandate(ad, en, fq).forEach(function (dm, j) {
             rows.push({
               key: "rec2|" + (tr.getAttribute("data-row-id") || ri) + "|" + dm + "|" + j,
-              recurName: rname,
+              payName: payNameR,
               amount: ami ? ami.value : "",
               dateLabel: dm,
             });
@@ -2691,11 +2980,11 @@
       var fq0 = getRecFreq(pfx);
       var nm0 = document.getElementById(pfx + "-rec-name");
       var amt0 = document.getElementById(pfx + "-rec-amt");
-      var name0 = nm0 && nm0.value.trim() ? nm0.value.trim() : "Recurring Payment";
+      var payName0b = nm0 && nm0.value.trim() ? nm0.value.trim() : "";
       genPlanOccurrencesFirst(pm, fq0, recCdVal(pfx, fq0)).forEach(function (o) {
         rows.push({
           key: "rec0|" + o.key,
-          recurName: name0,
+          payName: payName0b,
           amount: amt0 ? amt0.value : "",
           dateLabel: o.label,
         });
@@ -2706,11 +2995,11 @@
         var anch = ((tr.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
         var nmi = tr.querySelector(".pay-name");
         var ami = tr.querySelector(".pay-amt");
-        var rname = nmi && nmi.value.trim() ? nmi.value.trim() : "Recurring Payment";
+        var payNameR2 = nmi && nmi.value.trim() ? nmi.value.trim() : "";
         genPlanOccurrencesRecurring2(pm, fq, anch).forEach(function (o) {
           rows.push({
             key: "rec2|" + (tr.getAttribute("data-row-id") || "x") + "|" + o.key,
-            recurName: rname,
+            payName: payNameR2,
             amount: ami ? ami.value : "",
             dateLabel: o.label,
           });
@@ -2778,10 +3067,17 @@
     var occ = collectOccupiedPeriodIndices(ctx, pfx, { excludeOneTimeRow: excludeRow });
     var out = [];
     for (var i = 0; i < totalP; i++) {
+      var blocked = !!occ["p" + i];
+      var blockHtml = "";
+      if (blocked) {
+        var desc = findPeriodBlockDescriptor(ctx, pfx, i, { excludeOneTimeRow: excludeRow });
+        blockHtml = formatBlockedPaymentHtml(desc);
+      }
       out.push({
         key: "PP|" + i,
         label: describePlanPeriodSpan(i, mf, pm),
-        blocked: !!occ["p" + i],
+        blocked: blocked,
+        blockHtml: blockHtml,
       });
     }
     return out;
@@ -2874,12 +3170,17 @@
       var tbl = document.createElement("table");
       tbl.className = "pay-picker-table";
       tbl.innerHTML =
-        "<thead><tr><th></th><th>Recurring Payment Name</th><th>Recurring Amount (AED)</th><th>Collection Date</th></tr></thead>";
+        "<thead><tr><th></th><th>Linked recurring payment</th><th>Recurring Amount (AED)</th><th>Collection Date</th></tr></thead>";
       var tb = document.createElement("tbody");
       var selKeys = opts.selectedKeys || [];
       (opts.rows || []).forEach(function (r) {
         var tr = document.createElement("tr");
         var checked = selKeys.indexOf(r.key) >= 0 ? " checked" : "";
+        var pn = r.payName != null ? String(r.payName).trim() : "";
+        var col2 =
+          pn.length > 0
+            ? "Recurring Payment <span style=\"color:#9CA3AF\">(" + esc(pn) + ")</span>"
+            : "Recurring Payment";
         tr.innerHTML =
           '<td><input type="checkbox" data-k="' +
           esc(r.key) +
@@ -2887,7 +3188,7 @@
           checked +
           " /></td>" +
           "<td>" +
-          esc(r.recurName) +
+          col2 +
           "</td>" +
           "<td>" +
           esc(r.amount) +
@@ -2958,13 +3259,27 @@
           cell = document.createElement("button");
           cell.type = "button";
           cell.className = "cal-day";
-          cell.textContent = String(day);
           var inRange = rangeStart && rangeEnd && dt >= rangeStart && dt <= rangeEnd;
-          var blocked = !inRange || blockFn(dt);
-          if (!inRange || blocked) {
+          var blockedByRule = !inRange || blockFn(dt);
+          if (blockedByRule) {
             cell.classList.add("blocked");
             cell.disabled = true;
+            if (!inRange) {
+              cell.innerHTML = '<span style="font-size:9px;line-height:1.2;color:#6B7280">Out of range</span>';
+            } else {
+              var calCtx = opts.calendarCtx || {};
+              var cctx = calCtx.ctx || "mnd";
+              var cpfx = calCtx.pfx || "mnd";
+              var stR = rangeStart;
+              var pix = mandatePeriodIndex(dt, stR, mandateFreqEl(cctx).value);
+              var desc = findPeriodBlockDescriptor(cctx, cpfx, pix, {
+                excludeOneTimeRow: calCtx.excludeOneTimeRow || null,
+                excludeRecurring2Row: calCtx.excludeRecurring2Row || null,
+              });
+              cell.innerHTML = formatBlockedPaymentHtml(desc);
+            }
           } else {
+            cell.textContent = String(day);
             cell.classList.add("available");
             (function (dtx, btn) {
               btn.addEventListener("click", function () {
@@ -2976,7 +3291,7 @@
               });
             })(dt, cell);
           }
-          if (selRaw && fmtDMY(dt) === selRaw) cell.classList.add("selected");
+          if (selRaw && fmtDMY(dt) === selRaw && !blockedByRule) cell.classList.add("selected");
           grid.appendChild(cell);
         }
         gridHost.appendChild(grid);
@@ -3015,7 +3330,11 @@
         var b = document.createElement("button");
         b.type = "button";
         b.className = "pay-rel-period-btn" + (p.blocked ? " blocked" : "");
-        b.textContent = p.label;
+        if (p.blocked) {
+          b.innerHTML = p.blockHtml || esc(p.label);
+        } else {
+          b.textContent = p.label;
+        }
         b.dataset.key = p.key;
         if (p.blocked) {
           b.disabled = true;
@@ -3123,6 +3442,12 @@
       });
       var recW = document.getElementById(pfx + "-rec-cdWeekly");
       if (recW) recW.addEventListener("change", recDeps);
+      var rn = document.getElementById(pfx + "-rec-name");
+      if (rn) {
+        rn.addEventListener("input", function () {
+          self.refreshAllPaymentDeps(ctx);
+        });
+      }
       if (window.lucide && lucide.createIcons) lucide.createIcons();
     },
     refreshAddonFreqs: function () {},
@@ -3138,10 +3463,10 @@
     },
     refreshAllPaymentDeps: function (ctx) {
       var pfx = ctx === "mnd" ? "mnd" : "pp001";
+      var tbl = this;
       document.querySelectorAll("#" + pfx + "-payTableBody tr").forEach(function (row, ix) {
         if (ix === 0) return;
-        var ts = row.querySelector(".pay-type-sel");
-        if (ts) populatePayTypeSelect(ts, ctx, pfx);
+        populatePayTypeDropdown(row, ctx, pfx, tbl);
       });
       updateNamePlaceholders(pfx);
       document.querySelectorAll("#" + pfx + "-payTableBody tr[data-pay-kind=onetime]").forEach(function (row) {
@@ -3203,6 +3528,7 @@
               selectedDmy: sel0,
               mandateStart: range.start,
               mandateEnd: range.end,
+              calendarCtx: { ctx: ctx, pfx: pfx, excludeOneTimeRow: row },
               isDateBlocked: function (dt) {
                 return isOneTimeDateBlocked(dt, ctx, pfx, row);
               },
@@ -3243,6 +3569,114 @@
       cell.appendChild(wrap);
       cell.appendChild(btn);
     },
+    applyPaymentKindChange: function (row, k, ctx, pfx) {
+      var self = this;
+      var freqCell = row.querySelector(".pay-freq-cell");
+      var cdCell = row.querySelector(".pay-cd-cell");
+      row.setAttribute("data-pay-kind", k);
+      syncPayTypeDropdownTrigger(row);
+      if (freqCell) freqCell.innerHTML = "";
+      if (cdCell) {
+        cdCell.innerHTML = "";
+        cdCell.className = "pay-cd-cell pay-extra-cd";
+      }
+      var rowErr = row.querySelector("[data-row-err]");
+      if (rowErr) rowErr.classList.remove("show");
+      var nameErr = row.querySelector("[data-name-err]");
+      if (nameErr) nameErr.classList.remove("show");
+      if (!k) {
+        self.refreshAllPaymentDeps(ctx);
+        return;
+      }
+      if (k === "onetime") {
+        freqCell.innerHTML = '<div class="freq-readonly">One-Time</div>';
+        cdCell.classList.add("pay-onetime-cd");
+        self.refreshOneTimeCd(row, ctx);
+      } else if (k === "recurring2") {
+        freqCell.innerHTML = '<select class="input pay-rec2-freq"></select>';
+        var fs = freqCell.querySelector(".pay-rec2-freq");
+        fillRec2FreqSelect(fs, getRecFreq(pfx));
+        fs.addEventListener("change", function () {
+          self.refreshAllPaymentDeps(ctx);
+        });
+        cdCell.innerHTML = "";
+        cdCell.className = "pay-cd-cell pay-rec2-cd";
+        var twR = document.createElement("div");
+        twR.className = "pay-tag-wrap";
+        cdCell.appendChild(twR);
+        var bR = document.createElement("button");
+        bR.type = "button";
+        bR.className = "btn-pay-picker";
+        bR.textContent = ctx === "mnd" ? "Pick anchor date" : "Pick anchor day";
+        bR.addEventListener("click", function () {
+          var selA = ((row.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+          if (ctx === "mnd") {
+            var rangeA = getMandateRange(ctx);
+            openPicker({
+              mode: "monthCalendar",
+              title: "Pick anchor collection date",
+              selectedDmy: selA,
+              mandateStart: rangeA.start,
+              mandateEnd: rangeA.end,
+              calendarCtx: { ctx: ctx, pfx: pfx, excludeRecurring2Row: row },
+              isDateBlocked: function (dt) {
+                return isRecurring2AnchorBlocked(dt, ctx, pfx, row);
+              },
+              onApply: function (v) {
+                row.dataset.cdTags = v;
+                self.refreshRecurring2Cd(row, ctx);
+                self.refreshAllPaymentDeps(ctx);
+              },
+            });
+          } else {
+            var pmA = getMandateRange(ctx).planMonths || 12;
+            var anchChoices = [];
+            var mx;
+            for (mx = 1; mx <= pmA; mx++) anchChoices.push("Month " + mx + " Day 10");
+            openPicker({
+              mode: "singleList",
+              title: "Pick anchor day",
+              choices: anchChoices,
+              selected: selA,
+              onApply: function (v) {
+                row.dataset.cdTags = v;
+                self.refreshRecurring2Cd(row, ctx);
+                self.refreshAllPaymentDeps(ctx);
+              },
+            });
+          }
+        });
+        cdCell.appendChild(bR);
+        self.refreshRecurring2Cd(row, ctx);
+      } else {
+        freqCell.innerHTML = '<div class="freq-readonly">—</div>';
+        cdCell.innerHTML = "";
+        var tw = document.createElement("div");
+        tw.className = "pay-tag-wrap";
+        cdCell.appendChild(tw);
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "btn-pay-picker";
+        b.textContent = "Select Collection Days";
+        b.addEventListener("click", function () {
+          var tblRows = buildAddonPickerRows(ctx, pfx);
+          var cur = (row.dataset.cdTags || "").split(",").filter(Boolean);
+          openPicker({
+            mode: "addonTable",
+            title: "Select collection days",
+            rows: tblRows,
+            selectedKeys: cur,
+            onApply: function (keys) {
+              row.dataset.cdTags = keys.join(",");
+              self.refreshAddonDiscountCd(row, ctx);
+            },
+          });
+        });
+        cdCell.appendChild(b);
+        self.refreshAddonDiscountCd(row, ctx);
+      }
+      self.refreshAllPaymentDeps(ctx);
+    },
     addRow: function (ctx, dupFrom) {
       var pfx = ctx === "mnd" ? "mnd" : "pp001";
       var tb = document.getElementById(pfx + "-payTableBody");
@@ -3251,8 +3685,14 @@
       row.setAttribute("data-pay-kind", "");
       row.setAttribute("data-row-id", uid);
       row.innerHTML =
-        '<td class="pay-name-cell"><label>Name <span class="req" hidden>*</span></label><input type="text" class="input pay-name" placeholder="Optional label" /><div class="pay-row-err" data-name-err></div></td>' +
-        '<td><select class="input pay-type-sel"><option value="">Select type</option></select><div class="pay-row-err" data-row-err></div></td>' +
+        '<td class="pay-name-cell"><label>Name <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label><input type="text" class="input pay-name" placeholder="Optional label" /><div class="pay-row-err" data-name-err></div></td>' +
+        '<td class="pay-type-td">' +
+        '<div class="pay-type-dropdown" data-pay-type-dropdown>' +
+        '<button type="button" class="pay-type-dd-trigger input">Select type</button>' +
+        '<div class="pay-type-dd-panel" hidden></div>' +
+        "</div>" +
+        '<div class="pay-row-err" data-row-err></div>' +
+        "</td>" +
         '<td><input class="input pay-amt" inputmode="decimal" /></td>' +
         '<td class="pay-freq-cell"></td>' +
         '<td class="pay-cd-cell pay-extra-cd"></td>' +
@@ -3260,111 +3700,18 @@
         '<td class="pay-actions-cell"><button type="button" class="icon-act-btn pay-del" title="Delete"><i data-lucide="trash-2"></i></button><button type="button" class="icon-act-btn pay-dup" title="Duplicate"><i data-lucide="copy"></i></button></td>';
       tb.appendChild(row);
       var self = this;
-      var tsInit = row.querySelector(".pay-type-sel");
-      if (tsInit) populatePayTypeSelect(tsInit, ctx, pfx);
       function bindRow(r) {
-        var ts = r.querySelector(".pay-type-sel"),
-          freqCell = r.querySelector(".pay-freq-cell"),
-          cdCell = r.querySelector(".pay-extra-cd");
-        ts.addEventListener("change", function () {
-          var k = ts.value;
-          r.setAttribute("data-pay-kind", k);
-          freqCell.innerHTML = "";
-          cdCell.innerHTML = "";
-          cdCell.className = "pay-cd-cell pay-extra-cd";
-          r.querySelector("[data-row-err]").classList.remove("show");
-          if (r.querySelector("[data-name-err]")) r.querySelector("[data-name-err]").classList.remove("show");
-          if (!k) {
-            self.refreshAllPaymentDeps(ctx);
-            return;
+        var dd = r.querySelector("[data-pay-type-dropdown]");
+        var trigger = dd.querySelector(".pay-type-dd-trigger");
+        var panel = dd.querySelector(".pay-type-dd-panel");
+        trigger.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var wasOpen = !panel.hidden;
+          closeAllPayTypeDropdowns();
+          if (!wasOpen) {
+            populatePayTypeDropdown(r, ctx, pfx, self);
+            panel.hidden = false;
           }
-          if (k === "onetime") {
-            freqCell.innerHTML = '<div class="freq-readonly">One-Time</div>';
-            cdCell.classList.add("pay-onetime-cd");
-            self.refreshOneTimeCd(r, ctx);
-          } else if (k === "recurring2") {
-            freqCell.innerHTML = '<select class="input pay-rec2-freq"></select>';
-            var fs = freqCell.querySelector(".pay-rec2-freq");
-            fillRec2FreqSelect(fs, getRecFreq(pfx));
-            fs.addEventListener("change", function () {
-              self.refreshAllPaymentDeps(ctx);
-            });
-            cdCell.innerHTML = "";
-            cdCell.className = "pay-cd-cell pay-rec2-cd";
-            var twR = document.createElement("div");
-            twR.className = "pay-tag-wrap";
-            cdCell.appendChild(twR);
-            var bR = document.createElement("button");
-            bR.type = "button";
-            bR.className = "btn-pay-picker";
-            bR.textContent = ctx === "mnd" ? "Pick anchor date" : "Pick anchor day";
-            bR.addEventListener("click", function () {
-              var selA = ((r.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
-              if (ctx === "mnd") {
-                var rangeA = getMandateRange(ctx);
-                openPicker({
-                  mode: "monthCalendar",
-                  title: "Pick anchor collection date",
-                  selectedDmy: selA,
-                  mandateStart: rangeA.start,
-                  mandateEnd: rangeA.end,
-                  isDateBlocked: function (dt) {
-                    return isRecurring2AnchorBlocked(dt, ctx, pfx, r);
-                  },
-                  onApply: function (v) {
-                    r.dataset.cdTags = v;
-                    self.refreshRecurring2Cd(r, ctx);
-                    self.refreshAllPaymentDeps(ctx);
-                  },
-                });
-              } else {
-                var pmA = getMandateRange(ctx).planMonths || 12;
-                var anchChoices = [];
-                var mx;
-                for (mx = 1; mx <= pmA; mx++) anchChoices.push("Month " + mx + " Day 10");
-                openPicker({
-                  mode: "singleList",
-                  title: "Pick anchor day",
-                  choices: anchChoices,
-                  selected: selA,
-                  onApply: function (v) {
-                    r.dataset.cdTags = v;
-                    self.refreshRecurring2Cd(r, ctx);
-                    self.refreshAllPaymentDeps(ctx);
-                  },
-                });
-              }
-            });
-            cdCell.appendChild(bR);
-            self.refreshRecurring2Cd(r, ctx);
-          } else {
-            freqCell.innerHTML = '<div class="freq-readonly">—</div>';
-            cdCell.innerHTML = "";
-            var tw = document.createElement("div");
-            tw.className = "pay-tag-wrap";
-            cdCell.appendChild(tw);
-            var b = document.createElement("button");
-            b.type = "button";
-            b.className = "btn-pay-picker";
-            b.textContent = "Select Collection Days";
-            b.addEventListener("click", function () {
-              var tblRows = buildAddonPickerRows(ctx, pfx);
-              var cur = (r.dataset.cdTags || "").split(",").filter(Boolean);
-              openPicker({
-                mode: "addonTable",
-                title: "Select collection days",
-                rows: tblRows,
-                selectedKeys: cur,
-                onApply: function (keys) {
-                  r.dataset.cdTags = keys.join(",");
-                  self.refreshAddonDiscountCd(r, ctx);
-                },
-              });
-            });
-            cdCell.appendChild(b);
-            self.refreshAddonDiscountCd(r, ctx);
-          }
-          self.refreshAllPaymentDeps(ctx);
         });
         r.querySelector(".pay-del").addEventListener("click", function () {
           r.remove();
@@ -3375,14 +3722,17 @@
         });
       }
       bindRow(row);
+      populatePayTypeDropdown(row, ctx, pfx, self);
       if (dupFrom) {
-        var pv = dupFrom.querySelector(".pay-type-sel");
-        row.querySelector(".pay-type-sel").value = pv ? pv.value : "";
+        row.dataset.cdTags = dupFrom.dataset.cdTags || "";
+        var dk = dupFrom.getAttribute("data-pay-kind") || "";
+        self.applyPaymentKindChange(row, dk, ctx, pfx);
         if (row.querySelector(".pay-name") && dupFrom.querySelector(".pay-name")) row.querySelector(".pay-name").value = dupFrom.querySelector(".pay-name").value;
         row.querySelector(".pay-amt").value = dupFrom.querySelector(".pay-amt").value;
         row.querySelector(".pay-notes").value = dupFrom.querySelector(".pay-notes").value;
-        row.dataset.cdTags = dupFrom.dataset.cdTags || "";
-        row.querySelector(".pay-type-sel").dispatchEvent(new Event("change"));
+        if (dk === "addon" || dk === "discount") self.refreshAddonDiscountCd(row, ctx);
+        else if (dk === "onetime") self.refreshOneTimeCd(row, ctx);
+        else if (dk === "recurring2") self.refreshRecurring2Cd(row, ctx);
       }
       updateNamePlaceholders(pfx);
       if (window.lucide && lucide.createIcons) lucide.createIcons();
@@ -3433,25 +3783,6 @@
             err.classList.add("show");
           }
           return;
-        }
-        // E1: Name is required for additional rows of the same payment type.
-        var typeCount = 0;
-        document.querySelectorAll("#" + pfx + "-payTableBody tr").forEach(function (r2, ix2) {
-          if (ix2 === 0) return;
-          if ((r2.getAttribute("data-pay-kind") || "") === k) typeCount++;
-        });
-        if (typeCount > 1) {
-          var nameInput = row.querySelector(".pay-name");
-          var nm = (nameInput ? nameInput.value : "").trim();
-          var reqStar = row.querySelector(".pay-name-cell .req");
-          if (reqStar) reqStar.hidden = false;
-          if (!nm) {
-            ok = false;
-            if (nameErr) {
-              nameErr.textContent = "Name is required for additional payment rows.";
-              nameErr.classList.add("show");
-            }
-          }
         }
         var amt = parseMoney(row.querySelector(".pay-amt").value);
         var incomplete = (k !== "onetime" && !(amt > 0)) || (k === "onetime" && !(amt > 0));
@@ -3533,6 +3864,7 @@
       var pfx = ctx === "mnd" ? "mnd" : "pp001";
       return recCdVal(pfx, getRecFreq(pfx));
     },
+    buildAddonPickerRows: buildAddonPickerRows,
   };
 
   document.addEventListener("click", function (e) {
@@ -3889,6 +4221,9 @@
 (function(){
 var MN=["January","February","March","April","May","June","July","August","September","October","November","December"];
 var PLANS=[
+{id:"fx-aed500",name:"Monthly Fixed AED 500 (demo)",frequency:"Monthly",amountType:"Fixed",ca:500,mi:null,ma:null,life:{y:1,m:0,d:0},cd:{t:"m",day:5}},
+{id:"var-addon-demo",name:"Variable + Add-On (demo)",frequency:"Monthly",amountType:"Variable",ca:500,mi:100,ma:600,life:{y:1,m:0,d:0},cd:{t:"m",day:5},varDemo:true},
+{id:"var-simple-demo",name:"Variable Simple (demo)",frequency:"Monthly",amountType:"Variable",ca:400,mi:50,ma:400,life:{y:1,m:0,d:0},cd:{t:"m",day:12}},
 {id:"p1",name:"Gym Basic",frequency:"Monthly",amountType:"Variable",ca:200,mi:50,ma:200,life:{y:1,m:0,d:0},cd:{t:"m",day:5}},
 {id:"p2",name:"Corporate Annual Dues",frequency:"Annually",amountType:"Fixed",ca:12000,mi:null,ma:null,life:{y:1,m:0,d:0},cd:{t:"a",d:15,mo:2}},
 {id:"p3",name:"Weekly Standard",frequency:"Weekly",amountType:"Variable",ca:150,mi:100,ma:150,life:{y:0,m:8,d:0},cd:{t:"w",w:"Monday"}},
@@ -3948,6 +4283,28 @@ function addLifeStart(dt,y,m,d){var x=new Date(dt.getTime());x.setFullYear(x.get
 function syncEndFromLife(){var s=parseDMY(startEl.value);if(!s)return;suppressDateSync=true;try{var y=parseInt(lifeY.value,10)||0,m=parseInt(lifeM.value,10)||0,d=parseInt(lifeD.value,10)||0;endEl.value=fmtDMY(addLifeStart(s,y,m,d));}finally{suppressDateSync=false;}}
 function syncLifeFromEnd(){if(suppressDateSync)return;var s=parseDMY(startEl.value),e=parseDMY(endEl.value);if(!s||!e)return;suppressDateSync=true;try{var days=Math.max(0,Math.round((e.getTime()-s.getTime())/86400000));var y=Math.floor(days/365),r=days-y*365,m=Math.min(11,Math.floor(r/30)),d=Math.min(30,r-m*30);lifeY.value=String(y);lifeM.value=String(m);lifeD.value=String(d);}finally{suppressDateSync=false;}}
 
+function applyVariableDemoPayments(){
+var pfx="mnd";
+var tb=document.getElementById(pfx+"-payTableBody");
+if(!tb||!window.AutoraPayTbl||document.getElementById("mnd-amountType").value!=="Variable")return;
+while(tb.rows.length>1){tb.deleteRow(1);}
+var nm=document.getElementById(pfx+"-rec-name"),am=document.getElementById(pfx+"-rec-amt"),rf=document.getElementById(pfx+"-rec-freq");
+if(nm)nm.value="Monthly Salary";
+if(am)am.value="500";
+if(rf){rf.value="Monthly";rf.dispatchEvent(new Event("change"));}
+var mo=document.getElementById(pfx+"-rec-cdMo");if(mo)mo.value="5";
+AutoraPayTbl.addRow("mnd");
+var last=tb.querySelector("tr:last-child");if(!last)return;
+if(window.AutoraPayTbl&&AutoraPayTbl.applyPaymentKindChange){AutoraPayTbl.applyPaymentKindChange(last,"addon","mnd","mnd");}
+var pamt=last.querySelector(".pay-amt");if(pamt)pamt.value="50";
+var br=AutoraPayTbl.buildAddonPickerRows("mnd","mnd");
+var keys=br.slice(0,4).map(function(r){return r.key;});
+last.dataset.cdTags=keys.join(",");
+AutoraPayTbl.refreshAddonDiscountCd(last,"mnd");
+AutoraPayTbl.refreshAllPaymentDeps("mnd");
+if(window.lucide&&lucide.createIcons)lucide.createIcons();
+}
+
 function fillFromPlan(p){
 suppressCaMirror=true;
 freqEl.value=p.frequency;setAmtMode(p.amountType==="Fixed");caEl.value=p.ca!=null?String(p.ca):"";
@@ -3969,7 +4326,7 @@ function touch(){updateReview();}
 
 function planById(id){for(var i=0;i<PLANS.length;i++){if(PLANS[i].id===id)return PLANS[i];}return null;}
 
-sel.addEventListener("change",function(){var v=sel.value;if(v==="__add_new__"){window.location.href="#screen-pp001";return;}if(v===""||v==="custom"){syncCD();touch();return;}var p=planById(v);if(p)fillFromPlan(p);});
+sel.addEventListener("change",function(){var v=sel.value;if(v==="__add_new__"){window.location.href="#screen-pp001";return;}if(v===""||v==="custom"){syncCD();touch();return;}var p=planById(v);if(p)fillFromPlan(p);if(p&&p.varDemo)setTimeout(function(){applyVariableDemoPayments();},0);});
 
 startEl.addEventListener("input",function(){syncEndFromLife();markCustom();touch();if(amtT.value==="Variable"&&window.AutoraPayTbl)AutoraPayTbl.onPeriodInputsChange("mnd");});
 startEl.addEventListener("change",function(){syncEndFromLife();markCustom();touch();if(amtT.value==="Variable"&&window.AutoraPayTbl)AutoraPayTbl.onPeriodInputsChange("mnd");});
