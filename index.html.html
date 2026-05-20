@@ -45,7 +45,7 @@
       --luminous-orchid: #B36CFF;
       --solar-coral: #FF6B68;
       --warm-sand: #F6EFE8;
-      --mist-lavender: #EAE5F4;
+      --mist-lavender: #F2F4F7;
       --graphite-plum: #4E465E;
       --white: #ffffff;
       --rgb-midnight-plum: 18, 12, 36;
@@ -79,6 +79,8 @@
       --sidebar-width: 248px;
       --topbar-height: 56px;
       --min-page-width: 1280px;
+      --page-bg: #FFFFFF;
+      --card-surface: #F8F7FB;
     }
     *, *::before, *::after { box-sizing: border-box; }
     html, body {
@@ -290,7 +292,7 @@
     }
     .filter-select:focus { outline: none; border-color: var(--ultraviolet); }
     .card {
-      background: var(--white); border: 1px solid var(--mist-lavender); border-radius: 12px;
+      background: var(--card-surface); border: 1px solid var(--card-surface); border-radius: 12px;
       box-shadow: 0 1px 3px var(--shadow-card);
       flex: 1; min-height: 0; display: flex; flex-direction: column;
     }
@@ -348,7 +350,7 @@
     }
     @media (max-width: 900px) { .kpi-row { grid-template-columns: 1fr; } }
     .kpi-card {
-      background: var(--white); border: 1px solid var(--mist-lavender); border-radius: 12px;
+      background: var(--card-surface); border: 1px solid var(--card-surface); border-radius: 12px;
       padding: 16px 18px; box-shadow: 0 1px 3px var(--shadow-card);
     }
     .kpi-card h3 { margin: 0 0 8px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--graphite-plum); }
@@ -437,8 +439,6 @@
     .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--mist-lavender); display: grid; place-items: center; font-size: 13px; font-weight: 600; color: var(--ultraviolet); }
     .user-name { font-size: 13px; font-weight: 500; color: var(--near-black); }
     .content { padding: 20px 24px 40px; flex: 1; min-width: 0; }
-    .mnd-page-grid { display: grid; grid-template-columns: minmax(0, 1.85fr) minmax(300px, 1fr); gap: 24px; align-items: start; }
-    @media (max-width: 1100px) { .mnd-page-grid { grid-template-columns: 1fr; } }
     .breadcrumb { font-size: 12px; font-weight: 500; color: var(--graphite-plum); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .breadcrumb a { color: var(--graphite-plum); text-decoration: underline; text-underline-offset: 2px; }
     .breadcrumb-sep { opacity: 0.6; }
@@ -446,7 +446,7 @@
     .page-header { margin-bottom: 16px; }
     .page-title { font-size: 22px; font-weight: 700; margin: 0 0 4px; letter-spacing: -0.02em; }
     .page-subtitle { margin: 0; font-size: 13px; color: var(--graphite-plum); max-width: 720px; }
-    .form-card { background: var(--mist-lavender); border: 1px solid color-mix(in srgb, var(--mist-lavender) 70%, var(--graphite-plum) 30%); border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px var(--shadow-card); margin-bottom: 16px; }
+    .form-card { background: var(--card-surface); border: 1px solid var(--card-surface); border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px var(--shadow-card); margin-bottom: 16px; }
     .form-section-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--graphite-plum); margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--mist-lavender); }
     .form-group { margin-bottom: 16px; }
     .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--graphite-plum); margin-bottom: 6px; }
@@ -503,8 +503,6 @@
     .upload-zone-inner p { margin: 0; font-size: 13px; color: var(--graphite-plum); }
     .upload-wrap { position: relative; }
     .form-actions-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; margin-top: 8px; padding-top: 16px; border-top: 1px solid var(--mist-lavender); }
-    .review-card { position: sticky; top: 20px; background: var(--mist-lavender); border: 1px solid color-mix(in srgb, var(--mist-lavender) 70%, var(--graphite-plum) 30%); border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px var(--shadow-card); }
-    .review-card h2 { font-size: 15px; font-weight: 600; margin: 0 0 4px; color: var(--near-black); }
     .review-sub { font-size: 12px; color: var(--graphite-plum); margin: 0 0 16px; }
     .review-kv { font-size: 11px; color: var(--graphite-plum); margin-bottom: 10px; }
     .review-kv strong { display: block; font-size: 13px; font-weight: 600; color: var(--near-black); margin-top: 3px; line-height: 1.35; word-break: break-word; }
@@ -610,7 +608,7 @@
     }
     @media (max-width: 1100px) { .form-layout { grid-template-columns: 1fr; } }
     .form-card {
-      background: var(--mist-lavender); border: 1px solid color-mix(in srgb, var(--mist-lavender) 70%, var(--graphite-plum) 30%);
+      background: var(--card-surface); border: 1px solid var(--card-surface);
       border-radius: 12px;
       padding: 24px; box-shadow: 0 1px 3px var(--shadow-card);
     }
@@ -643,7 +641,7 @@
     .form-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--mist-lavender); }
     .preview-card {
       position: sticky; top: 20px;
-      background: var(--mist-lavender); border: 1px solid color-mix(in srgb, var(--mist-lavender) 70%, var(--graphite-plum) 30%);
+      background: var(--card-surface); border: 1px solid var(--card-surface);
       border-radius: 12px;
       padding: 20px; box-shadow: 0 1px 3px var(--shadow-card);
     }
@@ -658,78 +656,64 @@
     .payments-table-wrap {
       width: 100%;
       max-width: 100%;
-      overflow-x: auto;
-      overflow-y: visible;
-      -webkit-overflow-scrolling: touch;
-      border: 1px solid color-mix(in srgb, var(--mist-lavender) 70%, var(--graphite-plum) 30%);
+      overflow: visible;
+      border: 1px solid var(--card-surface);
       border-radius: 10px;
-      background: var(--mist-lavender);
+      background: var(--card-surface);
       margin-bottom: 12px;
       box-sizing: border-box;
     }
     .payments-schedule-table {
-      width: max-content;
-      min-width: 1180px;
+      width: 100%;
       border-collapse: collapse;
-      table-layout: auto;
-      font-size: 12px;
+      table-layout: fixed;
+      font-size: 11px;
     }
     .payments-schedule-table th {
       text-align: left;
-      padding: 8px 10px;
+      padding: 6px 6px;
       background: var(--table-header-bg);
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.03em;
       color: var(--graphite-plum);
       border-bottom: 1px solid var(--row-border);
-      white-space: nowrap;
-      overflow: visible;
+      white-space: normal;
+      word-wrap: break-word;
+      line-height: 1.3;
     }
     .payments-schedule-table td {
-      padding: 8px 10px;
+      padding: 6px 6px;
       vertical-align: top;
       border-bottom: 1px solid var(--row-border);
-      font-size: 12px;
+      font-size: 11px;
       overflow: visible;
-      white-space: nowrap;
-    }
-    .payments-schedule-table thead th:nth-child(1),
-    .payments-schedule-table tbody td:nth-child(1) {
-      min-width: 200px;
-    }
-    .payments-schedule-table thead th:nth-child(2),
-    .payments-schedule-table tbody td:nth-child(2) {
-      min-width: 200px;
-    }
-    .payments-schedule-table thead th:nth-child(3),
-    .payments-schedule-table tbody td:nth-child(3) {
-      min-width: 130px;
-    }
-    .payments-schedule-table thead th:nth-child(4),
-    .payments-schedule-table tbody td:nth-child(4) {
-      min-width: 150px;
-    }
-    .payments-schedule-table thead th:nth-child(5),
-    .payments-schedule-table tbody td:nth-child(5) {
-      min-width: 220px;
-    }
-    .payments-schedule-table thead th:nth-child(6),
-    .payments-schedule-table tbody td:nth-child(6) {
-      min-width: 180px;
       white-space: normal;
+      word-wrap: break-word;
     }
+    .payments-schedule-table tr.pay-type-dd-open {
+      position: relative;
+      z-index: 120;
+    }
+    .payments-schedule-table td.pay-type-td {
+      overflow: visible;
+      position: relative;
+    }
+    .payments-schedule-table col.col-pay-name { width: 14%; }
+    .payments-schedule-table col.col-pay-type { width: 17%; }
+    .payments-schedule-table col.col-pay-amt { width: 10%; }
+    .payments-schedule-table col.col-pay-freq { width: 12%; }
+    .payments-schedule-table col.col-pay-cd { width: 20%; }
+    .payments-schedule-table col.col-pay-notes { width: 16%; }
+    .payments-schedule-table col.col-pay-actions { width: 11%; }
     .payments-schedule-table thead th.pay-actions-cell,
     .payments-schedule-table tbody td.pay-actions-cell {
-      min-width: 96px;
-      width: 96px;
-      max-width: 96px;
       text-align: right;
     }
     .payments-schedule-table tr:last-child td { border-bottom: none; }
-    .payments-schedule-table .pay-type-cell { font-weight: 600; color: var(--near-black); min-width: 130px; }
-    .payments-schedule-table .pay-actions-cell { white-space: nowrap; width: 88px; }
+    .payments-schedule-table .pay-type-cell { font-weight: 600; color: var(--near-black); }
+    .payments-schedule-table .pay-actions-cell { white-space: nowrap; }
     .payments-schedule-table .pay-actions-cell .icon-act-btn { margin-left: 4px; }
     .payments-schedule-table select.input, .payments-schedule-table input.input {
       height: 36px;
@@ -742,7 +726,7 @@
       resize: vertical;
       font-size: 12px;
     }
-    .pay-cd-cell { min-width: 160px; }
+    .pay-cd-cell { min-width: 0; }
     .pay-cd-cell .cd-inner { display: flex; flex-direction: column; gap: 6px; }
     .pay-cd-cell .cd-inner.hidden-field { display: none !important; }
     .pay-cd-cell .rec-cd-start-wrap.hidden-field { display: none !important; }
@@ -795,7 +779,7 @@
       flex-direction: column;
       gap: 6px;
       align-items: stretch;
-      min-width: 200px;
+      min-width: 0;
     }
     .pay-name-cell label {
       display: inline-flex;
@@ -843,7 +827,7 @@
 
     .pay-type-dropdown {
       position: relative;
-      min-width: 168px;
+      min-width: 0;
       max-width: 100%;
     }
     .pay-type-dd-trigger {
@@ -874,18 +858,159 @@
       opacity: 0.75;
     }
     .pay-type-dd-panel {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: calc(100% + 4px);
-      z-index: 80;
-      background: var(--white);
-      border: 1px solid var(--input-border);
-      border-radius: 8px;
-      box-shadow: 0 8px 24px rgba(var(--rgb-midnight-plum), 0.12);
+      position: fixed;
+      z-index: 9999;
+      background: white;
+      border: 1.5px solid #EAE5F4;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      min-width: 200px;
       padding: 4px 0;
-      max-height: none;
+      max-height: 280px;
+      overflow: hidden;
+      overflow-y: auto;
+    }
+    .pay-type-dd-panel:not([hidden]) {
+      display: block;
+    }
+    #mnd-variablePaymentsWrap {
       overflow: visible;
+    }
+    #screen-mnd #mnd-paymentsTable {
+      table-layout: fixed;
+      width: 100%;
+    }
+    #screen-mnd #mnd-variablePaymentsWrap .payments-table-wrap {
+      overflow-x: hidden;
+      overflow-y: visible;
+    }
+    #screen-mnd #mnd-paymentsTable td {
+      vertical-align: middle;
+      overflow: visible;
+      position: relative;
+    }
+    #screen-mnd #mnd-paymentsTable .input,
+    #screen-mnd #mnd-paymentsTable select.input,
+    #screen-mnd #mnd-paymentsTable .pay-type-dd-trigger {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 6px 8px;
+      font-size: 12px;
+      height: auto;
+      min-height: 32px;
+    }
+    #screen-mnd #mnd-paymentsTable .pay-notes-td {
+      overflow: hidden;
+      position: relative;
+    }
+    #screen-mnd #mnd-paymentsTable .pay-cd-td {
+      overflow: hidden;
+      position: relative;
+    }
+    #screen-mnd #mnd-paymentsTable .pay-notes {
+      font-size: 11px;
+      padding: 5px 7px;
+      min-height: 28px;
+      height: 28px;
+    }
+    #screen-mnd #mnd-paymentsTable .pay-type-dd-trigger {
+      text-align: left;
+    }
+    #screen-mnd #mnd-paymentsTable .cd-summary {
+      font-size: 11px;
+      color: #120C24;
+      font-family: Inter, sans-serif;
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .cd-popover {
+      display: none;
+    }
+    .cd-popover .input,
+    .cd-popover select.input {
+      font-size: 12px;
+      padding: 6px 8px;
+    }
+    .cd-popover .cd-inner {
+      margin-bottom: 8px;
+    }
+    #screen-mnd #mnd-paymentsTable .freq-readonly {
+      min-height: 32px;
+      padding: 6px 8px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    #screen-mnd #mnd-paymentsTable tbody tr,
+    #screen-mnd #mnd-paymentsTable .pay-type-td,
+    #screen-mnd #mnd-paymentsTable .pay-actions-cell {
+      white-space: nowrap;
+    }
+    #pp001-variablePaymentsWrap {
+      overflow: visible;
+    }
+    #screen-pp001 #pp001-paymentsTable {
+      table-layout: fixed;
+      width: 100%;
+    }
+    #screen-pp001 #pp001-variablePaymentsWrap .payments-table-wrap {
+      overflow-x: hidden;
+      overflow-y: visible;
+    }
+    #screen-pp001 #pp001-paymentsTable td {
+      vertical-align: middle;
+      overflow: visible;
+      position: relative;
+    }
+    #screen-pp001 #pp001-paymentsTable .input,
+    #screen-pp001 #pp001-paymentsTable select.input,
+    #screen-pp001 #pp001-paymentsTable .pay-type-dd-trigger {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 6px 8px;
+      font-size: 12px;
+      height: auto;
+      min-height: 32px;
+    }
+    #screen-pp001 #pp001-paymentsTable .pay-notes-td {
+      overflow: hidden;
+      position: relative;
+    }
+    #screen-pp001 #pp001-paymentsTable .pay-cd-td {
+      overflow: hidden;
+      position: relative;
+    }
+    #screen-pp001 #pp001-paymentsTable .pay-notes {
+      font-size: 11px;
+      padding: 5px 7px;
+      min-height: 28px;
+      height: 28px;
+    }
+    #screen-pp001 #pp001-paymentsTable .pay-type-dd-trigger {
+      text-align: left;
+    }
+    #screen-pp001 #pp001-paymentsTable .cd-summary {
+      font-size: 11px;
+      color: #120C24;
+      font-family: Inter, sans-serif;
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    #screen-pp001 #pp001-paymentsTable .freq-readonly {
+      min-height: 32px;
+      padding: 6px 8px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    #screen-pp001 #pp001-paymentsTable tbody tr,
+    #screen-pp001 #pp001-paymentsTable .pay-type-td,
+    #screen-pp001 #pp001-paymentsTable .pay-actions-cell {
+      white-space: nowrap;
     }
     .pay-type-opt {
       display: block;
@@ -1060,8 +1185,9 @@
       overflow: auto;
       max-height: 52vh;
       margin: 12px 0;
-      border: 1px solid var(--mist-lavender);
+      border: 1px solid var(--card-surface);
       border-radius: 10px;
+      background: var(--card-surface);
     }
     .pay-picker-table {
       width: 100%;
@@ -1211,17 +1337,13 @@
       gap: 12px;
       align-items: start;
     }
-    .mnd-amt-three #mnd-wrapMax,
-    .pp001-amt-three #pp001-wrapMax {
-      grid-column: 1 / -1;
-    }
     .mnd-amt-three.mode-variable #mnd-grp-collectionAmount,
     .pp001-amt-three.mode-variable #pp001-grp-collectionAmount {
       display: none !important;
     }
-    .mnd-amt-three.mode-variable #mnd-wrapMax,
-    .pp001-amt-three.mode-variable #pp001-wrapMax {
-      grid-column: auto;
+    .mnd-max-after-table,
+    .pp001-max-after-table {
+      margin-top: 12px;
     }
     .mnd-amt-three.mode-fixed #mnd-wrapMin,
     .mnd-amt-three.mode-fixed #mnd-wrapMax,
@@ -1258,9 +1380,10 @@
     .sch-sched-wrap {
       overflow: auto;
       max-height: min(560px, 70vh);
-      border: 1px solid var(--mist-lavender);
+      border: 1px solid var(--card-surface);
       border-radius: 10px;
       margin-top: 16px;
+      background: var(--card-surface);
     }
     .sch-sched-table {
       width: 100%; border-collapse: collapse; font-size: 12px;
@@ -1288,10 +1411,10 @@
 <body>
   <nav class="phase1-prototype-bar" aria-label="Prototype screens">
     <strong>Phase 1 prototype</strong>
-    <a href="#screen-pp002" data-target="screen-pp002">SCR-PP-002: Payment plans list</a>
-    <a href="#screen-mnd" data-target="screen-mnd">SCR-MND-001: Create mandate</a>
-    <a href="#screen-pp001" data-target="screen-pp001">SCR-PP-001: Create payment plan</a>
-    <a href="#screen-sch" data-target="screen-sch">SCR-SCH-001: Payment schedule</a>
+    <a href="#screen-pp002" data-target="screen-pp002">Payment plans list</a>
+    <a href="#screen-mnd" data-target="screen-mnd">Create mandate</a>
+    <a href="#screen-pp001" data-target="screen-pp001">Create payment plan</a>
+    <a href="#screen-sch" data-target="screen-sch">Payment schedule</a>
   </nav>
 <article class="phase1-screen-anchor" id="screen-pp002" aria-label="Payment Plans — List">
 <div class="app-shell">
@@ -1582,35 +1705,29 @@
 
         <div class="page-header">
           <h1 class="page-title">Create New Mandate</h1>
-          <p class="page-subtitle">Link a client to a payment plan and capture consent details before sending the mandate to the client.</p>
+          <p class="page-subtitle">Link a payer to a payment plan and capture consent details before sending the mandate to the payer.</p>
         </div>
 
-        <div class="mnd-page-grid">
-          <div class="mnd-left-col">
             <form id="mnd-mandateForm" novalidate>
               <div class="form-card">
-                <p class="form-section-title">Client</p>
-                <div class="form-row-2">
-                  <div class="form-group">
-                    <label for="mnd-payerName">Client name <span style="font-weight:400">(optional)</span></label>
-                    <input class="input" id="mnd-payerName" type="text" maxlength="120" placeholder="As on bank records" />
-                  </div>
-                  <div class="form-group contact-field">
-                    <label for="mnd-payerMobile">Client's contact details <span class="req">*</span></label>
-                    <input class="input" id="mnd-payerMobile" type="text" inputmode="tel" autocomplete="tel" placeholder="Mobile number or email" />
-                    <div class="field-error" id="mnd-err-mobile">Client's contact details are required.</div>
+                <p class="form-section-title">Payment plan</p>
+
+                <div class="form-group">
+                  <span style="font-size:13px;font-weight:600;color:#120C24;font-family:Inter,sans-serif;display:block;margin-bottom:8px;">
+                    Mandate type
+                  </span>
+                  <div class="segmented" id="mnd-mandateTypeSeg" role="group" aria-label="Mandate type">
+                    <button type="button" class="active" id="mnd-typeCustom" data-v="custom" onclick="setMandateType('custom')">Custom</button>
+                    <button type="button" id="mnd-typePlan" data-v="plan" onclick="setMandateType('plan')">Payment Plan</button>
                   </div>
                 </div>
-              </div>
 
-              <div class="form-card">
-                <p class="form-section-title">Payment plan</p>
-                <div class="form-group">
-                  <label for="mnd-planSelect">Payment plan</label>
+                <div class="form-group" id="mnd-planSelectGroup" style="display:none;">
+                  <label for="mnd-planSelect">Payment plan <span class="req">*</span></label>
                   <select class="input" id="mnd-planSelect">
-                    <option value="">Select a payment plan (optional)</option>
-                    <option value="custom">Custom Plan</option>
+                    <option value="">Select a payment plan</option>
                   </select>
+                  <div class="field-error" id="mnd-err-plan">Select a payment plan.</div>
                 </div>
 
                 <div class="form-group">
@@ -1621,6 +1738,38 @@
                     <option>Half-Yearly</option><option>Annually</option><option>One-Time</option>
                   </select>
                   <div class="field-error" id="mnd-err-frequency">Select a frequency.</div>
+                </div>
+
+                <div class="form-group">
+                  <label for="mnd-startDate">Start date <span class="req">*</span></label>
+                  <input class="input" id="mnd-startDate" name="startDate" placeholder="DD/MM/YYYY" autocomplete="off" />
+                  <div class="field-error" id="mnd-err-start">Enter a valid date (DD/MM/YYYY).</div>
+                </div>
+
+                <div class="form-group">
+                  <label>Lifetime <span class="req">*</span></label>
+                  <div style="display:flex; gap:10px; margin-top:8px;">
+                    <div style="width:72px; text-align:left;">
+                      <p style="font-size:12px;font-weight:600;color:#4E465E;margin:0 0 6px;font-family:Inter,sans-serif;">Years</p>
+                      <input class="input" type="number" id="mnd-lifeY" min="0" step="1" value="0" style="padding:10px 8px; width:100%; box-sizing:border-box;" />
+                    </div>
+                    <div style="width:72px; text-align:left;">
+                      <p style="font-size:12px;font-weight:600;color:#4E465E;margin:0 0 6px;font-family:Inter,sans-serif;">Months</p>
+                      <input class="input" type="number" id="mnd-lifeM" min="0" max="11" step="1" value="0" style="padding:10px 8px; width:100%; box-sizing:border-box;" />
+                    </div>
+                    <div style="width:72px; text-align:left;">
+                      <p style="font-size:12px;font-weight:600;color:#4E465E;margin:0 0 6px;font-family:Inter,sans-serif;">Days</p>
+                      <input class="input" type="number" id="mnd-lifeD" min="0" max="30" step="1" value="0" style="padding:10px 8px; width:100%; box-sizing:border-box;" />
+                    </div>
+                  </div>
+                  <div class="field-error" id="mnd-err-life">Set at least one lifetime value.</div>
+                </div>
+
+                <div class="form-group">
+                  <label for="mnd-endDate">End date <span class="req">*</span></label>
+                  <input class="input" id="mnd-endDate" placeholder="DD/MM/YYYY" />
+                  <p class="field-hint">Updates when lifetime or start changes; you may edit to back-calculate lifetime.</p>
+                  <div class="field-error" id="mnd-err-end">Enter a valid end date.</div>
                 </div>
 
                 <div class="form-group">
@@ -1638,111 +1787,15 @@
                     <input class="input" id="mnd-collectionAmount" inputmode="decimal" placeholder="0.00" />
                     <div class="field-error" id="mnd-err-ca">Enter a valid amount.</div>
                   </div>
-                  <div class="form-group" id="mnd-wrapMin">
-                    <label for="mnd-minAmount">Min amount (AED) <span class="req">*</span></label>
-                    <input class="input" id="mnd-minAmount" inputmode="decimal" placeholder="1" value="1" />
-                    <div class="field-error" id="mnd-err-min">Required when Variable.</div>
-                  </div>
-                  <div class="form-group" id="mnd-wrapMax">
-                    <label for="mnd-maxAmount">Max amount (AED) <span class="req">*</span></label>
-                    <input class="input" id="mnd-maxAmount" inputmode="decimal" placeholder="0.00" />
-                    <div class="field-error" id="mnd-err-max">Max must be ≥ min.</div>
-                  </div>
-                  <div class="form-group" id="mnd-expectedIncreaseGroup" style="display:none;">
-                    <div style="
-                      background: #F3F0FF;
-                      border: 1px solid #EAE5F4;
-                      border-radius: 10px;
-                      padding: 10px 14px;
-                      margin-bottom: 10px;
-                      font-size: 12px;
-                      color: #4E465E;
-                      line-height: 1.6;
-                      font-family: Inter, sans-serif;
-                    ">
-                      💡 <strong>Tip:</strong> If you expect the payment amount to increase in the future, add a buffer percentage here to avoid reissuing a new mandate every time the amount changes.
-                    </div>
-                    <label style="
-                      font-size: 13px;
-                      font-weight: 600;
-                      color: #120C24;
-                      font-family: Inter, sans-serif;
-                      display: block;
-                      margin-bottom: 6px;
-                    ">
-                      Expected Increase in Payment Amount
-                      <span style="font-weight: 400; color: #4E465E;">(Optional)</span>
-                    </label>
-                    <div style="position: relative; display: flex; align-items: center;">
-                      <input
-                        type="number"
-                        id="mnd-expectedIncreaseInput"
-                        min="0"
-                        max="100"
-                        placeholder="e.g. 10"
-                        oninput="calculateEffectiveMax('mnd')"
-                        style="
-                          width: 100%;
-                          padding: 10px 40px 10px 14px;
-                          border: 1.5px solid #EAE5F4;
-                          border-radius: 10px;
-                          font-size: 14px;
-                          font-family: Inter, sans-serif;
-                          color: #120C24;
-                          outline: none;
-                          box-sizing: border-box;
-                        "
-                        onfocus="this.style.borderColor='#7A5CFF'"
-                        onblur="this.style.borderColor='#EAE5F4'"
-                      />
-                      <span style="
-                        position: absolute;
-                        right: 14px;
-                        font-size: 14px;
-                        font-weight: 600;
-                        color: #4E465E;
-                        font-family: Inter, sans-serif;
-                        pointer-events: none;
-                      ">%</span>
-                    </div>
-                    <p id="mnd-effectiveMaxNote" style="
-                      font-size: 12px;
-                      color: #7A5CFF;
-                      font-family: Inter, sans-serif;
-                      margin-top: 6px;
-                      display: none;
-                    "></p>
-                  </div>
-                </div>
-
-                <div class="form-group hidden-field" id="mnd-variablePaymentsWrap">
-                  <p class="form-section-title" style="margin-top:0;padding-top:0;border-top:none;">Payments</p>
-                  <div class="payments-table-wrap">
-                    <table class="payments-schedule-table" id="mnd-paymentsTable" aria-label="Payment schedule builder">
-                      <thead>
-                        <tr>
-                          <th scope="col">Name</th>
-                          <th scope="col">Payment Type</th>
-                          <th scope="col">Amount (AED)</th>
-                          <th scope="col">Frequency</th>
-                          <th scope="col">Collection Day</th>
-                          <th scope="col">Notes</th>
-                          <th scope="col" class="pay-actions-cell">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody id="mnd-payTableBody"></tbody>
-                    </table>
-                  </div>
-                  <button type="button" class="btn btn-secondary" id="mnd-addPayRow">+ Add Payment</button>
                 </div>
 
                 <div class="form-group" id="mnd-collectionDayGroup">
                   <label id="mnd-collectionDayLabel">Collection day <span class="req">*</span></label>
                   <div id="mnd-cdModeHost"></div>
-                  <div id="mnd-cd-fixedDayDisplay" class="cd-long-fixed-display hidden-field" style="padding:10px 14px;background:#F8F7FB;border:1.5px solid #EAE5F4;border-radius:10px;font-size:14px;color:#4E465E;font-family:Inter,sans-serif;">First day of the next period</div>
+                  <div id="mnd-cd-fixedDayDisplay" class="cd-long-fixed-display hidden-field" style="padding:10px 14px;background:#F8F7FB;border:1.5px solid #F2F4F7;border-radius:10px;font-size:14px;color:#4E465E;font-family:Inter,sans-serif;">First day of the next period</div>
                   <div id="mnd-cd-startDateDaysGroup" class="cd-long-start-group hidden-field">
                     <label for="mnd-cd-daysAfterStartInput" style="font-size:13px;font-weight:600;color:#120C24;font-family:Inter,sans-serif;display:block;margin-bottom:6px;">Days after the start date</label>
-                    <input type="number" id="mnd-cd-daysAfterStartInput" class="cd-days-after-input" min="1" max="90" placeholder="Enter number of days" style="width:100%;padding:10px 14px;border:1.5px solid #EAE5F4;border-radius:10px;font-size:14px;font-family:Inter,sans-serif;color:#120C24;outline:none;box-sizing:border-box;" />
+                    <input type="number" id="mnd-cd-daysAfterStartInput" class="cd-days-after-input" min="1" max="90" placeholder="Enter number of days" style="width:100%;padding:10px 14px;border:1.5px solid #F2F4F7;border-radius:10px;font-size:14px;font-family:Inter,sans-serif;color:#120C24;outline:none;box-sizing:border-box;" />
                     <p id="mnd-cd-daysAfterNote" style="font-size:12px;color:#7A5CFF;font-family:Inter,sans-serif;margin-top:6px;display:none;"></p>
                   </div>
                   <select class="input hidden-field" id="mnd-collectionDayWeekly"></select>
@@ -1774,34 +1827,108 @@
                   <div class="field-error" id="mnd-err-cd">Complete collection day.</div>
                 </div>
 
-                <div class="form-group">
-                  <label for="mnd-startDate">Start date <span class="req">*</span></label>
-                  <input class="input" id="mnd-startDate" name="startDate" placeholder="DD/MM/YYYY" autocomplete="off" />
-                  <div class="field-error" id="mnd-err-start">Enter a valid date (DD/MM/YYYY).</div>
+                <div class="form-group hidden-field" id="mnd-variablePaymentsWrap">
+                  <p class="form-section-title" style="margin-top:0;padding-top:0;border-top:none;">Payments</p>
+                  <div class="payments-table-wrap">
+                    <table class="payments-schedule-table" id="mnd-paymentsTable" aria-label="Payment schedule builder">
+                      <colgroup>
+                        <col style="width:14%" />
+                        <col style="width:17%" />
+                        <col style="width:10%" />
+                        <col style="width:12%" />
+                        <col style="width:20%" />
+                        <col style="width:16%" />
+                        <col style="width:11%" />
+                      </colgroup>
+                      <thead>
+                        <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">Payment Type</th>
+                          <th scope="col">Amount (AED)</th>
+                          <th scope="col">Frequency</th>
+                          <th scope="col">Collection Day</th>
+                          <th scope="col">Notes</th>
+                          <th scope="col" class="pay-actions-cell">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="mnd-payTableBody"></tbody>
+                    </table>
+                  </div>
+                  <button type="button" class="btn btn-secondary" id="mnd-addPayRow">+ Add Payment</button>
                 </div>
-                
 
-                <div class="form-row-3">
-                  <div class="form-group">
-                    <label for="mnd-lifeY">Lifetime — years</label>
-                    <input class="input" type="number" id="mnd-lifeY" min="0" step="1" value="0" />
+                <div class="mnd-max-after-table" id="mnd-maxAfterTableWrap">
+                  <div style="display:flex; gap:16px; align-items:start;">
+                    <div class="form-group" style="flex:1; margin-bottom:0;" id="mnd-wrapMin">
+                      <label for="mnd-minAmount">Min amount (AED) <span class="req">*</span></label>
+                      <input class="input" id="mnd-minAmount" inputmode="decimal" placeholder="1" value="1" />
+                      <div class="field-error" id="mnd-err-min">Required when Variable.</div>
+                    </div>
+                    <div class="form-group" style="flex:1; margin-bottom:0;" id="mnd-wrapMax">
+                      <label for="mnd-maxAmount">Max amount (AED) <span class="req">*</span></label>
+                      <input class="input" id="mnd-maxAmount" inputmode="decimal" placeholder="0.00" />
+                      <p style="font-size:11px;color:#4E465E;font-family:Inter,sans-serif;margin-top:4px;">
+                        Auto-calculated from your payment table. You can increase this but not below the calculated value.
+                      </p>
+                      <p id="mnd-max-warning" style="font-size:12px;color:#FF6B68;font-family:Inter,sans-serif;margin-top:5px;display:none;line-height:1.5;"></p>
+                      <div class="field-error" id="mnd-err-max">Max must be ≥ min.</div>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="mnd-lifeM">Lifetime — months (max 11)</label>
-                    <input class="input" type="number" id="mnd-lifeM" min="0" max="11" step="1" value="0" />
+                  <div class="form-group" id="mnd-expectedIncreaseGroup" style="display:none;">
+                    <label style="
+                      font-size: 13px;
+                      font-weight: 600;
+                      color: #120C24;
+                      font-family: Inter, sans-serif;
+                      display: block;
+                      margin-bottom: 6px;
+                    ">
+                      Expected Increase in Payment Amount
+                      <span style="font-weight: 400; color: #4E465E;">(Optional)</span>
+                    </label>
+                    <div style="position: relative; display: flex; align-items: center;">
+                      <input
+                        type="number"
+                        id="mnd-expectedIncreaseInput"
+                        min="0"
+                        max="100"
+                        placeholder="e.g. 10"
+                        oninput="calculateEffectiveMax('mnd')"
+                        style="
+                          width: 100%;
+                          padding: 10px 40px 10px 14px;
+                          border: 1.5px solid #F2F4F7;
+                          border-radius: 10px;
+                          font-size: 14px;
+                          font-family: Inter, sans-serif;
+                          color: #120C24;
+                          outline: none;
+                          box-sizing: border-box;
+                        "
+                        onfocus="this.style.borderColor='#7A5CFF'"
+                        onblur="this.style.borderColor='#F2F4F7'"
+                      />
+                      <span style="
+                        position: absolute;
+                        right: 14px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: #4E465E;
+                        font-family: Inter, sans-serif;
+                        pointer-events: none;
+                      ">%</span>
+                    </div>
+                    <p style="font-size:12px;color:#4E465E;font-family:Inter,sans-serif;margin-top:6px;line-height:1.6;">
+                      💡 If you expect the payment amount to increase in the future, add a buffer percentage here to avoid reissuing a new mandate every time the amount changes.
+                    </p>
+                    <p id="mnd-effectiveMaxNote" style="
+                      font-size: 12px;
+                      color: #7A5CFF;
+                      font-family: Inter, sans-serif;
+                      margin-top: 6px;
+                      display: none;
+                    "></p>
                   </div>
-                  <div class="form-group">
-                    <label for="mnd-lifeD">Lifetime — days (max 30)</label>
-                    <input class="input" type="number" id="mnd-lifeD" min="0" max="30" step="1" value="0" />
-                  </div>
-                </div>
-                <div class="field-error" id="mnd-err-life">Set at least one lifetime component or align dates.</div>
-
-                <div class="form-group">
-                  <label for="mnd-endDate">End date <span class="req">*</span></label>
-                  <input class="input" id="mnd-endDate" placeholder="DD/MM/YYYY" />
-                  <p class="field-hint">Updates when lifetime or start changes; you may edit to back-calculate lifetime.</p>
-                  <div class="field-error" id="mnd-err-end">Enter a valid end date.</div>
                 </div>
 
                 <div class="form-group">
@@ -1811,8 +1938,32 @@
               </div>
 
               <div class="form-card">
-                <div class="payer-toggle-bar" id="mnd-payerToggleBar" role="switch" tabindex="0" aria-checked="false" aria-label="Enter client information">
-                  <span>Enter client's information</span>
+                <p class="form-section-title">Payer Information</p>
+                <div class="form-group" id="mnd-contactChannelsGroup">
+                  <label>Contact Details <span class="req">*</span></label>
+                  <p style="font-size:12px;color:#4E465E;font-family:Inter,sans-serif;margin:4px 0 10px;">
+                    Fill in at least one of the payer's contact details below.
+                  </p>
+                  <div class="form-group" style="margin-bottom:10px;">
+                    <label for="mnd-contactWhatsapp" style="font-size:12px;font-weight:600;color:#4E465E;">
+                      WhatsApp Number
+                    </label>
+                    <input class="input" id="mnd-contactWhatsapp" type="tel" placeholder="+971 XX XXX XXXX" />
+                  </div>
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label for="mnd-contactMobile" style="font-size:12px;font-weight:600;color:#4E465E;">
+                      Mobile Number
+                    </label>
+                    <input class="input" id="mnd-contactMobile" type="tel" placeholder="+971 XX XXX XXXX" />
+                  </div>
+                  <div class="field-error" id="mnd-err-contact">Please fill in at least one contact detail.</div>
+                </div>
+                <div class="payer-toggle-bar" id="mnd-payerToggleBar"
+                  role="switch" tabindex="0" aria-checked="true"
+                  aria-label="The Payer will fill the mandate information"
+                  style="margin-top: 12px;"
+                >
+                  <span>The Payer will fill the mandate information</span>
                   <span class="switch" aria-hidden="true"></span>
                 </div>
                 <div class="collapsible" id="mnd-payerInfoSection" aria-hidden="true" hidden>
@@ -1829,7 +1980,7 @@
                   </div>
                   <div class="form-row-2">
                     <div class="form-group">
-                      <label for="mnd-eidFullName">Client's full name</label>
+                      <label for="mnd-eidFullName">Payer's full name</label>
                       <input class="input" id="mnd-eidFullName" placeholder="Extracted from Emirates ID" />
                     </div>
                     <div class="form-group">
@@ -1858,16 +2009,23 @@
                     </div>
                     <div class="form-group">
                       <label for="mnd-ibanNumber">IBAN Number</label>
-                      <input class="input" id="mnd-ibanNumber" placeholder="AE XX XXXX XXXX XXXX XXXX XXX" />
+                      <input class="input" id="mnd-ibanNumber" placeholder="AE XX XXXX XXXX XXXX XXXX XXX" onblur="validateIban(this)" />
+                      <p id="mnd-iban-status" style="font-size:12px;font-family:Inter,sans-serif;margin-top:5px;display:none;"></p>
                     </div>
                   </div>
                   <div id="mnd-ccBlock" class="hidden-field">
                     <div class="form-group">
                       <label for="mnd-ccNumber">Credit Card Number</label>
-                      <input class="input" id="mnd-ccNumber" placeholder="XXXX XXXX XXXX XXXX" />
+                      <input class="input" id="mnd-ccNumber" placeholder="XXXX XXXX XXXX XXXX" onblur="validateCreditCard(this)" />
+                      <p id="mnd-cc-status" style="font-size:12px;font-family:Inter,sans-serif;margin-top:5px;display:none;"></p>
+                    </div>
+                    <div class="form-group hidden-field" id="mnd-ccExpiryGroup">
+                      <label for="mnd-ccExpiry">Credit Card Expiry Date <span class="req">*</span></label>
+                      <input class="input" id="mnd-ccExpiry" type="text" placeholder="MM/YYYY" maxlength="7" oninput="formatCcExpiry(this)" />
+                      <div class="field-error" id="mnd-err-ccExpiry">Enter a valid expiry date (MM/YYYY).</div>
                     </div>
                   </div>
-                  <div class="field-error" id="mnd-err-payer-info">Please enter at least one of the client's information fields, or turn off the toggle.</div>
+                  <div class="field-error" id="mnd-err-payer-info">Please enter at least one of the payer's information fields, or turn on "Entered by the Payer".</div>
                 </div>
               </div>
 
@@ -1879,23 +2037,6 @@
                 </div>
               </div>
             </form>
-          </div>
-
-          <aside class="review-card" aria-label="Review mandate">
-            <h2>Review Mandate</h2>
-            <p class="review-sub">Review the details before sending to the client.</p>
-            <div class="review-kv">Client contact<strong id="mnd-rv-mobile">—</strong></div>
-            <div class="review-kv">Payment Plan<strong id="mnd-rv-plan">—</strong></div>
-            <div class="review-kv">Frequency<strong id="mnd-rv-freq">—</strong></div>
-            <div class="review-kv">Amount Type<strong id="mnd-rv-amt">—</strong></div>
-            <div class="review-kv">Collection Amount (AED)<strong id="mnd-rv-ca">—</strong></div>
-            <div class="review-kv" id="mnd-rv-mm-row">Min / Max (AED)<strong id="mnd-rv-mm">—</strong></div>
-            <div class="review-kv">Collection Day<strong id="mnd-rv-cd">—</strong></div>
-            <div class="review-kv">Start Date<strong id="mnd-rv-start">—</strong></div>
-            <div class="review-kv">End Date<strong id="mnd-rv-end">—</strong></div>
-            <div class="review-kv">Lifetime<strong id="mnd-rv-life">—</strong></div>
-          </aside>
-        </div>
       </main>
     </div>
   </div>
@@ -1980,8 +2121,7 @@
           <p class="page-subtitle">Define a reusable collection template. Plans appear when creating mandates and must stay unique by name.</p>
         </div>
 
-        <div class="form-layout">
-          <div class="form-card">
+        <div class="form-card">
             <p class="form-section-title">Plan details</p>
             <form id="pp001-planForm" novalidate>
               <div class="form-group">
@@ -2006,6 +2146,21 @@
               </div>
 
               <div class="form-group">
+                <label>Lifetime <span class="req">*</span></label>
+                <div style="display:flex; gap:10px; margin-top:8px;">
+                  <div style="width:72px; text-align:left;">
+                    <p style="font-size:12px;font-weight:600;color:#4E465E;margin:0 0 6px;font-family:Inter,sans-serif;">Years</p>
+                    <input class="input" type="number" id="pp001-lifeYears" name="lifeYears" min="0" step="1" value="0" style="padding:10px 8px; width:100%; box-sizing:border-box;" />
+                  </div>
+                  <div style="width:72px; text-align:left;">
+                    <p style="font-size:12px;font-weight:600;color:#4E465E;margin:0 0 6px;font-family:Inter,sans-serif;">Months</p>
+                    <input class="input" type="number" id="pp001-lifeMonths" name="lifeMonths" min="0" max="11" step="1" value="0" style="padding:10px 8px; width:100%; box-sizing:border-box;" />
+                  </div>
+                </div>
+                <div class="field-error" id="pp001-err-lifetime">Set a positive lifetime (years and/or months).</div>
+              </div>
+
+              <div class="form-group">
                 <span id="pp001-amountTypeLabel">Amount type <span class="req">*</span></span>
                 <div class="segmented" role="group" aria-labelledby="pp001-amountTypeLabel">
                   <button type="button" id="pp001-amtFixed" data-value="Fixed">Fixed</button>
@@ -2020,112 +2175,15 @@
                   <input class="input" id="pp001-collectionAmount" name="collectionAmount" inputmode="decimal" placeholder="0.00" />
                   <div class="field-error" id="pp001-err-collectionAmount">Enter a valid amount greater than zero.</div>
                 </div>
-                <div class="form-group" id="pp001-wrapMin">
-                  <label for="pp001-minAmount">Min amount (AED) <span class="req">*</span></label>
-                  <input class="input" id="pp001-minAmount" name="minAmount" inputmode="decimal" placeholder="1" value="1" />
-                  <div class="field-error" id="pp001-err-minAmount">Required for variable plans.</div>
-                </div>
-                <div class="form-group" id="pp001-wrapMax">
-                  <label for="pp001-maxAmount">Max amount (AED) <span class="req">*</span></label>
-                  <input class="input" id="pp001-maxAmount" name="maxAmount" inputmode="decimal" placeholder="0.00" />
-                  <div class="field-error" id="pp001-err-maxAmount">Max must be ≥ min.</div>
-                  <div class="field-error" id="pp001-err-collectionOverMax">Collection amount cannot be greater than the max amount.</div>
-                </div>
-                <div class="form-group" id="pp001-expectedIncreaseGroup" style="display:none;">
-                  <div style="
-                    background: #F3F0FF;
-                    border: 1px solid #EAE5F4;
-                    border-radius: 10px;
-                    padding: 10px 14px;
-                    margin-bottom: 10px;
-                    font-size: 12px;
-                    color: #4E465E;
-                    line-height: 1.6;
-                    font-family: Inter, sans-serif;
-                  ">
-                    💡 <strong>Tip:</strong> If you expect the payment amount to increase in the future, add a buffer percentage here to avoid reissuing a new mandate every time the amount changes.
-                  </div>
-                  <label style="
-                    font-size: 13px;
-                    font-weight: 600;
-                    color: #120C24;
-                    font-family: Inter, sans-serif;
-                    display: block;
-                    margin-bottom: 6px;
-                  ">
-                    Expected Increase in Payment Amount
-                    <span style="font-weight: 400; color: #4E465E;">(Optional)</span>
-                  </label>
-                  <div style="position: relative; display: flex; align-items: center;">
-                    <input
-                      type="number"
-                      id="pp001-expectedIncreaseInput"
-                      min="0"
-                      max="100"
-                      placeholder="e.g. 10"
-                      oninput="calculateEffectiveMax('pp001')"
-                      style="
-                        width: 100%;
-                        padding: 10px 40px 10px 14px;
-                        border: 1.5px solid #EAE5F4;
-                        border-radius: 10px;
-                        font-size: 14px;
-                        font-family: Inter, sans-serif;
-                        color: #120C24;
-                        outline: none;
-                        box-sizing: border-box;
-                      "
-                      onfocus="this.style.borderColor='#7A5CFF'"
-                      onblur="this.style.borderColor='#EAE5F4'"
-                    />
-                    <span style="
-                      position: absolute;
-                      right: 14px;
-                      font-size: 14px;
-                      font-weight: 600;
-                      color: #4E465E;
-                      font-family: Inter, sans-serif;
-                      pointer-events: none;
-                    ">%</span>
-                  </div>
-                  <p id="pp001-effectiveMaxNote" style="
-                    font-size: 12px;
-                    color: #7A5CFF;
-                    font-family: Inter, sans-serif;
-                    margin-top: 6px;
-                    display: none;
-                  "></p>
-                </div>
-              </div>
-
-              <div class="form-group hidden-field" id="pp001-variablePaymentsWrap">
-                <p class="form-section-title" style="margin-top:0;padding-top:0;border-top:none;">Payments</p>
-                <div class="payments-table-wrap">
-                  <table class="payments-schedule-table" id="pp001-paymentsTable" aria-label="Payment schedule builder">
-                    <thead>
-                      <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Payment Type</th>
-                        <th scope="col">Amount (AED)</th>
-                        <th scope="col">Frequency</th>
-                        <th scope="col">Collection Day</th>
-                        <th scope="col">Notes</th>
-                        <th scope="col" class="pay-actions-cell">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody id="pp001-payTableBody"></tbody>
-                  </table>
-                </div>
-                <button type="button" class="btn btn-secondary" id="pp001-addPayRow">+ Add Payment</button>
               </div>
 
               <div class="form-group" id="pp001-collectionDayGroup">
                 <label for="pp001-collectionDay" id="pp001-collectionDayLabel">Collection day <span style="font-weight:400">(optional)</span></label>
                 <div id="pp001-cdModeHost"></div>
-                <div id="pp001-cd-fixedDayDisplay" class="cd-long-fixed-display hidden-field" style="padding:10px 14px;background:#F8F7FB;border:1.5px solid #EAE5F4;border-radius:10px;font-size:14px;color:#4E465E;font-family:Inter,sans-serif;">First day of the next period</div>
+                <div id="pp001-cd-fixedDayDisplay" class="cd-long-fixed-display hidden-field" style="padding:10px 14px;background:#F8F7FB;border:1.5px solid #F2F4F7;border-radius:10px;font-size:14px;color:#4E465E;font-family:Inter,sans-serif;">First day of the next period</div>
                 <div id="pp001-cd-startDateDaysGroup" class="cd-long-start-group hidden-field">
                   <label for="pp001-cd-daysAfterStartInput" style="font-size:13px;font-weight:600;color:#120C24;font-family:Inter,sans-serif;display:block;margin-bottom:6px;">Days after the start date</label>
-                  <input type="number" id="pp001-cd-daysAfterStartInput" class="cd-days-after-input" min="1" max="90" placeholder="Enter number of days" style="width:100%;padding:10px 14px;border:1.5px solid #EAE5F4;border-radius:10px;font-size:14px;font-family:Inter,sans-serif;color:#120C24;outline:none;box-sizing:border-box;" />
+                  <input type="number" id="pp001-cd-daysAfterStartInput" class="cd-days-after-input" min="1" max="90" placeholder="Enter number of days" style="width:100%;padding:10px 14px;border:1.5px solid #F2F4F7;border-radius:10px;font-size:14px;font-family:Inter,sans-serif;color:#120C24;outline:none;box-sizing:border-box;" />
                   <p id="pp001-cd-daysAfterNote" style="font-size:12px;color:#7A5CFF;font-family:Inter,sans-serif;margin-top:6px;display:none;"></p>
                 </div>
                 <select class="input hidden-field" id="pp001-collectionDayWeekly"></select>
@@ -2181,15 +2239,108 @@
                 <div class="field-error" id="pp001-err-collectionDay">Describe when collections run.</div>
               </div>
 
-              <div class="form-row-2">
-                <div class="form-group">
-                  <label for="pp001-lifeYears">Lifetime — years <span class="req">*</span></label>
-                  <input class="input" type="number" id="pp001-lifeYears" name="lifeYears" min="0" step="1" value="0" />
-                  <div class="field-error" id="pp001-err-lifetime">Set a positive lifetime (years and/or months).</div>
+              <div class="form-group hidden-field" id="pp001-variablePaymentsWrap">
+                <p class="form-section-title" style="margin-top:0;padding-top:0;border-top:none;">Payments</p>
+                <div class="payments-table-wrap">
+                  <table class="payments-schedule-table" id="pp001-paymentsTable" aria-label="Payment schedule builder">
+                    <colgroup>
+                      <col style="width:14%" />
+                      <col style="width:17%" />
+                      <col style="width:10%" />
+                      <col style="width:12%" />
+                      <col style="width:20%" />
+                      <col style="width:16%" />
+                      <col style="width:11%" />
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Payment Type</th>
+                        <th scope="col">Amount (AED)</th>
+                        <th scope="col">Frequency</th>
+                        <th scope="col">Collection Day</th>
+                        <th scope="col">Notes</th>
+                        <th scope="col" class="pay-actions-cell">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="pp001-payTableBody"></tbody>
+                  </table>
                 </div>
-                <div class="form-group">
-                  <label for="pp001-lifeMonths">Lifetime — months <span class="req">*</span></label>
-                  <select class="input" id="pp001-lifeMonths" name="lifeMonths"></select>
+                <button type="button" class="btn btn-secondary" id="pp001-addPayRow">+ Add Payment</button>
+              </div>
+
+              <div class="pp001-max-after-table" id="pp001-maxAfterTableWrap">
+                <div style="display:flex; gap:16px; align-items:start;">
+                  <div class="form-group" style="flex:1; margin-bottom:0;" id="pp001-wrapMin">
+                    <label for="pp001-minAmount">Min amount (AED) <span class="req">*</span></label>
+                    <input class="input" id="pp001-minAmount" name="minAmount" inputmode="decimal" placeholder="1" value="1" />
+                    <div class="field-error" id="pp001-err-minAmount">Required when Variable.</div>
+                  </div>
+                  <div class="form-group" style="flex:1; margin-bottom:0;" id="pp001-wrapMax">
+                    <label for="pp001-maxAmount">Max amount (AED) <span class="req">*</span></label>
+                    <input class="input" id="pp001-maxAmount" name="maxAmount" inputmode="decimal" placeholder="0.00" />
+                    <p style="font-size:11px;color:#4E465E;font-family:Inter,sans-serif;margin-top:4px;">
+                      Auto-calculated from your payment table. You can increase this but not below the calculated value.
+                    </p>
+                    <p id="pp001-max-warning" style="font-size:12px;color:#FF6B68;font-family:Inter,sans-serif;margin-top:5px;display:none;line-height:1.5;"></p>
+                    <div class="field-error" id="pp001-err-maxAmount">Max must be ≥ min.</div>
+                    <div class="field-error" id="pp001-err-collectionOverMax">Collection amount cannot be greater than the max amount.</div>
+                  </div>
+                </div>
+                <div class="form-group" id="pp001-expectedIncreaseGroup" style="display:none;">
+                  <label style="
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: #120C24;
+                    font-family: Inter, sans-serif;
+                    display: block;
+                    margin-bottom: 6px;
+                  ">
+                    Expected Increase in Payment Amount
+                    <span style="font-weight: 400; color: #4E465E;">(Optional)</span>
+                  </label>
+                  <div style="position: relative; display: flex; align-items: center;">
+                    <input
+                      type="number"
+                      id="pp001-expectedIncreaseInput"
+                      min="0"
+                      max="100"
+                      placeholder="e.g. 10"
+                      oninput="calculateEffectiveMax('pp001')"
+                      style="
+                        width: 100%;
+                        padding: 10px 40px 10px 14px;
+                        border: 1.5px solid #F2F4F7;
+                        border-radius: 10px;
+                        font-size: 14px;
+                        font-family: Inter, sans-serif;
+                        color: #120C24;
+                        outline: none;
+                        box-sizing: border-box;
+                      "
+                      onfocus="this.style.borderColor='#7A5CFF'"
+                      onblur="this.style.borderColor='#F2F4F7'"
+                    />
+                    <span style="
+                      position: absolute;
+                      right: 14px;
+                      font-size: 14px;
+                      font-weight: 600;
+                      color: #4E465E;
+                      font-family: Inter, sans-serif;
+                      pointer-events: none;
+                    ">%</span>
+                  </div>
+                  <p style="font-size:12px;color:#4E465E;font-family:Inter,sans-serif;margin-top:6px;line-height:1.6;">
+                    💡 If you expect the payment amount to increase in the future, add a buffer percentage here to avoid reissuing a new mandate every time the amount changes.
+                  </p>
+                  <p id="pp001-effectiveMaxNote" style="
+                    font-size: 12px;
+                    color: #7A5CFF;
+                    font-family: Inter, sans-serif;
+                    margin-top: 6px;
+                    display: none;
+                  "></p>
                 </div>
               </div>
 
@@ -2203,21 +2354,6 @@
                 <button type="button" class="btn btn-primary" id="pp001-btnSeeSchedule">See Payment Schedule</button>
               </div>
             </form>
-          </div>
-
-          <aside class="preview-card" aria-label="Live preview">
-            <h2>Live preview</h2>
-            <div id="pp001-previewBody">
-              <div class="preview-kv">Plan name<strong id="pp001-pv-name">—</strong></div>
-              <div class="preview-kv">Frequency<strong id="pp001-pv-freq">—</strong></div>
-              <div class="preview-kv">Amount type<strong id="pp001-pv-amt">—</strong></div>
-              <div class="preview-kv">Collection amount (AED)<strong id="pp001-pv-ca">—</strong></div>
-              <div class="preview-kv" id="pp001-pv-min-wrap">Min / Max (AED)<strong id="pp001-pv-mm">—</strong></div>
-              <div class="preview-kv">Collection day<strong id="pp001-pv-day">—</strong></div>
-              <div class="preview-kv">Lifetime<strong id="pp001-pv-life">—</strong></div>
-              <div class="preview-kv" id="pp001-pv-desc-wrap" hidden>Notes<strong id="pp001-pv-desc">—</strong></div>
-            </div>
-          </aside>
         </div>
       </main>
     </div>
@@ -2552,7 +2688,7 @@
       input.style.borderColor = "#7A5CFF";
     });
     input.addEventListener("blur", function () {
-      input.style.borderColor = "#EAE5F4";
+      input.style.borderColor = "#F2F4F7";
     });
   };
 
@@ -2716,7 +2852,7 @@
   w.buildCollectionDayModeToggleHtml = function (idPrefix) {
     return (
       '<div style="margin-bottom:10px;" class="cd-mode-toggle-wrap">' +
-      '<div style="display:inline-flex; background:#EAE5F4; border-radius:8px; padding:3px;">' +
+      '<div style="display:inline-flex; background:#F2F4F7; border-radius:8px; padding:3px;">' +
       '<button type="button" id="' + idPrefix + '-fixedDayBtn" style="' +
       "padding:7px 16px; border-radius:6px; border:none; cursor:pointer;" +
       "font-size:12px; font-weight:600; font-family:Inter,sans-serif;" +
@@ -2898,9 +3034,9 @@
       '<h3 style="font-size:17px; font-weight:700; color:#120C24; margin:0 0 10px;">How would you like to update the existing mandates?</h3>' +
       '<p style="font-size:13px; color:#4E465E; line-height:1.6; margin:0 0 22px;">New mandates will need to be issued to apply the updated terms. Choose how you would like to handle the transition.</p>' +
       '<div style="display:flex; flex-direction:column; gap:12px;">' +
-      '<div style="border:1.5px solid #EAE5F4; border-radius:12px; padding:16px;"><p style="font-size:13px; font-weight:700; color:#120C24; margin:0 0 6px;">Option A — Cancel and reissue immediately</p><p style="font-size:12px; color:#4E465E; line-height:1.5; margin:0 0 12px;">The current mandates will be cancelled right away and new ones will be created with the updated terms. Note: there may be a short gap in collections while the new mandates are being approved by the bank.</p><button type="button" onclick="handleOptionA()" style="padding:10px 20px; border-radius:10px; background:#7A5CFF; color:white; font-size:13px; font-weight:600; border:none; cursor:pointer; font-family:Inter,sans-serif;">Choose Option A</button></div>' +
-      '<div style="border:1.5px solid #EAE5F4; border-radius:12px; padding:16px;"><p style="font-size:13px; font-weight:700; color:#120C24; margin:0 0 6px;">Option B — Issue new mandates first, then cancel</p><p style="font-size:12px; color:#4E465E; line-height:1.5; margin:0 0 12px;">New mandates will be sent to the bank immediately. The current mandates will only be cancelled once the new ones are approved — so collections continue without interruption during the transition.</p><button type="button" onclick="handleOptionB()" style="padding:10px 20px; border-radius:10px; background:#7A5CFF; color:white; font-size:13px; font-weight:600; border:none; cursor:pointer; font-family:Inter,sans-serif;">Choose Option B</button></div></div>' +
-      '<button type="button" class="option-ab-cancel" style="width:100%; margin-top:16px; padding:10px; border-radius:10px; background:none; border:1.5px solid #EAE5F4; color:#4E465E; font-size:13px; font-weight:600; cursor:pointer; font-family:Inter,sans-serif;">Cancel — I\'ll decide later</button></div>';
+      '<div style="border:1.5px solid #F2F4F7; border-radius:12px; padding:16px;"><p style="font-size:13px; font-weight:700; color:#120C24; margin:0 0 6px;">Option A — Cancel and reissue immediately</p><p style="font-size:12px; color:#4E465E; line-height:1.5; margin:0 0 12px;">The current mandates will be cancelled right away and new ones will be created with the updated terms. Note: there may be a short gap in collections while the new mandates are being approved by the bank.</p><button type="button" onclick="handleOptionA()" style="padding:10px 20px; border-radius:10px; background:#7A5CFF; color:white; font-size:13px; font-weight:600; border:none; cursor:pointer; font-family:Inter,sans-serif;">Choose Option A</button></div>' +
+      '<div style="border:1.5px solid #F2F4F7; border-radius:12px; padding:16px;"><p style="font-size:13px; font-weight:700; color:#120C24; margin:0 0 6px;">Option B — Issue new mandates first, then cancel</p><p style="font-size:12px; color:#4E465E; line-height:1.5; margin:0 0 12px;">New mandates will be sent to the bank immediately. The current mandates will only be cancelled once the new ones are approved — so collections continue without interruption during the transition.</p><button type="button" onclick="handleOptionB()" style="padding:10px 20px; border-radius:10px; background:#7A5CFF; color:white; font-size:13px; font-weight:600; border:none; cursor:pointer; font-family:Inter,sans-serif;">Choose Option B</button></div></div>' +
+      '<button type="button" class="option-ab-cancel" style="width:100%; margin-top:16px; padding:10px; border-radius:10px; background:none; border:1.5px solid #F2F4F7; color:#4E465E; font-size:13px; font-weight:600; cursor:pointer; font-family:Inter,sans-serif;">Cancel — I\'ll decide later</button></div>';
     overlay.querySelector(".option-ab-cancel").addEventListener("click", function () {
       w.__ddccSchSaveNewPending = false;
       overlay.remove();
@@ -2970,7 +3106,7 @@
       '<div style="display:flex; flex-direction:column; gap:10px;">' +
       '<button type="button" class="apply-existing-btn" style="width:100%; padding:14px 16px; border-radius:12px; background:#7A5CFF; color:white; font-size:14px; font-weight:600; border:none; cursor:pointer; text-align:left; font-family:Inter,sans-serif;">Apply to existing mandates<div style="font-size:11px; font-weight:400; opacity:0.85; margin-top:3px;">Update the mandates already linked to this plan</div></button>' +
       '<button type="button" class="apply-new-only-btn" style="width:100%; padding:14px 16px; border-radius:12px; background:#F3F0FF; color:#7A5CFF; font-size:14px; font-weight:600; border:none; cursor:pointer; text-align:left; font-family:Inter,sans-serif;">New mandates only<div style="font-size:11px; font-weight:400; opacity:0.8; margin-top:3px;">Keep the current mandates as they are — the updated plan will only apply to new mandates going forward</div></button>' +
-      '<button type="button" class="apply-close-btn" style="width:100%; margin-top:4px; padding:10px; border-radius:10px; background:none; border:1.5px solid #EAE5F4; color:#4E465E; font-size:13px; font-weight:600; cursor:pointer; font-family:Inter,sans-serif;">Close</button></div></div>';
+      '<button type="button" class="apply-close-btn" style="width:100%; margin-top:4px; padding:10px; border-radius:10px; background:none; border:1.5px solid #F2F4F7; color:#4E465E; font-size:13px; font-weight:600; cursor:pointer; font-family:Inter,sans-serif;">Close</button></div></div>';
     overlay.querySelector(".apply-existing-btn").addEventListener("click", function () {
       w.showOptionABDialog();
     });
@@ -3044,7 +3180,7 @@
       '<div class="cd-inner hidden-field" data-rec-cd="d"><input class="input" type="number" id="' + pfx + '-rec-cdDaily" min="1" max="31" placeholder="Day of period (1–31)" /></div>' +
       '<div class="cd-inner hidden-field" data-rec-cd="w"><select class="input" id="' + pfx + '-rec-cdWeekly"></select></div>' +
       '<div class="cd-inner hidden-field" data-rec-cd="m" id="' + pfx + '-rec-wrapM"><input class="input" type="number" id="' + pfx + '-rec-cdMo" min="1" max="31" placeholder="Day (1–31)" /></div>' +
-      '<div class="cd-inner hidden-field" data-rec-cd="lf" id="' + modePfx + '-longFixedDisplay" style="padding:10px 14px;background:#F8F7FB;border:1.5px solid #EAE5F4;border-radius:10px;font-size:13px;color:#4E465E;font-family:Inter,sans-serif;">First day of the next period</div>' +
+      '<div class="cd-inner hidden-field" data-rec-cd="lf" id="' + modePfx + '-longFixedDisplay" style="padding:10px 14px;background:#F8F7FB;border:1.5px solid #F2F4F7;border-radius:10px;font-size:13px;color:#4E465E;font-family:Inter,sans-serif;">First day of the next period</div>' +
       '<div class="cd-inner hidden-field" data-rec-cd="t"><input class="input" type="text" id="' + pfx + '-rec-cdTxt" placeholder="DD/MM/YYYY or description" /></div>';
     return (
       toggle +
@@ -3058,7 +3194,7 @@
       "</div>" +
       '<div id="' + modePfx + '-longStartGroup" class="cd-long-start-group hidden-field">' +
       '<label style="font-size:13px;font-weight:600;color:#120C24;font-family:Inter,sans-serif;display:block;margin-bottom:6px;">Days after the start date</label>' +
-      '<input type="number" id="' + pfx + '-recCdDaysAfterStart" class="cd-days-after-input" min="1" max="90" placeholder="Enter number of days" style="width:100%;padding:10px 14px;border:1.5px solid #EAE5F4;border-radius:10px;font-size:14px;font-family:Inter,sans-serif;color:#120C24;outline:none;box-sizing:border-box;" />' +
+      '<input type="number" id="' + pfx + '-recCdDaysAfterStart" class="cd-days-after-input" min="1" max="90" placeholder="Enter number of days" style="width:100%;padding:10px 14px;border:1.5px solid #F2F4F7;border-radius:10px;font-size:14px;font-family:Inter,sans-serif;color:#120C24;outline:none;box-sizing:border-box;" />' +
       '<p id="' + pfx + '-recCdDaysAfterNote" style="font-size:12px;color:#7A5CFF;font-family:Inter,sans-serif;margin-top:6px;display:none;"></p>' +
       "</div>" +
       "</div>"
@@ -3091,37 +3227,42 @@
   };
 
   function recCdVal(pfx, freq) {
-    var modeKey = pfx + "-recCd";
+    var idPfx = pfx;
+    if (pfx === "mnd" || pfx === "pp001") {
+      var firstRec = document.querySelector("#" + pfx + "-payTableBody tr[data-is-first-recurring]");
+      if (firstRec) idPfx = payRowCdPrefix(firstRec, pfx);
+    }
+    var modeKey = idPfx + "-recCd";
     if (window.__cdDayModes && window.__cdDayModes[modeKey] === "startDate") {
       if (freq === "Weekly") {
-        var wSd = document.getElementById(pfx + "-rec-cdWeekly");
+        var wSd = document.getElementById(idPfx + "-rec-cdWeekly");
         return wSd && wSd.value ? wSd.value : "";
       }
       if (window.isLongPeriodFrequency && window.isLongPeriodFrequency(freq)) {
-        var lpIn = document.getElementById(pfx + "-recCdDaysAfterStart");
+        var lpIn = document.getElementById(idPfx + "-recCdDaysAfterStart");
         if (lpIn && String(lpIn.value).trim() !== "") return String(lpIn.value).trim() + " days after start";
         return "";
       }
-      var off = document.getElementById(pfx + "-recCdStartOffset");
+      var off = document.getElementById(idPfx + "-recCdStartOffset");
       if (off && String(off.value).trim() !== "") return String(off.value).trim() + " days after start";
       return "";
     }
     if (!freq || freq === "Daily") {
-      var dIn = document.getElementById(pfx + "-rec-cdDaily");
+      var dIn = document.getElementById(idPfx + "-rec-cdDaily");
       return dIn && String(dIn.value).trim() !== "" ? "Day " + dIn.value.trim() : "\u2014";
     }
     if (freq === "Weekly") {
-      var w = document.getElementById(pfx + "-rec-cdWeekly");
+      var w = document.getElementById(idPfx + "-rec-cdWeekly");
       return w && w.value ? w.value : "";
     }
     if (freq === "Monthly") {
-      var mo = document.getElementById(pfx + "-rec-cdMo");
+      var mo = document.getElementById(idPfx + "-rec-cdMo");
       return mo && mo.value ? "Day " + mo.value : "";
     }
     if (window.isLongPeriodFrequency && window.isLongPeriodFrequency(freq)) {
       return "First day of the next period";
     }
-    var tx = document.getElementById(pfx + "-rec-cdTxt");
+    var tx = document.getElementById(idPfx + "-rec-cdTxt");
     return tx ? String(tx.value || "").trim() : "";
   }
 
@@ -3167,6 +3308,34 @@
     else sel.selectedIndex = 0;
   }
 
+  function getRecurringAddonFrequencies(mainFrequency) {
+    var order = ["Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Annually"];
+    var mainIndex = order.indexOf(mainFrequency);
+    if (mainIndex < 0) return [];
+    return order.slice(mainIndex + 1);
+  }
+
+  function fillRecurringAddonFreqSelect(sel, mainFrequency) {
+    var opts = getRecurringAddonFrequencies(mainFrequency);
+    var cur = sel ? sel.value : "";
+    if (!sel) return;
+    sel.innerHTML = "";
+    if (!opts.length) {
+      var o0 = document.createElement("option");
+      o0.value = "";
+      o0.textContent = "No less-frequent options";
+      sel.appendChild(o0);
+      return;
+    }
+    opts.forEach(function (f) {
+      var o = document.createElement("option");
+      o.value = o.textContent = f;
+      sel.appendChild(o);
+    });
+    if (opts.indexOf(cur) >= 0) sel.value = cur;
+    else sel.selectedIndex = 0;
+  }
+
   function fillRec2FreqSelect(sel, firstRecFreq) {
     var fw = freqWeight(firstRecFreq);
     var opts = ["Weekly", "Monthly", "Quarterly", "Half-Yearly", "Annually"].filter(function (f) {
@@ -3184,8 +3353,23 @@
   }
 
   function getRecFreq(pfx) {
+    var first = document.querySelector("#" + pfx + "-payTableBody tr[data-is-first-recurring]");
+    if (first) {
+      var fs = first.querySelector(".pay-row-freq");
+      if (fs && fs.value) return fs.value;
+    }
     var s = document.getElementById(pfx + "-rec-freq");
-    return s ? s.value : "";
+    return s && s.value ? s.value : "";
+  }
+
+  function getFirstRecurringAmt(pfx) {
+    var first = document.querySelector("#" + pfx + "-payTableBody tr[data-is-first-recurring]");
+    if (first) {
+      var am = first.querySelector(".pay-amt");
+      return am ? parseFloat(am.value) || 0 : 0;
+    }
+    var recAmt = document.getElementById(pfx + "-rec-amt");
+    return recAmt ? parseFloat(recAmt.value) || 0 : 0;
   }
 
   function getMandateRange(ctx) {
@@ -3445,12 +3629,15 @@
     recurring2: "Recurring Payment",
     addon: "Add-On",
     discount: "Discount",
+    "recurring-addon": "Recurring Add-on",
+    "recurring-discount": "Recurring Discount",
     onetime: "One-Time",
   };
 
   var TOOLTIP_EQ =
     "This option is not available because the frequency of the recurring payment is equal to the frequency of the mandate";
   var TOOLTIP_FULL = "This option is not available because all collection periods are occupied";
+  var TOOLTIP_FIRST_REC = "The first payment must be a Recurring Payment";
 
   function syncPayTypeDropdownTrigger(row) {
     var root = row.querySelector("[data-pay-type-dropdown]");
@@ -3461,16 +3648,70 @@
     trigger.textContent = PAY_TYPE_LABELS.hasOwnProperty(k) ? PAY_TYPE_LABELS[k] : PAY_TYPE_LABELS[""];
   }
 
+  function sanitizePayNotesCell(row) {
+    var inp = row.querySelector("input.pay-notes, textarea.pay-notes");
+    if (!inp) return;
+    var td = inp.closest("td");
+    if (!td) return;
+    var val = inp.value;
+    var ph = inp.getAttribute("placeholder") || "Notes";
+    td.className = "pay-notes-td";
+    td.innerHTML = "";
+    if (inp.tagName === "TEXTAREA") {
+      var ta = document.createElement("textarea");
+      ta.className = "input pay-notes";
+      ta.rows = 2;
+      ta.placeholder = ph;
+      ta.value = val;
+      td.appendChild(ta);
+    } else {
+      var el = document.createElement("input");
+      el.type = "text";
+      el.className = "input pay-notes";
+      el.placeholder = ph;
+      el.value = val;
+      td.appendChild(el);
+    }
+  }
+
   function closeAllPayTypeDropdowns() {
     document.querySelectorAll(".pay-type-dd-panel").forEach(function (p) {
       p.hidden = true;
+      p.style.position = "";
+      p.style.top = "";
+      p.style.left = "";
+      p.style.width = "";
+      p.style.zIndex = "";
     });
+    document.querySelectorAll(".payments-schedule-table tr.pay-type-dd-open").forEach(function (tr) {
+      tr.classList.remove("pay-type-dd-open");
+    });
+  }
+
+  function openPayTypeDropdown(row, ctx, pfx, payTbl) {
+    closeAllPayTypeDropdowns();
+    var root = row.querySelector("[data-pay-type-dropdown]");
+    if (!root) return;
+    var trigger = root.querySelector(".pay-type-dd-trigger");
+    var panel = root.querySelector(".pay-type-dd-panel");
+    if (!trigger || !panel) return;
+    populatePayTypeDropdown(row, ctx, pfx, payTbl);
+    var rect = trigger.getBoundingClientRect();
+    panel.style.position = "fixed";
+    panel.style.top = rect.bottom + 4 + "px";
+    panel.style.left = rect.left + "px";
+    panel.style.width = "220px";
+    panel.style.zIndex = "9999";
+    panel.hidden = false;
+    row.classList.add("pay-type-dd-open");
   }
 
   if (!window.__directDebitCcPayTypeDdDoc) {
     window.__directDebitCcPayTypeDdDoc = true;
-    document.addEventListener("click", function () {
-      closeAllPayTypeDropdowns();
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest("[data-pay-type-dropdown]")) {
+        closeAllPayTypeDropdowns();
+      }
     });
   }
 
@@ -3488,6 +3729,7 @@
     if (!fr || fw < 0) fw = mw;
     var free = countFreePeriods(ctx, pfx);
 
+    var isFirstRecurring = row.getAttribute("data-is-first-recurring") === "true";
     var recOk = fw > mw && free > 0;
     var otOk = fw > mw && free > 0;
     var recTip = fw <= mw ? TOOLTIP_EQ : TOOLTIP_FULL;
@@ -3498,6 +3740,10 @@
     panel.innerHTML = "";
 
     function appendChoice(val, label, disabled, tip) {
+      if (isFirstRecurring) {
+        disabled = val !== "recurring2";
+        if (disabled) tip = TOOLTIP_FIRST_REC;
+      }
       var el = document.createElement(disabled ? "div" : "button");
       if (!disabled) el.type = "button";
       el.className = "pay-type-opt" + (disabled ? " pay-type-opt--disabled type-option" : "");
@@ -3514,27 +3760,37 @@
       panel.appendChild(el);
     }
 
-    appendChoice("", PAY_TYPE_LABELS[""], false, null);
+    appendChoice("", PAY_TYPE_LABELS[""], isFirstRecurring, isFirstRecurring ? TOOLTIP_FIRST_REC : null);
 
-    if (recOk) appendChoice("recurring2", PAY_TYPE_LABELS.recurring2, false, null);
+    if (isFirstRecurring || recOk) appendChoice("recurring2", PAY_TYPE_LABELS.recurring2, false, null);
     else appendChoice("recurring2", PAY_TYPE_LABELS.recurring2, true, recTip);
 
-    appendChoice("addon", PAY_TYPE_LABELS.addon, false, null);
-    appendChoice("discount", PAY_TYPE_LABELS.discount, false, null);
+    appendChoice("addon", PAY_TYPE_LABELS.addon, isFirstRecurring, isFirstRecurring ? TOOLTIP_FIRST_REC : null);
+    appendChoice("discount", PAY_TYPE_LABELS.discount, isFirstRecurring, isFirstRecurring ? TOOLTIP_FIRST_REC : null);
+    appendChoice("recurring-addon", PAY_TYPE_LABELS["recurring-addon"], isFirstRecurring, isFirstRecurring ? TOOLTIP_FIRST_REC : null);
+    appendChoice("recurring-discount", PAY_TYPE_LABELS["recurring-discount"], isFirstRecurring, isFirstRecurring ? TOOLTIP_FIRST_REC : null);
 
-    if (otOk) appendChoice("onetime", PAY_TYPE_LABELS.onetime, false, null);
+    if (isFirstRecurring) appendChoice("onetime", PAY_TYPE_LABELS.onetime, true, TOOLTIP_FIRST_REC);
+    else if (otOk) appendChoice("onetime", PAY_TYPE_LABELS.onetime, false, null);
     else appendChoice("onetime", PAY_TYPE_LABELS.onetime, true, otTip);
 
-    var selOk =
-      !cur ||
-      cur === "addon" ||
-      cur === "discount" ||
-      (cur === "recurring2" && recOk) ||
-      (cur === "onetime" && otOk);
-    if (!selOk) {
-      payTbl.applyPaymentKindChange(row, "", ctx, pfx);
+    if (isFirstRecurring) {
+      if (cur !== "recurring2") payTbl.applyPaymentKindChange(row, "recurring2", ctx, pfx);
+      else syncPayTypeDropdownTrigger(row);
     } else {
-      syncPayTypeDropdownTrigger(row);
+      var selOk =
+        !cur ||
+        cur === "addon" ||
+        cur === "discount" ||
+        cur === "recurring-addon" ||
+        cur === "recurring-discount" ||
+        (cur === "recurring2" && recOk) ||
+        (cur === "onetime" && otOk);
+      if (!selOk) {
+        payTbl.applyPaymentKindChange(row, "", ctx, pfx);
+      } else {
+        syncPayTypeDropdownTrigger(row);
+      }
     }
   }
 
@@ -3617,9 +3873,11 @@
 
     pm = getMandateRange(ctx).planMonths || 12;
     fq0 = getRecFreq(pfx);
-    nm0 = document.getElementById(pfx + "-rec-name");
+    var firstRecBlk = document.querySelector("#" + pfx + "-payTableBody tr[data-is-first-recurring]");
+    nm0 = firstRecBlk ? firstRecBlk.querySelector(".pay-name") : document.getElementById(pfx + "-rec-name");
     var firstNameP = nm0 ? nm0.value.trim() : "";
-    var occFirst = genPlanOccurrencesFirst(pm, fq0, recCdVal(pfx, fq0));
+    var cdPfxBlk = firstRecBlk && window.__payTblPayRowCdPrefix ? window.__payTblPayRowCdPrefix(firstRecBlk, pfx) : pfx;
+    var occFirst = genPlanOccurrencesFirst(pm, fq0, recCdVal(cdPfxBlk, fq0));
     for (i = 0; i < occFirst.length; i++) {
       o = occFirst[i];
       if (planPeriodIndexFromLabel(ctx, o.label, mf) === periodIx) return { typeLabel: "Recurring Payment", name: firstNameP };
@@ -3673,20 +3931,23 @@
         en = range.end;
       if (!st || !en) return rows;
       var fq0 = getRecFreq(pfx);
-      var nm0 = document.getElementById(pfx + "-rec-name");
-      var amt0 = document.getElementById(pfx + "-rec-amt");
+      var firstRec = document.querySelector("#" + pfx + "-payTableBody tr[data-is-first-recurring]");
+      var nm0 = firstRec ? firstRec.querySelector(".pay-name") : document.getElementById(pfx + "-rec-name");
       var payName0 = nm0 && nm0.value.trim() ? nm0.value.trim() : "";
-      var ds0 = genDatesFirstRecurringMandate(st, en, fq0, recCdVal(pfx, fq0));
+      var amt0n = getFirstRecurringAmt(pfx);
+      var cdPfx = firstRec && window.__payTblMndRowCdPrefix ? window.__payTblMndRowCdPrefix(firstRec) : pfx;
+      var ds0 = genDatesFirstRecurringMandate(st, en, fq0, recCdVal(cdPfx, fq0));
       ds0.forEach(function (dm, i) {
         rows.push({
           key: "rec0|" + dm + "|" + i,
           payName: payName0,
-          amount: amt0 ? amt0.value : "",
+          amount: amt0n > 0 ? String(amt0n) : "",
           dateLabel: dm,
         });
       });
       document.querySelectorAll("#" + pfx + "-payTableBody tr[data-pay-kind=recurring2]").forEach(function (tr, ri) {
-        var fs = tr.querySelector(".pay-rec2-freq");
+        if (tr.getAttribute("data-is-first-recurring") === "true") return;
+        var fs = tr.querySelector(".pay-rec2-freq, .pay-row-freq");
         var fq = fs ? fs.value : "";
         var anch = ((tr.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
         var ad = parseDMY(anch);
@@ -3707,14 +3968,16 @@
     } else {
       var pm = getMandateRange(ctx).planMonths || 12;
       var fq0 = getRecFreq(pfx);
-      var nm0 = document.getElementById(pfx + "-rec-name");
-      var amt0 = document.getElementById(pfx + "-rec-amt");
-      var payName0b = nm0 && nm0.value.trim() ? nm0.value.trim() : "";
-      genPlanOccurrencesFirst(pm, fq0, recCdVal(pfx, fq0)).forEach(function (o) {
+      var firstRecP = document.querySelector("#" + pfx + "-payTableBody tr[data-is-first-recurring]");
+      var nm0p = firstRecP ? firstRecP.querySelector(".pay-name") : document.getElementById(pfx + "-rec-name");
+      var payName0b = nm0p && nm0p.value.trim() ? nm0p.value.trim() : "";
+      var amt0p = getFirstRecurringAmt(pfx);
+      var cdPfxP = firstRecP && window.__payTblPayRowCdPrefix ? window.__payTblPayRowCdPrefix(firstRecP, pfx) : pfx;
+      genPlanOccurrencesFirst(pm, fq0, recCdVal(cdPfxP, fq0)).forEach(function (o) {
         rows.push({
           key: "rec0|" + o.key,
           payName: payName0b,
-          amount: amt0 ? amt0.value : "",
+          amount: amt0p > 0 ? String(amt0p) : "",
           dateLabel: o.label,
         });
       });
@@ -4156,6 +4419,370 @@
     if (window.lucide && lucide.createIcons) lucide.createIcons();
   }
 
+  function openCdPopoverFixed(btn, ctx) {
+    document.querySelectorAll(".cd-popover").forEach(function (p) {
+      p.style.display = "none";
+    });
+    var td = btn.closest("td");
+    var popover = td && td.querySelector(".cd-popover");
+    if (!popover) return;
+    var row = btn.closest("tr");
+    if (row && popover.dataset.inited !== "1") {
+      initPayRowCdPopover(row, ctx);
+      if (window.lucide && lucide.createIcons) lucide.createIcons();
+    }
+    var rect = btn.getBoundingClientRect();
+    var popW = 272;
+    var leftPos = Math.min(rect.left, window.innerWidth - popW - 12);
+    var topPos = rect.bottom + 6;
+    if (topPos + 320 > window.innerHeight) {
+      topPos = Math.max(12, rect.top - 320 - 6);
+    }
+    popover.style.cssText =
+      "display:block; position:fixed; z-index:9999;" +
+      "top:" + topPos + "px; left:" + leftPos + "px;" +
+      "width:" + popW + "px; max-height:300px; overflow:hidden;" +
+      "background:white; border:1.5px solid #EAE5F4; border-radius:14px;" +
+      "padding:16px; box-shadow:0 8px 24px rgba(18,12,36,0.13); box-sizing:border-box;";
+  }
+
+  window.openCdPopover = function openCdPopover(btn) {
+    openCdPopoverFixed(btn, "mnd");
+  };
+
+  window.closeCdPopover = function closeCdPopover(btn) {
+    var popover = btn.closest(".cd-popover");
+    if (popover) popover.style.display = "none";
+    var row = btn.closest("tr");
+    if (row) updateMndCdSummary(row);
+  };
+
+  window.openPlanCdPopover = function openPlanCdPopover(btn) {
+    openCdPopoverFixed(btn, "pp001");
+  };
+
+  window.closePlanCdPopover = function closePlanCdPopover(btn) {
+    var popover = btn.closest(".cd-popover");
+    if (popover) popover.style.display = "none";
+    var row = btn.closest("tr");
+    if (row) updatePayCdSummary(row, "pp001");
+  };
+
+  if (!window.__cdPopoverDocClick) {
+    window.__cdPopoverDocClick = true;
+    document.addEventListener(
+      "click",
+      function (e) {
+        if (!e.target.closest(".cd-edit-btn") && !e.target.closest(".cd-popover")) {
+          document.querySelectorAll(".cd-popover").forEach(function (p) {
+            p.style.display = "none";
+          });
+        }
+      },
+      true
+    );
+  }
+
+  window.onPayRowFrequencyChange = function onPayRowFrequencyChange(select) {
+    onCompactPayRowFrequencyChange(select, "mnd");
+  };
+
+  window.onPlanPayRowFrequencyChange = function onPlanPayRowFrequencyChange(select) {
+    onCompactPayRowFrequencyChange(select, "pp001");
+  };
+
+  function onCompactPayRowFrequencyChange(select, ctx) {
+    var row = select.closest("tr");
+    if (!row) return;
+    var cdSummary = row.querySelector(".cd-summary");
+    var cdEditBtn = row.querySelector(".cd-edit-btn");
+    if (select.value === "Daily") {
+      if (cdSummary) cdSummary.textContent = "N/A";
+      if (cdEditBtn) cdEditBtn.style.display = "none";
+    } else {
+      if (cdSummary && cdSummary.textContent === "N/A") cdSummary.textContent = "Not set";
+      if (cdEditBtn) cdEditBtn.style.display = "";
+      updatePayCdSummary(row, ctx);
+    }
+  }
+
+  function payRowCdPrefix(row, pfx) {
+    return pfx + "-r" + (row.getAttribute("data-row-id") || "0");
+  }
+
+  function mndRowCdPrefix(row) {
+    return payRowCdPrefix(row, "mnd");
+  }
+
+  function updatePayCdSummary(row, ctx) {
+    var pfx = ctx === "mnd" ? "mnd" : "pp001";
+    var sum = row.querySelector(".cd-summary");
+    if (!sum) return;
+    var k = row.getAttribute("data-pay-kind") || "";
+    var freqSel = row.querySelector(".pay-row-freq");
+    var fq = freqSel ? freqSel.value : "";
+    if (fq === "Daily") {
+      sum.textContent = "N/A";
+      return;
+    }
+    if (k === "recurring2" && row.getAttribute("data-is-first-recurring") === "true") {
+      sum.textContent = recCdVal(payRowCdPrefix(row, pfx), fq) || "Not set";
+      return;
+    }
+    if (k === "recurring2") {
+      var anch = ((row.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+      if (ctx === "pp001" && anch) {
+        sum.textContent = anch;
+      } else {
+        sum.textContent = anch || "Not set";
+      }
+      return;
+    }
+    if (k === "addon" || k === "discount" || k === "recurring-addon" || k === "recurring-discount") {
+      var n = (row.dataset.cdTags || "").split(",").filter(Boolean).length;
+      sum.textContent = n ? n + " day" + (n === 1 ? "" : "s") + " selected" : "Not set";
+      return;
+    }
+    if (k === "onetime") {
+      var ot = ((row.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+      sum.textContent = ctx === "pp001" ? formatOneTimeCellDisplay(ctx, pfx, ot) || ot || "Not set" : ot || "Not set";
+      return;
+    }
+    sum.textContent = "Not set";
+  }
+
+  function updateMndCdSummary(row) {
+    updatePayCdSummary(row, "mnd");
+  }
+
+  function initPayRowCdPopover(row, ctx) {
+    var pfx = payRowCdPrefix(row, ctx === "mnd" ? "mnd" : "pp001");
+    var pop = row.querySelector(".cd-popover");
+    if (!pop || pop.dataset.inited === "1") return;
+    pop.dataset.inited = "1";
+    var modePfx = pfx + "-recCd";
+    pop.innerHTML =
+      '<p style="font-size:13px;font-weight:700;color:#120C24;font-family:Inter,sans-serif;margin:0 0 12px;">Collection Day</p>' +
+      buildRecCdHtml(pfx) +
+      '<button type="button" class="cd-popover-done" style="margin-top:12px;width:100%;padding:10px;border-radius:8px;background:#7A5CFF;color:white;border:none;font-size:12px;font-weight:600;font-family:Inter,sans-serif;cursor:pointer;">Done</button>';
+    fillWeekdays(document.getElementById(pfx + "-rec-cdWeekly"));
+    if (window.initCollectionDayModeToggle) window.initCollectionDayModeToggle(modePfx);
+    if (window.wireDaysAfterInput) window.wireDaysAfterInput(pfx + "-recCdDaysAfterStart", pfx + "-recCdDaysAfterNote");
+    var doneBtn = pop.querySelector(".cd-popover-done");
+    if (doneBtn) {
+      doneBtn.addEventListener("click", function () {
+        pop.style.display = "none";
+        updatePayCdSummary(row, ctx);
+        if (window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.refreshAllPaymentDeps(ctx);
+      });
+    }
+    ["rec-cdDaily", "rec-cdMo", "rec-cdTxt", "recCdStartOffset", "recCdDaysAfterStart"].forEach(function (id) {
+      var el = document.getElementById(pfx + "-" + id);
+      if (el) {
+        el.addEventListener("input", function () {
+          updatePayCdSummary(row, ctx);
+          if (window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.refreshAllPaymentDeps(ctx);
+        });
+        el.addEventListener("change", function () {
+          updatePayCdSummary(row, ctx);
+          if (window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.refreshAllPaymentDeps(ctx);
+        });
+      }
+    });
+    var recW = document.getElementById(pfx + "-rec-cdWeekly");
+    if (recW) recW.addEventListener("change", function () {
+      updatePayCdSummary(row, ctx);
+      if (window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.refreshAllPaymentDeps(ctx);
+    });
+  }
+
+  function initMndRowCdPopover(row, ctx) {
+    initPayRowCdPopover(row, ctx);
+  }
+
+  function buildPayCdCellHtml(pfx) {
+    return (
+      '<div style="display:flex;align-items:center;gap:6px;width:100%;">' +
+      '<button type="button" class="cd-edit-btn" title="Set collection day" style="' +
+      "display:inline-flex;align-items:center;gap:4px;" +
+      "background:#F3F0FF;border:1px solid #EAE5F4;border-radius:6px;padding:4px 8px;" +
+      "cursor:pointer;font-size:11px;font-weight:600;color:#7A5CFF;font-family:Inter,sans-serif;" +
+      'white-space:nowrap;flex-shrink:0;">' +
+      '<i data-lucide="pencil" style="width:11px;height:11px;"></i>Set</button>' +
+      '<span class="cd-summary" style="font-size:11px;color:#4E465E;font-family:Inter,sans-serif;' +
+      'flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Not set</span></div>' +
+      '<div class="cd-popover"></div>'
+    );
+  }
+
+  function wireCdEditButton(row, ctx, pfx, payTbl) {
+    var editBtn = row.querySelector(".cd-edit-btn");
+    if (!editBtn || editBtn.dataset.cdWired === "1") return;
+    editBtn.dataset.cdWired = "1";
+    editBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var k = row.getAttribute("data-pay-kind") || "";
+      if (k === "addon" || k === "discount" || k === "recurring-addon" || k === "recurring-discount") {
+        var tblRows = buildAddonPickerRows(ctx, pfx);
+        var cur = (row.dataset.cdTags || "").split(",").filter(Boolean);
+        openPicker({
+          mode: "addonTable",
+          title: "Select collection days",
+          rows: tblRows,
+          selectedKeys: cur,
+          onApply: function (keys) {
+            row.dataset.cdTags = keys.join(",");
+            updatePayCdSummary(row, ctx);
+            payTbl.refreshAllPaymentDeps(ctx);
+          },
+        });
+        return;
+      }
+      if (k === "onetime") {
+        payTbl.refreshOneTimeCd(row, ctx);
+        var otBtn = row.querySelector(".btn-pay-picker");
+        if (otBtn) otBtn.click();
+        return;
+      }
+      if (k === "recurring2" && row.getAttribute("data-is-first-recurring") !== "true") {
+        var anchBtn = row.querySelector(".btn-pay-picker");
+        if (anchBtn) anchBtn.click();
+        return;
+      }
+      if (k === "recurring2" && row.getAttribute("data-is-first-recurring") === "true") {
+        var fq = row.querySelector(".pay-row-freq");
+        if (fq) syncRecCd(payRowCdPrefix(row, pfx), fq.value);
+        if (window.updateCollectionDayUI) window.updateCollectionDayUI(payRowCdPrefix(row, pfx) + "-recCd");
+      }
+      if (pfx === "pp001") window.openPlanCdPopover(editBtn);
+      else window.openCdPopover(editBtn);
+    });
+  }
+
+  function buildCompactPayRowHtml(pfx, opts) {
+    opts = opts || {};
+    var hideDel = opts.isFirst ? ' style="display:none;"' : "";
+    return (
+      '<td><input type="text" class="input pay-name" placeholder="Optional" /></td>' +
+      '<td class="pay-type-td">' +
+      '<div class="pay-type-dropdown" data-pay-type-dropdown>' +
+      '<button type="button" class="pay-type-dd-trigger input">Select type</button>' +
+      '<div class="pay-type-dd-panel" hidden></div></div>' +
+      '<div class="pay-row-err" data-row-err></div></td>' +
+      '<td><input class="input pay-amt" inputmode="decimal" /></td>' +
+      '<td class="pay-freq-cell"></td>' +
+      '<td class="pay-cd-td" style="position:relative;">' +
+      buildPayCdCellHtml(pfx) +
+      '</td>' +
+      '<td class="pay-notes-td"><input type="text" class="input pay-notes" placeholder="Notes" /></td>' +
+      '<td class="pay-actions-cell">' +
+      '<button type="button" class="icon-act-btn pay-del" title="Delete"' +
+      hideDel +
+      '><i data-lucide="trash-2"></i></button>' +
+      '<button type="button" class="icon-act-btn pay-dup" title="Duplicate"><i data-lucide="copy"></i></button></td>'
+    );
+  }
+
+  function buildMndPayRowHtml(uid, opts) {
+    return buildCompactPayRowHtml("mnd", opts);
+  }
+
+  function bindCompactPayRow(row, ctx, pfx, payTbl) {
+    var boundKey = pfx + "Bound";
+    if (row.dataset[boundKey] === "1") return;
+    row.dataset[boundKey] = "1";
+    var dd = row.querySelector("[data-pay-type-dropdown]");
+    if (!dd) return;
+    var trigger = dd.querySelector(".pay-type-dd-trigger");
+    var panel = dd.querySelector(".pay-type-dd-panel");
+    trigger.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var wasOpen = row.classList.contains("pay-type-dd-open") && !panel.hidden;
+      if (wasOpen) {
+        closeAllPayTypeDropdowns();
+      } else {
+        openPayTypeDropdown(row, ctx, pfx, payTbl);
+      }
+    });
+    var delBtn = row.querySelector(".pay-del");
+    if (delBtn) {
+      delBtn.addEventListener("click", function () {
+        if (row.getAttribute("data-is-first-recurring") === "true") return;
+        row.remove();
+        if (window.recalculateMax) window.recalculateMax(pfx);
+        payTbl.refreshAllPaymentDeps(ctx);
+      });
+    }
+    var dupBtn = row.querySelector(".pay-dup");
+    if (dupBtn) {
+      dupBtn.addEventListener("click", function () {
+        payTbl.addRow(ctx, row);
+      });
+    }
+    var amtIn = row.querySelector(".pay-amt");
+    if (amtIn) {
+      amtIn.addEventListener("input", function () {
+        if (window.recalculateMax) window.recalculateMax(pfx);
+      });
+      amtIn.addEventListener("change", function () {
+        if (window.recalculateMax) window.recalculateMax(pfx);
+      });
+    }
+    wireCdEditButton(row, ctx, pfx, payTbl);
+  }
+
+  function bindMndPayRow(row, ctx, pfx, payTbl) {
+    bindCompactPayRow(row, ctx, pfx, payTbl);
+  }
+
+  window.ensureFirstRecurringRow = function ensureFirstRecurringRow() {
+    var tbody = document.getElementById("mnd-payTableBody");
+    if (!tbody || tbody.querySelectorAll("tr").length > 0) return;
+    if (!window.DirectDebitCcPayTbl) return;
+    DirectDebitCcPayTbl.addRow("mnd", null, { isFirst: true });
+    var tr = tbody.querySelector("tr");
+    if (!tr) return;
+    tr.setAttribute("data-is-first-recurring", "true");
+    DirectDebitCcPayTbl.applyPaymentKindChange(tr, "recurring2", "mnd", "mnd");
+    var fs = tr.querySelector(".pay-row-freq");
+    var mainF = mandateFreqEl("mnd").value;
+    if (fs) {
+      fillRecurringFreqSelect(fs, mainF);
+      fs.value = mainF || fs.value;
+      if (window.onPayRowFrequencyChange) window.onPayRowFrequencyChange(fs);
+    }
+    var del = tr.querySelector(".pay-del");
+    if (del) del.style.display = "none";
+    initPayRowCdPopover(tr, "mnd");
+    if (fs) syncRecCd(payRowCdPrefix(tr, "mnd"), fs.value);
+    updatePayCdSummary(tr, "mnd");
+    if (window.recalculateMax) window.recalculateMax("mnd");
+  };
+
+  window.ensureFirstPlanRecurringRow = function ensureFirstPlanRecurringRow() {
+    var tbody = document.getElementById("pp001-payTableBody");
+    if (!tbody || tbody.querySelectorAll("tr").length > 0) return;
+    if (!window.DirectDebitCcPayTbl) return;
+    DirectDebitCcPayTbl.addRow("pp001", null, { isFirst: true });
+    var tr = tbody.querySelector("tr");
+    if (!tr) return;
+    tr.setAttribute("data-is-first-recurring", "true");
+    DirectDebitCcPayTbl.applyPaymentKindChange(tr, "recurring2", "pp001", "pp001");
+    var fs = tr.querySelector(".pay-row-freq");
+    var mainF = mandateFreqEl("pp001").value;
+    if (fs) {
+      fillRecurringFreqSelect(fs, mainF);
+      fs.value = mainF || fs.value;
+      if (window.onPlanPayRowFrequencyChange) window.onPlanPayRowFrequencyChange(fs);
+    }
+    var del = tr.querySelector(".pay-del");
+    if (del) del.style.display = "none";
+    initPayRowCdPopover(tr, "pp001");
+    if (fs) syncRecCd(payRowCdPrefix(tr, "pp001"), fs.value);
+    updatePayCdSummary(tr, "pp001");
+    if (window.recalculateMax) window.recalculateMax("pp001");
+  };
+
   document.getElementById("paySchPickerCancel").addEventListener("click", pickerClose);
   document.getElementById("paySchPickerApply").addEventListener("click", function () {
     var ctx0 = window.__payPickerCtx;
@@ -4200,67 +4827,49 @@
       if (tb) tb.innerHTML = "";
     },
     initVariable: function (ctx) {
-      var pfx = ctx === "mnd" ? "mnd" : "pp001";
-      this.clearVariable(ctx);
-      var tb = document.getElementById(pfx + "-payTableBody");
-      if (!tb) return;
-      var tr = document.createElement("tr");
-      tr.setAttribute("data-pay-kind", "recurring");
-      tr.innerHTML =
-        '<td class="pay-name-cell"><label>Name <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label><input type="text" class="input pay-name" id="' + pfx + '-rec-name" placeholder="Optional label" /></td>' +
-        '<td class="pay-type-cell">Recurring Payment</td>' +
-        '<td><input class="input" id="' + pfx + '-rec-amt" inputmode="decimal" /></td>' +
-        '<td><select class="input" id="' + pfx + '-rec-freq"></select></td>' +
-        '<td class="pay-cd-cell"><div id="' + pfx + '-rec-cdRoot">' +
-        buildRecCdHtml(pfx) +
-        "</div></td>" +
-        '<td><textarea class="input" id="' + pfx + '-rec-notes" rows="2"></textarea></td>' +
-        '<td class="pay-actions-cell"></td>';
-      tb.appendChild(tr);
-      fillWeekdays(document.getElementById(pfx + "-rec-cdWeekly"));
-      var rf = document.getElementById(pfx + "-rec-freq");
-      fillRecurringFreqSelect(rf, mandateFreqEl(ctx).value);
-      syncRecCd(pfx, rf.value);
-      var self = this;
-      function recDeps() {
-        self.refreshAddonFreqs(ctx);
-        self.refreshAllPaymentDeps(ctx);
+      if (ctx === "mnd" || ctx === "pp001") {
+        this.clearVariable(ctx);
+        if (ctx === "mnd" && window.ensureFirstRecurringRow) window.ensureFirstRecurringRow();
+        if (ctx === "pp001" && window.ensureFirstPlanRecurringRow) window.ensureFirstPlanRecurringRow();
+        return;
       }
-      rf.addEventListener("change", function () {
-        syncRecCd(pfx, rf.value);
-        if (window.updateCollectionDayUI) window.updateCollectionDayUI(pfx + "-recCd");
-        recDeps();
-      });
-      ["rec-cdDaily", "rec-cdMo", "rec-cdTxt", "recCdStartOffset", "recCdDaysAfterStart"].forEach(function (id) {
-        var el = document.getElementById(pfx + "-" + id);
-        if (el) {
-          el.addEventListener("input", recDeps);
-          el.addEventListener("change", recDeps);
-        }
-      });
-      var recW = document.getElementById(pfx + "-rec-cdWeekly");
-      if (recW) recW.addEventListener("change", recDeps);
-      var rn = document.getElementById(pfx + "-rec-name");
-      if (rn) {
-        rn.addEventListener("input", function () {
-          self.refreshAllPaymentDeps(ctx);
-        });
-      }
-      if (window.initCollectionDayModeToggle) window.initCollectionDayModeToggle(pfx + "-recCd");
-      if (window.wireDaysAfterInput) {
-        window.wireDaysAfterInput(pfx + "-recCdDaysAfterStart", pfx + "-recCdDaysAfterNote");
-      }
-      if (window.updateCollectionDayUI) window.updateCollectionDayUI(pfx + "-recCd");
-      if (window.lucide && lucide.createIcons) lucide.createIcons();
     },
-    refreshAddonFreqs: function () {},
+    refreshAddonFreqs: function (ctx) {
+      var pfx = ctx === "mnd" ? "mnd" : "pp001";
+      var mainF = mandateFreqEl(ctx).value;
+      document.querySelectorAll("#" + pfx + "-payTableBody tr[data-pay-kind=recurring-addon], #" + pfx + "-payTableBody tr[data-pay-kind=recurring-discount]").forEach(function (row) {
+        var fs = row.querySelector(".pay-rec-addon-freq");
+        if (fs) fillRecurringAddonFreqSelect(fs, mainF);
+      });
+    },
     onMandateFreqChange: function (ctx) {
       var pfx = ctx === "mnd" ? "mnd" : "pp001";
-      var rf = document.getElementById(pfx + "-rec-freq");
-      if (rf) {
-        fillRecurringFreqSelect(rf, mandateFreqEl(ctx).value);
-        syncRecCd(pfx, rf.value);
-        if (window.updateCollectionDayUI) window.updateCollectionDayUI(pfx + "-recCd");
+      if (ctx === "mnd") {
+        var first = document.querySelector("#mnd-payTableBody tr[data-is-first-recurring]");
+        if (first) {
+          var rf = first.querySelector(".pay-row-freq");
+          var mainF = mandateFreqEl(ctx).value;
+          if (rf) {
+            fillRecurringFreqSelect(rf, mainF);
+            rf.value = mainF || rf.value;
+            if (window.onPayRowFrequencyChange) window.onPayRowFrequencyChange(rf);
+            syncRecCd(mndRowCdPrefix(first), rf.value);
+            if (window.updateCollectionDayUI) window.updateCollectionDayUI(mndRowCdPrefix(first) + "-recCd");
+          }
+        }
+      } else if (ctx === "pp001") {
+        var firstP = document.querySelector("#pp001-payTableBody tr[data-is-first-recurring]");
+        if (firstP) {
+          var rfP = firstP.querySelector(".pay-row-freq");
+          var mainFP = mandateFreqEl(ctx).value;
+          if (rfP) {
+            fillRecurringFreqSelect(rfP, mainFP);
+            rfP.value = mainFP || rfP.value;
+            if (window.onPlanPayRowFrequencyChange) window.onPlanPayRowFrequencyChange(rfP);
+            syncRecCd(payRowCdPrefix(firstP, "pp001"), rfP.value);
+            if (window.updateCollectionDayUI) window.updateCollectionDayUI(payRowCdPrefix(firstP, "pp001") + "-recCd");
+          }
+        }
       }
       this.refreshAddonFreqs(ctx);
       this.refreshAllPaymentDeps(ctx);
@@ -4271,15 +4880,15 @@
     refreshAllPaymentDeps: function (ctx) {
       var pfx = ctx === "mnd" ? "mnd" : "pp001";
       var tbl = this;
-      document.querySelectorAll("#" + pfx + "-payTableBody tr").forEach(function (row, ix) {
-        if (ix === 0) return;
+      document.querySelectorAll("#" + pfx + "-payTableBody tr").forEach(function (row) {
         populatePayTypeDropdown(row, ctx, pfx, tbl);
+        sanitizePayNotesCell(row);
       });
       updateNamePlaceholders(pfx);
       document.querySelectorAll("#" + pfx + "-payTableBody tr[data-pay-kind=onetime]").forEach(function (row) {
         DirectDebitCcPayTbl.refreshOneTimeCd(row, ctx);
       });
-      document.querySelectorAll("#" + pfx + "-payTableBody tr[data-pay-kind=addon], #" + pfx + "-payTableBody tr[data-pay-kind=discount]").forEach(function (row) {
+      document.querySelectorAll("#" + pfx + "-payTableBody tr[data-pay-kind=addon], #" + pfx + "-payTableBody tr[data-pay-kind=discount], #" + pfx + "-payTableBody tr[data-pay-kind=recurring-addon], #" + pfx + "-payTableBody tr[data-pay-kind=recurring-discount]").forEach(function (row) {
         DirectDebitCcPayTbl.refreshAddonDiscountCd(row, ctx);
       });
       document.querySelectorAll("#" + pfx + "-payTableBody tr[data-pay-kind=recurring2]").forEach(function (row) {
@@ -4287,6 +4896,10 @@
       });
     },
     refreshAddonDiscountCd: function (row, ctx) {
+      if (ctx === "mnd" || ctx === "pp001") {
+        updatePayCdSummary(row, ctx);
+        return;
+      }
       var cdCell = row.querySelector(".pay-extra-cd");
       if (!cdCell) return;
       var tw = cdCell.querySelector(".pay-tag-wrap");
@@ -4297,6 +4910,75 @@
         !n ? '<span style="font-size:11px;color:var(--graphite-plum)">None selected</span>' : '<span class="pay-tag">' + n + " days selected</span>";
     },
     refreshRecurring2Cd: function (row, ctx) {
+      if (ctx === "mnd" || ctx === "pp001") {
+        var cdCell = row.querySelector(".pay-cd-td");
+        if (!cdCell) return;
+        if (row.getAttribute("data-is-first-recurring") === "true") {
+          updatePayCdSummary(row, ctx);
+          return;
+        }
+        var hidden = cdCell.querySelector(".pay-rec2-cd-hidden");
+        if (!hidden) {
+          hidden = document.createElement("div");
+          hidden.className = "pay-rec2-cd pay-rec2-cd-hidden";
+          hidden.style.cssText = "position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;";
+          cdCell.appendChild(hidden);
+        }
+        var tw = hidden.querySelector(".pay-tag-wrap");
+        if (!tw) {
+          hidden.innerHTML = "";
+          tw = document.createElement("div");
+          tw.className = "pay-tag-wrap";
+          hidden.appendChild(tw);
+        }
+        var raw = ((row.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+        tw.innerHTML = raw ? '<span class="pay-tag">' + esc(raw) + "</span>" : "";
+        if (!hidden.querySelector(".btn-pay-picker")) {
+          var bR = document.createElement("button");
+          bR.type = "button";
+          bR.className = "btn-pay-picker";
+          bR.textContent = ctx === "pp001" ? "Pick period" : "Pick anchor";
+          var self = this;
+          var pfx = ctx === "mnd" ? "mnd" : "pp001";
+          bR.addEventListener("click", function () {
+            var selA = ((row.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+            if (ctx === "mnd") {
+              var rangeA = getMandateRange(ctx);
+              openPicker({
+                mode: "monthCalendar",
+                title: "Pick anchor collection date",
+                selectedDmy: selA,
+                mandateStart: rangeA.start,
+                mandateEnd: rangeA.end,
+                calendarCtx: { ctx: ctx, pfx: pfx, excludeRecurring2Row: row },
+                isDateBlocked: function (dt) {
+                  return isRecurring2AnchorBlocked(dt, ctx, pfx, row);
+                },
+                onApply: function (v) {
+                  row.dataset.cdTags = v;
+                  self.refreshRecurring2Cd(row, ctx);
+                  self.refreshAllPaymentDeps(ctx);
+                },
+              });
+            } else {
+              openPlanAnchorCalendar({
+                ctx: ctx,
+                pfx: pfx,
+                row: row,
+                selectedAnchor: selA,
+                onApply: function (lbl) {
+                  row.dataset.cdTags = lbl;
+                  self.refreshRecurring2Cd(row, ctx);
+                  self.refreshAllPaymentDeps(ctx);
+                },
+              });
+            }
+          });
+          hidden.appendChild(bR);
+        }
+        updatePayCdSummary(row, ctx);
+        return;
+      }
       var cdCell = row.querySelector(".pay-rec2-cd");
       if (!cdCell) return;
       var tw = cdCell.querySelector(".pay-tag-wrap");
@@ -4308,6 +4990,48 @@
     },
     refreshOneTimeCd: function (row, ctx) {
       var pfx = ctx === "mnd" ? "mnd" : "pp001";
+      if (ctx === "mnd" || ctx === "pp001") {
+        var cdTd = row.querySelector(".pay-cd-td");
+        var cell = cdTd ? cdTd.querySelector(".pay-onetime-cd") : null;
+        if (!cell && cdTd) {
+          cell = document.createElement("div");
+          cell.className = "pay-onetime-cd";
+          cell.style.cssText = "position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;";
+          cdTd.appendChild(cell);
+        }
+        if (!cell) return;
+        var c = compareCases(pfx, ctx);
+        var raw = ((row.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+        cell.innerHTML = "";
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "btn-pay-picker";
+        btn.textContent = "Pick date";
+        var self = this;
+        btn.addEventListener("click", function () {
+          var sel0 = ((row.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+          var range = getMandateRange(ctx);
+          openPicker({
+            mode: "monthCalendar",
+            title: "Pick one collection date",
+            selectedDmy: sel0,
+            mandateStart: range.start,
+            mandateEnd: range.end,
+            calendarCtx: { ctx: ctx, pfx: pfx, excludeOneTimeRow: row },
+            isDateBlocked: function (dt) {
+              return isOneTimeDateBlocked(dt, ctx, pfx, row);
+            },
+            onApply: function (v) {
+              row.dataset.cdTags = v;
+              updatePayCdSummary(row, ctx);
+              self.refreshAllPaymentDeps(ctx);
+            },
+          });
+        });
+        cell.appendChild(btn);
+        updatePayCdSummary(row, ctx);
+        return;
+      }
       var cell = row.querySelector(".pay-onetime-cd");
       if (!cell) return;
       var c = compareCases(pfx, ctx);
@@ -4376,7 +5100,87 @@
       cell.appendChild(wrap);
       cell.appendChild(btn);
     },
+    applyPaymentKindChangeMnd: function (row, k, ctx, pfx) {
+      var self = this;
+      var freqCell = row.querySelector(".pay-freq-cell");
+      var cdCell = row.querySelector(".pay-cd-td");
+      if (!cdCell) {
+        cdCell = document.createElement("td");
+        cdCell.className = "pay-cd-td";
+        cdCell.style.position = "relative";
+        var oldCd = row.querySelector(".pay-cd-cell");
+        if (oldCd) oldCd.replaceWith(cdCell);
+      }
+      row.setAttribute("data-pay-kind", k);
+      syncPayTypeDropdownTrigger(row);
+      if (freqCell) freqCell.innerHTML = "";
+      cdCell.innerHTML = buildPayCdCellHtml(pfx);
+      wireCdEditButton(row, ctx, pfx, self);
+      var rowErr = row.querySelector("[data-row-err]");
+      if (rowErr) rowErr.classList.remove("show");
+      if (!k) {
+        sanitizePayNotesCell(row);
+        self.refreshAllPaymentDeps(ctx);
+        return;
+      }
+      function wireFreq(sel) {
+        if (!sel) return;
+        sel.classList.add("pay-row-freq");
+        sel.addEventListener("change", function () {
+          if (ctx === "pp001" && window.onPlanPayRowFrequencyChange) window.onPlanPayRowFrequencyChange(sel);
+          else if (window.onPayRowFrequencyChange) window.onPayRowFrequencyChange(sel);
+          self.refreshAllPaymentDeps(ctx);
+        });
+        if (ctx === "pp001" && window.onPlanPayRowFrequencyChange) window.onPlanPayRowFrequencyChange(sel);
+        else if (window.onPayRowFrequencyChange) window.onPayRowFrequencyChange(sel);
+      }
+      if (k === "onetime") {
+        freqCell.innerHTML = '<div class="freq-readonly">One-Time</div>';
+        var hid = document.createElement("div");
+        hid.className = "pay-onetime-cd";
+        hid.style.cssText = "position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;";
+        cdCell.appendChild(hid);
+        self.refreshOneTimeCd(row, ctx);
+      } else if (k === "recurring-addon" || k === "recurring-discount") {
+        freqCell.innerHTML = '<select class="input pay-rec-addon-freq pay-row-freq"></select>';
+        var fsA = freqCell.querySelector(".pay-rec-addon-freq");
+        fillRecurringAddonFreqSelect(fsA, mandateFreqEl(ctx).value);
+        wireFreq(fsA);
+        self.refreshAddonDiscountCd(row, ctx);
+      } else if (k === "recurring2") {
+        freqCell.innerHTML = '<select class="input pay-rec2-freq pay-row-freq"></select>';
+        var fs = freqCell.querySelector(".pay-rec2-freq");
+        if (row.getAttribute("data-is-first-recurring") === "true") {
+          fillRecurringFreqSelect(fs, mandateFreqEl(ctx).value);
+        } else {
+          fillRec2FreqSelect(fs, getRecFreq(pfx));
+        }
+        wireFreq(fs);
+        if (row.getAttribute("data-is-first-recurring") === "true") {
+          initPayRowCdPopover(row, ctx);
+          syncRecCd(payRowCdPrefix(row, pfx), fs.value);
+        } else {
+          self.refreshRecurring2Cd(row, ctx);
+        }
+      } else if (k === "addon" || k === "discount") {
+        freqCell.innerHTML = '<div class="freq-readonly">—</div>';
+        self.refreshAddonDiscountCd(row, ctx);
+      } else {
+        freqCell.innerHTML = '<div class="freq-readonly">—</div>';
+        self.refreshAddonDiscountCd(row, ctx);
+      }
+      bindCompactPayRow(row, ctx, pfx, self);
+      sanitizePayNotesCell(row);
+      updatePayCdSummary(row, ctx);
+      self.refreshAllPaymentDeps(ctx);
+      if (window.recalculateMax) window.recalculateMax(pfx);
+      if (window.lucide && lucide.createIcons) lucide.createIcons();
+    },
     applyPaymentKindChange: function (row, k, ctx, pfx) {
+      if (ctx === "mnd" || ctx === "pp001") {
+        this.applyPaymentKindChangeMnd(row, k, ctx, pfx);
+        return;
+      }
       var self = this;
       var freqCell = row.querySelector(".pay-freq-cell");
       var cdCell = row.querySelector(".pay-cd-cell");
@@ -4399,6 +5203,37 @@
         freqCell.innerHTML = '<div class="freq-readonly">One-Time</div>';
         cdCell.classList.add("pay-onetime-cd");
         self.refreshOneTimeCd(row, ctx);
+      } else if (k === "recurring-addon" || k === "recurring-discount") {
+        freqCell.innerHTML = '<select class="input pay-rec-addon-freq"></select>';
+        var fsA = freqCell.querySelector(".pay-rec-addon-freq");
+        fillRecurringAddonFreqSelect(fsA, mandateFreqEl(ctx).value);
+        fsA.addEventListener("change", function () {
+          self.refreshAllPaymentDeps(ctx);
+        });
+        cdCell.innerHTML = "";
+        var twA = document.createElement("div");
+        twA.className = "pay-tag-wrap";
+        cdCell.appendChild(twA);
+        var bA = document.createElement("button");
+        bA.type = "button";
+        bA.className = "btn-pay-picker";
+        bA.textContent = "Select Collection Days";
+        bA.addEventListener("click", function () {
+          var tblRows = buildAddonPickerRows(ctx, pfx);
+          var curA = (row.dataset.cdTags || "").split(",").filter(Boolean);
+          openPicker({
+            mode: "addonTable",
+            title: "Select collection days",
+            rows: tblRows,
+            selectedKeys: curA,
+            onApply: function (keys) {
+              row.dataset.cdTags = keys.join(",");
+              self.refreshAddonDiscountCd(row, ctx);
+            },
+          });
+        });
+        cdCell.appendChild(bA);
+        self.refreshAddonDiscountCd(row, ctx);
       } else if (k === "recurring2") {
         freqCell.innerHTML = '<select class="input pay-rec2-freq"></select>';
         var fs = freqCell.querySelector(".pay-rec2-freq");
@@ -4479,14 +5314,36 @@
         self.refreshAddonDiscountCd(row, ctx);
       }
       self.refreshAllPaymentDeps(ctx);
+      if (window.recalculateMax) window.recalculateMax(pfx);
     },
-    addRow: function (ctx, dupFrom) {
+    addRow: function (ctx, dupFrom, opts) {
+      opts = opts || {};
       var pfx = ctx === "mnd" ? "mnd" : "pp001";
       var tb = document.getElementById(pfx + "-payTableBody");
       var row = document.createElement("tr");
       var uid = "r" + Date.now() + Math.random().toString(36).slice(2);
       row.setAttribute("data-pay-kind", "");
       row.setAttribute("data-row-id", uid);
+      if (ctx === "mnd" || ctx === "pp001") {
+        if (opts.isFirst) row.setAttribute("data-is-first-recurring", "true");
+        row.innerHTML = buildCompactPayRowHtml(pfx, opts);
+        tb.appendChild(row);
+        bindCompactPayRow(row, ctx, pfx, this);
+        populatePayTypeDropdown(row, ctx, pfx, this);
+        if (dupFrom) {
+          row.dataset.cdTags = dupFrom.dataset.cdTags || "";
+          var dk = dupFrom.getAttribute("data-pay-kind") || "";
+          this.applyPaymentKindChangeMnd(row, dk, ctx, pfx);
+          if (row.querySelector(".pay-name") && dupFrom.querySelector(".pay-name")) row.querySelector(".pay-name").value = dupFrom.querySelector(".pay-name").value;
+          row.querySelector(".pay-amt").value = dupFrom.querySelector(".pay-amt").value;
+          row.querySelector(".pay-notes").value = dupFrom.querySelector(".pay-notes").value;
+        }
+        updateNamePlaceholders(pfx);
+        sanitizePayNotesCell(row);
+        if (window.recalculateMax) window.recalculateMax(pfx);
+        if (window.lucide && lucide.createIcons) lucide.createIcons();
+        return;
+      }
       row.innerHTML =
         '<td class="pay-name-cell"><label>Name <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label><input type="text" class="input pay-name" placeholder="Optional label" /><div class="pay-row-err" data-name-err></div></td>' +
         '<td class="pay-type-td">' +
@@ -4499,7 +5356,7 @@
         '<td><input class="input pay-amt" inputmode="decimal" /></td>' +
         '<td class="pay-freq-cell"></td>' +
         '<td class="pay-cd-cell pay-extra-cd"></td>' +
-        '<td><textarea class="input pay-notes" rows="2"></textarea></td>' +
+        '<td class="pay-notes-td"><textarea class="input pay-notes" rows="2" placeholder="Notes"></textarea></td>' +
         '<td class="pay-actions-cell"><button type="button" class="icon-act-btn pay-del" title="Delete"><i data-lucide="trash-2"></i></button><button type="button" class="icon-act-btn pay-dup" title="Duplicate"><i data-lucide="copy"></i></button></td>';
       tb.appendChild(row);
       var self = this;
@@ -4509,17 +5366,27 @@
         var panel = dd.querySelector(".pay-type-dd-panel");
         trigger.addEventListener("click", function (e) {
           e.stopPropagation();
-          var wasOpen = !panel.hidden;
-          closeAllPayTypeDropdowns();
-          if (!wasOpen) {
-            populatePayTypeDropdown(r, ctx, pfx, self);
-            panel.hidden = false;
+          var wasOpen = r.classList.contains("pay-type-dd-open") && !panel.hidden;
+          if (wasOpen) {
+            closeAllPayTypeDropdowns();
+          } else {
+            openPayTypeDropdown(r, ctx, pfx, self);
           }
         });
         r.querySelector(".pay-del").addEventListener("click", function () {
           r.remove();
+          if (window.recalculateMax) window.recalculateMax(ctx === "mnd" ? "mnd" : "pp001");
           self.refreshAllPaymentDeps(ctx);
         });
+        var amtIn = r.querySelector(".pay-amt");
+        if (amtIn) {
+          amtIn.addEventListener("input", function () {
+            if (window.recalculateMax) window.recalculateMax(ctx === "mnd" ? "mnd" : "pp001");
+          });
+          amtIn.addEventListener("change", function () {
+            if (window.recalculateMax) window.recalculateMax(ctx === "mnd" ? "mnd" : "pp001");
+          });
+        }
         r.querySelector(".pay-dup").addEventListener("click", function () {
           self.addRow(ctx, r);
         });
@@ -4533,47 +5400,18 @@
         if (row.querySelector(".pay-name") && dupFrom.querySelector(".pay-name")) row.querySelector(".pay-name").value = dupFrom.querySelector(".pay-name").value;
         row.querySelector(".pay-amt").value = dupFrom.querySelector(".pay-amt").value;
         row.querySelector(".pay-notes").value = dupFrom.querySelector(".pay-notes").value;
-        if (dk === "addon" || dk === "discount") self.refreshAddonDiscountCd(row, ctx);
+        if (dk === "addon" || dk === "discount" || dk === "recurring-addon" || dk === "recurring-discount") self.refreshAddonDiscountCd(row, ctx);
         else if (dk === "onetime") self.refreshOneTimeCd(row, ctx);
         else if (dk === "recurring2") self.refreshRecurring2Cd(row, ctx);
       }
       updateNamePlaceholders(pfx);
+      if (window.recalculateMax) window.recalculateMax(ctx === "mnd" ? "mnd" : "pp001");
       if (window.lucide && lucide.createIcons) lucide.createIcons();
     },
     validateAll: function (ctx) {
       var pfx = ctx === "mnd" ? "mnd" : "pp001";
-      var mi = parseMoney(document.getElementById(pfx === "mnd" ? "mnd-minAmount" : "pp001-minAmount").value);
-      var ma = parseMoney(document.getElementById(pfx === "mnd" ? "mnd-maxAmount" : "pp001-maxAmount").value);
       var ok = true;
-      var recAmtEl = document.getElementById(pfx + "-rec-amt");
-      var recAmt = parseMoney(recAmtEl ? recAmtEl.value : "");
-      var rf = getRecFreq(pfx);
-      var cdRec = recCdVal(pfx, rf);
-      var errRecurring = document.getElementById(pfx + "-rec-err");
-      if (errRecurring) errRecurring.remove();
-      if (!(recAmt > 0) || recAmt < mi || recAmt > ma) {
-        ok = false;
-        var e = document.createElement("div");
-        e.className = "field-error show";
-        e.id = pfx + "-rec-err";
-        e.style.marginTop = "4px";
-        e.textContent = !(recAmt > 0) ? "Enter a valid amount." : "Amount must stay within Min / Max.";
-        recAmtEl.parentNode.appendChild(e);
-      }
-      var recCdErr = document.getElementById(pfx + "-rec-cd-err");
-      if (recCdErr) recCdErr.remove();
-      if (!cdRec || cdRec === "\u2014") {
-        ok = false;
-        var cdEx = document.createElement("div");
-        cdEx.className = "field-error show";
-        cdEx.id = pfx + "-rec-cd-err";
-        cdEx.style.marginTop = "4px";
-        cdEx.textContent = "Complete collection day.";
-        var cdMount = document.getElementById(pfx + "-rec-cdRoot");
-        if (cdMount && cdMount.parentNode) cdMount.parentNode.appendChild(cdEx);
-      }
-      document.querySelectorAll("#" + pfx + "-payTableBody tr").forEach(function (row, ix) {
-        if (ix === 0) return;
+      document.querySelectorAll("#" + pfx + "-payTableBody tr").forEach(function (row) {
         var k = row.getAttribute("data-pay-kind") || "",
           err = row.querySelector("[data-row-err]");
         var nameErr = row.querySelector("[data-name-err]");
@@ -4589,8 +5427,10 @@
         }
         var amt = parseMoney(row.querySelector(".pay-amt").value);
         var incomplete = (k !== "onetime" && !(amt > 0)) || (k === "onetime" && !(amt > 0));
-        if (k === "addon" || k === "discount") {
+        if (k === "addon" || k === "discount" || k === "recurring-addon" || k === "recurring-discount") {
           if (!(row.dataset.cdTags || "").trim()) incomplete = true;
+          var fsA = row.querySelector(".pay-rec-addon-freq");
+          if (fsA && !fsA.value) incomplete = true;
         }
         if (k === "onetime") {
           if (!(row.dataset.cdTags || "").trim()) incomplete = true;
@@ -4602,37 +5442,30 @@
             err.classList.add("show");
           }
         }
-        if (k === "addon" && recAmt > 0 && ma > 0 && recAmt + amt > ma) {
+        if (k === "onetime" && !(amt > 0)) {
           ok = false;
           if (err) {
-            err.textContent = "Add-On violates Max Amount on at least one selected day.";
+            err.textContent = "Enter a valid amount.";
             err.classList.add("show");
           }
         }
-        if (k === "discount" && recAmt > 0 && recAmt - amt < mi) {
-          ok = false;
-          if (err) {
-            err.textContent = "Discount violates Min Amount on at least one selected day.";
-            err.classList.add("show");
-          }
-        }
-        if (k === "onetime") {
-          var c = compareCases(pfx, ctx);
-          if (c === "A") {
-            if (!(amt >= mi && amt <= ma)) {
-              ok = false;
-              if (err) {
-                err.textContent = "Amount must stay within Min / Max.";
-                err.classList.add("show");
-              }
+        if (k === "recurring2" && row.getAttribute("data-is-first-recurring") === "true") {
+          if (!(amt > 0)) {
+            ok = false;
+            if (err) {
+              err.textContent = "Enter a valid amount.";
+              err.classList.add("show");
             }
-          } else {
-            if (!(amt >= recAmt && amt <= ma)) {
-              ok = false;
-              if (err) {
-                err.textContent = "Amount must be between recurring and Max.";
-                err.classList.add("show");
-              }
+          }
+          var fs0 = row.querySelector(".pay-row-freq, .pay-rec2-freq");
+          var fq0v = fs0 ? fs0.value : "";
+          var cdPfx0 = window.__payTblPayRowCdPrefix ? window.__payTblPayRowCdPrefix(row, pfx) : pfx;
+          var cd0 = recCdVal(cdPfx0, fq0v);
+          if (fq0v !== "Daily" && (!cd0 || cd0 === "\u2014")) {
+            ok = false;
+            if (err) {
+              err.textContent = "Complete collection day.";
+              err.classList.add("show");
             }
           }
         }
@@ -4668,6 +5501,123 @@
       return recCdVal(pfx, getRecFreq(pfx));
     },
     buildAddonPickerRows: buildAddonPickerRows,
+  };
+
+  window.__payTblParseDMY = parseDMY;
+  window.__payTblGenDatesFirst = genDatesFirstRecurringMandate;
+  window.__payTblGenDatesFromAnchor = genDatesFromAnchorMandate;
+  window.__payTblRecCdVal = recCdVal;
+  window.__payTblMndRowCdPrefix = mndRowCdPrefix;
+  window.__payTblPayRowCdPrefix = payRowCdPrefix;
+  window.updateMndCdSummary = updateMndCdSummary;
+  window.updatePayCdSummary = updatePayCdSummary;
+
+  window.buildPlanSchedulePreview = function buildPlanSchedulePreview() {
+    var tbody = document.getElementById("sch-tbody-plan");
+    if (!tbody) return;
+    var ctx = "pp001";
+    var pfx = "pp001";
+    var pm = getMandateRange(ctx).planMonths || 12;
+    var mf = mandateFreqEl(ctx).value;
+    var rows = [];
+    var pickerMap = {};
+    buildAddonPickerRows(ctx, pfx).forEach(function (pr) {
+      pickerMap[pr.key] = pr.dateLabel;
+    });
+    function tagToLabel(tag) {
+      if (pickerMap[tag]) return pickerMap[tag];
+      if (tag.indexOf("PP|") === 0) {
+        var pix = parseInt(tag.split("|")[1], 10);
+        if (!isNaN(pix)) return describePlanPeriodSpan(pix, mf, pm);
+      }
+      return tag;
+    }
+    var amtTypeEl = document.getElementById("pp001-amountType");
+    var isFixed = amtTypeEl && amtTypeEl.value === "Fixed";
+    if (isFixed) {
+      var ca = parseFloat((document.getElementById("pp001-collectionAmount") || {}).value) || 0;
+      if (ca > 0) {
+        genPlanOccurrencesFirst(pm, mf, recCdVal(pfx, mf)).forEach(function (o) {
+          rows.push({ date: o.label, type: "Recurring Payment", amt: ca.toFixed(2), notes: "\u2014", sortKey: o.label });
+        });
+      }
+    } else {
+      document.querySelectorAll("#" + pfx + "-payTableBody tr").forEach(function (tr) {
+        var k = tr.getAttribute("data-pay-kind") || "";
+        var nm = tr.querySelector(".pay-name");
+        var am = tr.querySelector(".pay-amt");
+        var name = nm && nm.value.trim() ? nm.value.trim() : "\u2014";
+        var amt = am ? parseFloat(am.value) : 0;
+        if (!(amt > 0)) return;
+        if (k === "onetime") {
+          var ot = ((tr.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+          rows.push({ date: tagToLabel(ot) || "\u2014", type: "One-Time", amt: amt.toFixed(2), notes: name, sortKey: ot });
+        } else if (k === "addon" || k === "discount") {
+          (tr.dataset.cdTags || "").split(",").filter(Boolean).forEach(function (tg) {
+            rows.push({
+              date: tagToLabel(tg) || "\u2014",
+              type: k === "addon" ? "Add-On" : "Discount",
+              amt: (k === "discount" ? "\u2212" : "") + amt.toFixed(2),
+              notes: name,
+              sortKey: tg,
+            });
+          });
+        } else if (k === "recurring-addon" || k === "recurring-discount") {
+          var fs = tr.querySelector(".pay-rec-addon-freq");
+          var fq = fs ? fs.value : "";
+          var tagsR = (tr.dataset.cdTags || "").split(",").filter(Boolean);
+          var firstTag = tagsR[0] || "";
+          var dateLbl = tagToLabel(firstTag) || "\u2014";
+          if (!firstTag && fq) {
+            var occRA = genPlanOccurrencesFirst(pm, fq, recCdVal(pfx, fq));
+            if (occRA.length) dateLbl = occRA[0].label;
+          }
+          rows.push({
+            date: dateLbl,
+            type: k === "recurring-addon" ? "Recurring Add-on" : "Recurring Discount",
+            amt: (k === "recurring-discount" ? "\u2212" : "") + amt.toFixed(2),
+            notes: name + " (per period)" + (fq ? " \u00b7 " + fq : ""),
+            sortKey: dateLbl,
+          });
+        } else if (k === "recurring2") {
+          var fs2 = tr.querySelector(".pay-row-freq, .pay-rec2-freq");
+          var fq2 = fs2 ? fs2.value : "";
+          if (tr.getAttribute("data-is-first-recurring") === "true") {
+            var rpfxP = window.__payTblPayRowCdPrefix ? window.__payTblPayRowCdPrefix(tr, pfx) : pfx;
+            genPlanOccurrencesFirst(pm, fq2, recCdVal(rpfxP, fq2)).forEach(function (o) {
+              rows.push({ date: o.label, type: "Recurring Payment", amt: amt.toFixed(2), notes: name, sortKey: o.label });
+            });
+          } else {
+            var anch = ((tr.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+            genPlanOccurrencesRecurring2(pm, fq2, anch).forEach(function (o) {
+              rows.push({ date: o.label, type: "Recurring Payment", amt: amt.toFixed(2), notes: name, sortKey: o.label });
+            });
+          }
+        }
+      });
+    }
+    rows.sort(function (a, b) {
+      var pa = planPeriodIndexFromLabel(ctx, a.sortKey || a.date, mf);
+      var pb = planPeriodIndexFromLabel(ctx, b.sortKey || b.date, mf);
+      if (pa !== pb) return pa - pb;
+      return String(a.date).localeCompare(String(b.date));
+    });
+    var html = "";
+    var dayTotals = {};
+    var lastDate = "";
+    rows.forEach(function (r) {
+      if (lastDate && lastDate !== r.date && dayTotals[lastDate] !== undefined) {
+        html += '<tr class="row-total"><td colspan="2">TOTAL \u00b7 ' + esc(lastDate) + "</td><td>" + dayTotals[lastDate].toFixed(2) + "</td><td></td></tr>";
+      }
+      html += "<tr><td>" + esc(r.date) + "</td><td>" + esc(r.type) + "</td><td>" + r.amt + "</td><td>" + esc(r.notes) + "</td></tr>";
+      var num = parseFloat(String(r.amt).replace("\u2212", "-"));
+      if (!isNaN(num)) dayTotals[r.date] = (dayTotals[r.date] || 0) + num;
+      lastDate = r.date;
+    });
+    if (lastDate && dayTotals[lastDate] !== undefined) {
+      html += '<tr class="row-total"><td colspan="2">TOTAL \u00b7 ' + esc(lastDate) + "</td><td>" + dayTotals[lastDate].toFixed(2) + "</td><td></td></tr>";
+    }
+    if (html) tbody.innerHTML = html;
   };
 
   document.addEventListener("click", function (e) {
@@ -5025,14 +5975,376 @@
       lucide.createIcons();
     })();
 
-/* --- mnd: script chunk --- */
+/* --- shared: recalculateMax, mandate type --- */
 (function () {
-                    function pad(n) { return n < 10 ? "0" + n : "" + n; }
-                    var d = new Date();
-                    var v = pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + d.getFullYear();
-                    var el = document.getElementById("mnd-startDate");
-                    if (el && !String(el.value || "").trim()) el.value = v;
-                  })();
+  window.recalculateMax = function recalculateMax(prefix) {
+    var prefixes = prefix ? [prefix] : ["mnd", "pp001"];
+
+    prefixes.forEach(function (pfx) {
+      var tbody = document.getElementById(pfx + "-payTableBody");
+      if (!tbody) return;
+
+      var rows = Array.from(tbody.querySelectorAll("tr"));
+      var groups = [];
+      var currentGroup = null;
+
+      rows.forEach(function (row) {
+        var kind = row.getAttribute("data-pay-kind") || "";
+        var amtInput = row.querySelector(".pay-amt, .pay-amount, input[data-pay-amount], input.amount-input");
+        if (!amtInput) {
+          var inputs = row.querySelectorAll('input[type="number"], input[inputmode="decimal"]');
+          amtInput = inputs[0] || null;
+        }
+        var amount = amtInput ? parseFloat(amtInput.value) || 0 : 0;
+
+        if (!kind) return;
+
+        if (kind === "recurring2") {
+          if (currentGroup !== null) groups.push(currentGroup);
+          currentGroup = amount;
+        } else if (kind === "addon" || kind === "recurring-addon") {
+          if (currentGroup !== null) currentGroup += amount;
+          else groups.push(amount);
+        } else if (kind === "discount" || kind === "recurring-discount") {
+          if (currentGroup !== null) currentGroup = Math.max(0, currentGroup - amount);
+        } else if (kind === "onetime") {
+          if (currentGroup !== null) {
+            groups.push(currentGroup);
+            currentGroup = null;
+          }
+          groups.push(amount);
+        }
+      });
+
+      if (currentGroup !== null) groups.push(currentGroup);
+
+      var calculatedMax = groups.length > 0 ? Math.max.apply(null, groups) : 0;
+      var maxField = document.getElementById(pfx + "-maxAmount");
+      if (!maxField) return;
+
+      maxField.dataset.calculatedMin = calculatedMax.toFixed(2);
+
+      if (calculatedMax > 0) {
+        maxField.value = calculatedMax.toFixed(2);
+      } else {
+        maxField.value = "";
+      }
+
+      maxField.onblur = function () {
+        var entered = parseFloat(this.value) || 0;
+        var floor = parseFloat(this.dataset.calculatedMin) || 0;
+        var warn = document.getElementById(pfx + "-max-warning");
+        if (entered < floor && floor > 0) {
+          if (warn) {
+            warn.textContent =
+              "The maximum amount cannot be lower than AED " +
+              floor.toFixed(2) +
+              ", which is the highest possible collection calculated from your payment table.";
+            warn.style.display = "block";
+          }
+          this.style.borderColor = "#FF6B68";
+        } else {
+          if (warn) warn.style.display = "none";
+          this.style.borderColor = "";
+        }
+      };
+
+      maxField.readOnly = false;
+      maxField.style.background = "";
+      maxField.style.color = "";
+      maxField.style.cursor = "";
+    });
+
+    if (window.calculateEffectiveMax) {
+      prefixes.forEach(function (pfx) {
+        var amtType = document.getElementById(pfx + "-amountType");
+        if (amtType && amtType.value === "Variable") calculateEffectiveMax(pfx);
+      });
+    }
+  };
+
+  window.setMandateType = function setMandateType(type) {
+    var planDropdownGroup = document.getElementById("mnd-planSelectGroup");
+    var planSelect = document.getElementById("mnd-planSelect");
+    if (type === "custom") {
+      if (planDropdownGroup) planDropdownGroup.style.display = "none";
+      window.unlockAllPlanFields();
+      if (planSelect) planSelect.value = "";
+    } else {
+      if (planDropdownGroup) planDropdownGroup.style.display = "block";
+      window.lockAllPlanFields();
+    }
+    var tc = document.getElementById("mnd-typeCustom");
+    var tp = document.getElementById("mnd-typePlan");
+    if (tc) tc.classList.toggle("active", type === "custom");
+    if (tp) tp.classList.toggle("active", type === "plan");
+    window.__mndMandateType = type;
+  };
+
+  window.lockAllPlanFields = function lockAllPlanFields() {
+    var planSel = document.getElementById("mnd-planSelect");
+    if (planSel) {
+      planSel.disabled = false;
+      planSel.readOnly = false;
+      planSel.style.background = "";
+      planSel.style.color = "";
+      planSel.style.cursor = "";
+    }
+    ["mnd-frequency", "mnd-collectionAmount", "mnd-minAmount", "mnd-maxAmount", "mnd-lifeY", "mnd-lifeM", "mnd-lifeD"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.readOnly = true;
+        el.disabled = false;
+        el.style.background = "#F8F7FB";
+        el.style.color = "#4E465E";
+        el.style.cursor = "not-allowed";
+      }
+    });
+    var amtSeg = document.getElementById("mnd-amtFixed");
+    if (amtSeg) {
+      amtSeg.disabled = true;
+      var av = document.getElementById("mnd-amtVariable");
+      if (av) av.disabled = true;
+    }
+    ["mnd-collectionDayWeekly", "mnd-collectionDayMonthly", "mnd-collectionDayText", "mnd-cdQ_M", "mnd-cdQ_D", "mnd-cdHY_M", "mnd-cdHY_D", "mnd-cdA_D", "mnd-cdA_M", "mnd-cd-daysAfterStartInput"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.disabled = true;
+        el.style.background = "#F8F7FB";
+        el.style.cursor = "not-allowed";
+      }
+    });
+    var addBtn = document.getElementById("mnd-addPayRow");
+    if (addBtn) addBtn.disabled = true;
+    document.querySelectorAll("#mnd-payTableBody input, #mnd-payTableBody select, #mnd-payTableBody button").forEach(function (el) {
+      if (el.closest && el.closest(".pay-actions-cell")) return;
+      el.disabled = true;
+      el.style.cursor = "not-allowed";
+    });
+    var endEl = document.getElementById("mnd-endDate");
+    if (endEl) {
+      endEl.readOnly = true;
+      endEl.style.background = "#F8F7FB";
+      endEl.style.cursor = "not-allowed";
+    }
+  };
+
+  window.unlockAllPlanFields = function unlockAllPlanFields() {
+    ["mnd-frequency", "mnd-collectionAmount", "mnd-minAmount", "mnd-maxAmount", "mnd-lifeY", "mnd-lifeM", "mnd-lifeD", "mnd-endDate"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.readOnly = false;
+        el.disabled = false;
+        el.style.background = "";
+        el.style.color = "";
+        el.style.cursor = "";
+      }
+    });
+    var amtSeg = document.getElementById("mnd-amtFixed");
+    if (amtSeg) {
+      amtSeg.disabled = false;
+      var av = document.getElementById("mnd-amtVariable");
+      if (av) av.disabled = false;
+    }
+    ["mnd-collectionDayWeekly", "mnd-collectionDayMonthly", "mnd-collectionDayText", "mnd-cdQ_M", "mnd-cdQ_D", "mnd-cdHY_M", "mnd-cdHY_D", "mnd-cdA_D", "mnd-cdA_M", "mnd-cd-daysAfterStartInput"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.disabled = false;
+        el.style.background = "";
+        el.style.cursor = "";
+      }
+    });
+    var addBtn = document.getElementById("mnd-addPayRow");
+    if (addBtn) addBtn.disabled = false;
+    document.querySelectorAll("#mnd-payTableBody input, #mnd-payTableBody select, #mnd-payTableBody button").forEach(function (el) {
+      el.disabled = false;
+      el.style.cursor = "";
+    });
+    if (window.recalculateMax) window.recalculateMax();
+  };
+
+  window.buildMandateSchedulePreview = function buildMandateSchedulePreview() {
+    var tbody = document.getElementById("sch-tbody-mandate");
+    if (!tbody || !window.DirectDebitCcPayTbl) return;
+    var st = null,
+      en = null;
+    var startIn = document.getElementById("mnd-startDate");
+    var endIn = document.getElementById("mnd-endDate");
+    var pdm = window.__payTblParseDMY;
+    if (startIn && endIn && pdm) {
+      st = pdm(startIn.value);
+      en = pdm(endIn.value);
+    }
+    if (!st || !en) return;
+    var rows = [];
+    document.querySelectorAll("#mnd-payTableBody tr").forEach(function (tr) {
+      var k = tr.getAttribute("data-pay-kind") || "";
+      var nm = tr.querySelector(".pay-name");
+      var am = tr.querySelector(".pay-amt");
+      var name = nm && nm.value.trim() ? nm.value.trim() : "—";
+      var amt = am ? parseFloat(am.value) : 0;
+      if (!(amt > 0)) return;
+      if (k === "onetime") {
+        var ot = ((tr.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+        rows.push({ date: ot || "—", type: "One-Time", amt: amt.toFixed(2), notes: name });
+      } else if (k === "addon" || k === "discount") {
+        var tags = (tr.dataset.cdTags || "").split(",").filter(Boolean);
+        tags.forEach(function (tg) {
+          var parts = tg.split("|");
+          var dm = parts.length >= 2 ? parts[1] : tg;
+          rows.push({ date: dm, type: k === "addon" ? "Add-On" : "Discount", amt: (k === "discount" ? "−" : "") + amt.toFixed(2), notes: name });
+        });
+      } else if (k === "recurring-addon" || k === "recurring-discount") {
+        var fs = tr.querySelector(".pay-rec-addon-freq");
+        var fq = fs ? fs.value : "";
+        var tagsR = (tr.dataset.cdTags || "").split(",").filter(Boolean);
+        var firstTag = tagsR[0] || "";
+        var dmR = firstTag.indexOf("|") >= 0 ? firstTag.split("|")[1] : firstTag;
+        rows.push({
+          date: dmR || "—",
+          type: k === "recurring-addon" ? "Recurring Add-on" : "Recurring Discount",
+          amt: (k === "recurring-discount" ? "−" : "") + amt.toFixed(2),
+          notes: name + " (per period)" + (fq ? " · " + fq : ""),
+        });
+      } else if (k === "recurring2") {
+        var fs2 = tr.querySelector(".pay-row-freq, .pay-rec2-freq");
+        var fq2 = fs2 ? fs2.value : "";
+        if (tr.getAttribute("data-is-first-recurring") === "true" && amt > 0 && window.__payTblGenDatesFirst && window.__payTblRecCdVal) {
+          var rpfx = window.__payTblMndRowCdPrefix ? window.__payTblMndRowCdPrefix(tr) : "mnd-r0";
+          var ds0 = window.__payTblGenDatesFirst(st, en, fq2, window.__payTblRecCdVal(rpfx, fq2));
+          ds0.forEach(function (dm) {
+            rows.push({ date: dm, type: "Recurring Payment", amt: amt.toFixed(2), notes: name });
+          });
+        } else {
+          var anch = ((tr.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
+          if (anch && fq2 && window.__payTblGenDatesFromAnchor && pdm) {
+            window.__payTblGenDatesFromAnchor(pdm(anch), en, fq2).forEach(function (dm) {
+              rows.push({ date: dm, type: "Recurring Payment", amt: amt.toFixed(2), notes: name });
+            });
+          }
+        }
+      }
+    });
+    rows.sort(function (a, b) {
+      var da = pdm ? pdm(a.date) : null,
+        db = pdm ? pdm(b.date) : null;
+      if (!da || !db) return 0;
+      return da - db;
+    });
+    var html = "";
+    var dayTotals = {};
+    rows.forEach(function (r) {
+      html += "<tr><td>" + r.date + "</td><td>" + r.type + "</td><td>" + r.amt + "</td><td>" + r.notes + "</td></tr>";
+      var key = r.date;
+      var num = parseFloat(String(r.amt).replace("−", "-"));
+      if (!isNaN(num)) dayTotals[key] = (dayTotals[key] || 0) + num;
+    });
+    Object.keys(dayTotals).forEach(function (d) {
+      html += '<tr class="row-total"><td colspan="2">TOTAL · ' + d + "</td><td>" + dayTotals[d].toFixed(2) + "</td><td></td></tr>";
+    });
+    if (html) tbody.innerHTML = html;
+  };
+
+  window.populateSchMandateSummary = function populateSchMandateSummary() {
+    function set(id, val) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = val || "—";
+    }
+    var wa = document.getElementById("mnd-contactWhatsapp");
+    var mo = document.getElementById("mnd-contactMobile");
+    var contactParts = [];
+    if (wa && wa.value.trim()) contactParts.push("WhatsApp: " + wa.value.trim());
+    if (mo && mo.value.trim()) contactParts.push("Mobile: " + mo.value.trim());
+    set("sch-sum-mnd-contact", contactParts.length ? contactParts.join(" · ") : "");
+    set("sch-sum-mnd-freq", (document.getElementById("mnd-frequency") || {}).value);
+    set("sch-sum-mnd-amt", (document.getElementById("mnd-amountType") || {}).value);
+    var mi = document.getElementById("mnd-minAmount");
+    var ma = document.getElementById("mnd-maxAmount");
+    if (mi && ma) {
+      set("sch-sum-mnd-mm", (mi.value || "—") + " / " + (ma.value || "—"));
+    }
+    set("sch-sum-mnd-start", (document.getElementById("mnd-startDate") || {}).value);
+    set("sch-sum-mnd-end", (document.getElementById("mnd-endDate") || {}).value);
+  };
+
+  window.populateSchPlanSummary = function populateSchPlanSummary() {
+    function set(id, val) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = val || "\u2014";
+    }
+    var pn = document.getElementById("pp001-planName");
+    set("sch-sum-plan-name", pn ? pn.value.trim() : "");
+    set("sch-sum-plan-freq", (document.getElementById("pp001-frequency") || {}).value);
+    set("sch-sum-plan-amt", (document.getElementById("pp001-amountType") || {}).value);
+    var mi = document.getElementById("pp001-minAmount");
+    var ma = document.getElementById("pp001-maxAmount");
+    if (mi && ma) set("sch-sum-plan-mm", (mi.value || "\u2014") + " / " + (ma.value || "\u2014"));
+    var ly = parseInt((document.getElementById("pp001-lifeYears") || {}).value, 10) || 0;
+    var lm = parseInt((document.getElementById("pp001-lifeMonths") || {}).value, 10) || 0;
+    var parts = [];
+    if (ly) parts.push(ly + (ly === 1 ? " year" : " years"));
+    if (lm) parts.push(lm + (lm === 1 ? " month" : " months"));
+    set("sch-sum-plan-life", parts.length ? parts.join(" ") : "\u2014");
+  };
+
+  window.recalculatePlanMax = function recalculatePlanMax() {
+    if (window.recalculateMax) window.recalculateMax("pp001");
+  };
+})();
+
+window.formatCcExpiry = function formatCcExpiry(input) {
+  var val = input.value.replace(/\D/g, "");
+  if (val.length >= 2) {
+    val = val.substring(0, 2) + "/" + val.substring(2, 6);
+  }
+  input.value = val;
+};
+
+window.validateIban = function validateIban(input) {
+  var val = input.value.trim();
+  if (!val) return;
+  var statusEl = document.getElementById("mnd-iban-status");
+  if (statusEl) {
+    statusEl.textContent = "Validating...";
+    statusEl.style.color = "#4E465E";
+    statusEl.style.display = "block";
+  }
+  setTimeout(function () {
+    var isValid = Math.random() > 0.3;
+    if (statusEl) {
+      if (isValid) {
+        statusEl.innerHTML = "\u2705 IBAN verified.";
+        statusEl.style.color = "#15803D";
+      } else {
+        statusEl.innerHTML = "\u274c This IBAN could not be verified. Please check and try again.";
+        statusEl.style.color = "#FF6B68";
+      }
+    }
+  }, 1500);
+};
+
+window.validateCreditCard = function validateCreditCard(input) {
+  var val = input.value.replace(/\s/g, "");
+  if (!val || val.length < 16) return;
+  var statusEl = document.getElementById("mnd-cc-status");
+  if (statusEl) {
+    statusEl.textContent = "Validating...";
+    statusEl.style.color = "#4E465E";
+    statusEl.style.display = "block";
+  }
+  setTimeout(function () {
+    var isValid = Math.random() > 0.3;
+    if (statusEl) {
+      if (isValid) {
+        statusEl.innerHTML = "\u2705 Card verified.";
+        statusEl.style.color = "#15803D";
+      } else {
+        statusEl.innerHTML = "\u274c This card could not be verified. Please check and try again.";
+        statusEl.style.color = "#FF6B68";
+      }
+    }
+  }, 1500);
+};
 
 /* --- mnd: script chunk --- */
 (function(){
@@ -5078,16 +6390,14 @@ function fmtDMY(dt){if(!dt||isNaN(dt.getTime()))return"";var d=dt.getDate().toSt
 function todayDMY(){return fmtDMY(new Date());}
 
 var amtGrid=document.getElementById("mnd-topAmountGrid"),varPay=document.getElementById("mnd-variablePaymentsWrap");
-function setAmtMode(fixed){amtFixed.classList.toggle("active",fixed);amtVar.classList.toggle("active",!fixed);amtT.value=fixed?"Fixed":"Variable";document.getElementById("mnd-rv-mm-row").style.display=fixed?"none":"block";if(!fixed&&!(parseMoney(miEl.value)>0))miEl.value="1";if(amtGrid){amtGrid.classList.toggle("mode-fixed",fixed);amtGrid.classList.toggle("mode-variable",!fixed);}if(varPay){if(fixed){varPay.classList.add("hidden-field");cdG.classList.remove("hidden-field");if(window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.clearVariable("mnd");syncCD();}else{varPay.classList.remove("hidden-field");cdG.classList.add("hidden-field");if(window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.initVariable("mnd");}};if(window.syncMndExpectedIncreaseGroup)window.syncMndExpectedIncreaseGroup();}
+function setAmtMode(fixed){amtFixed.classList.toggle("active",fixed);amtVar.classList.toggle("active",!fixed);amtT.value=fixed?"Fixed":"Variable";if(!fixed&&!(parseMoney(miEl.value)>0))miEl.value="1";if(amtGrid){amtGrid.classList.toggle("mode-fixed",fixed);amtGrid.classList.toggle("mode-variable",!fixed);}var maxWrap=document.getElementById("mnd-maxAfterTableWrap");if(maxWrap){if(fixed)maxWrap.classList.add("hidden-field");else maxWrap.classList.remove("hidden-field");}if(varPay){if(fixed){varPay.classList.add("hidden-field");cdG.classList.remove("hidden-field");if(window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.clearVariable("mnd");syncCD();}else{varPay.classList.remove("hidden-field");cdG.classList.add("hidden-field");if(window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.initVariable("mnd");if(window.ensureFirstRecurringRow)window.ensureFirstRecurringRow();if(window.recalculateMax)window.recalculateMax("mnd");}}if(window.syncMndExpectedIncreaseGroup)window.syncMndExpectedIncreaseGroup();}
 amtFixed.addEventListener("click",function(){setAmtMode(true);markCustom();touch();});
 amtVar.addEventListener("click",function(){setAmtMode(false);markCustom();touch();});
 
 var suppressCaMirror=false;
 caEl.addEventListener("input",function(){if(suppressCaMirror)return;markCustom();touch();});
 document.getElementById("mnd-minAmount").addEventListener("input",function(){markCustom();touch();});
-document.getElementById("mnd-maxAmount").addEventListener("input",function(){markCustom();touch();if(window.calculateEffectiveMax)calculateEffectiveMax("mnd");});
-document.getElementById("mnd-mandateRef").addEventListener("input",function(){markCustom();touch();});
-document.getElementById("mnd-payerName").addEventListener("input",function(){markCustom();touch();});
+document.getElementById("mnd-mandateRef").addEventListener("input",function(){touch();});
 
 function hideCD(){cdW.classList.add("hidden-field");wrapM.classList.add("hidden-field");wQ.classList.add("hidden-field");wH.classList.add("hidden-field");wA.classList.add("hidden-field");cdTxt.classList.add("hidden-field");}
 function syncCD(){var f=freqEl.value;hideCD();cdTxt.classList.remove("input-invalid");document.getElementById("mnd-err-cd").classList.remove("show");if(amtT.value==="Variable"){cdG.classList.add("hidden-field");return;}if(!f){cdG.classList.add("hidden-field");return;}if(f==="Daily"){cdG.classList.add("hidden-field");return;}cdG.classList.remove("hidden-field");if(window.updateCollectionDayUI){window.updateCollectionDayUI("mnd-cd");return;}if(f==="Weekly"){cdW.classList.remove("hidden-field");return;}if(f==="Monthly"){wrapM.classList.remove("hidden-field");return;}cdTxt.classList.remove("hidden-field");cdTxt.placeholder=f==="One-Time"?"DD/MM/YYYY":"Description";}
@@ -5104,12 +6414,17 @@ function applyVariableDemoPayments(){
 var pfx="mnd";
 var tb=document.getElementById(pfx+"-payTableBody");
 if(!tb||!window.DirectDebitCcPayTbl||document.getElementById("mnd-amountType").value!=="Variable")return;
-while(tb.rows.length>1){tb.deleteRow(1);}
-var nm=document.getElementById(pfx+"-rec-name"),am=document.getElementById(pfx+"-rec-amt"),rf=document.getElementById(pfx+"-rec-freq");
+while(tb.querySelectorAll("tr").length>1){tb.deleteRow(tb.rows.length-1);}
+var first=tb.querySelector("tr[data-is-first-recurring]")||tb.querySelector("tr");
+if(first){
+var nm=first.querySelector(".pay-name"),am=first.querySelector(".pay-amt"),rf=first.querySelector(".pay-row-freq");
 if(nm)nm.value="Monthly Salary";
 if(am)am.value="500";
 if(rf){rf.value="Monthly";rf.dispatchEvent(new Event("change"));}
-var mo=document.getElementById(pfx+"-rec-cdMo");if(mo)mo.value="5";
+var uid=first.getAttribute("data-row-id")||"0";
+var mo=document.getElementById("mnd-r"+uid+"-rec-cdMo");if(mo)mo.value="5";
+if(window.updateMndCdSummary)window.updateMndCdSummary(first);
+}
 DirectDebitCcPayTbl.addRow("mnd");
 var last=tb.querySelector("tr:last-child");if(!last)return;
 if(window.DirectDebitCcPayTbl&&DirectDebitCcPayTbl.applyPaymentKindChange){DirectDebitCcPayTbl.applyPaymentKindChange(last,"addon","mnd","mnd");}
@@ -5138,12 +6453,12 @@ if(cd.t==="m"){cdMo.value=String(cd.day);}else if(cd.t==="w"){cdW.value=cd.w;}el
 suppressCaMirror=false;
 syncEndFromLife();touch();}
 
-function markCustom(){var v=sel.value;if(v&&v!=="custom"&&v!=="__add_new__"&&v!==""){sel.value="custom";}}
-function touch(){updateReview();}
+function markCustom(){}
+function touch(){}
 
 function planById(id){for(var i=0;i<PLANS.length;i++){if(PLANS[i].id===id)return PLANS[i];}return null;}
 
-sel.addEventListener("change",function(){var v=sel.value;if(v==="__add_new__"){window.location.href="#screen-pp001";return;}if(v===""||v==="custom"){syncCD();touch();return;}var p=planById(v);if(p)fillFromPlan(p);if(p&&p.varDemo)setTimeout(function(){applyVariableDemoPayments();},0);});
+sel.addEventListener("change",function(){var v=sel.value;if(v==="__add_new__"){window.location.href="#screen-pp001";return;}var errPlan=document.getElementById("mnd-err-plan");if(errPlan)errPlan.classList.remove("show");if(window.__mndMandateType==="plan"){if(!v){if(errPlan)errPlan.classList.add("show");window.lockAllPlanFields();return;}var p=planById(v);if(p){fillFromPlan(p);window.lockAllPlanFields();if(p.varDemo)setTimeout(function(){applyVariableDemoPayments();if(window.recalculateMax)window.recalculateMax("mnd");},0);else if(window.recalculateMax)window.recalculateMax("mnd");}return;}if(v===""){window.unlockAllPlanFields();syncCD();return;}var p2=planById(v);if(p2)fillFromPlan(p2);});
 
 startEl.addEventListener("input",function(){syncEndFromLife();markCustom();touch();if(amtT.value==="Variable"&&window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.onPeriodInputsChange("mnd");});
 startEl.addEventListener("change",function(){syncEndFromLife();markCustom();touch();if(amtT.value==="Variable"&&window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.onPeriodInputsChange("mnd");});
@@ -5156,44 +6471,48 @@ endEl.addEventListener("change",function(){syncLifeFromEnd();markCustom();touch(
 ["collectionDayWeekly","collectionDayMonthly","cdQ_M","cdQ_D","cdHY_M","cdHY_D","cdA_D","cdA_M","collectionDayText"].forEach(function(id){var el=document.getElementById("mnd-"+id);if(!el)return;el.addEventListener("input",function(){markCustom();touch();});el.addEventListener("change",function(){markCustom();touch();});});
 var mndCdDaysIn=document.getElementById("mnd-cd-daysAfterStartInput");if(mndCdDaysIn){mndCdDaysIn.addEventListener("input",function(){markCustom();touch();});mndCdDaysIn.addEventListener("change",function(){markCustom();touch();});}
 
-var payI=document.getElementById("mnd-payIban"),payC=document.getElementById("mnd-payCc"),payM=document.getElementById("mnd-payMethod"),ibanB=document.getElementById("mnd-ibanBlock"),ccB=document.getElementById("mnd-ccBlock");
-payI.addEventListener("click",function(){payI.classList.add("active");payC.classList.remove("active");payM.value="iban";ibanB.classList.remove("hidden-field");ccB.classList.add("hidden-field");});
-payC.addEventListener("click",function(){payC.classList.add("active");payI.classList.remove("active");payM.value="cc";ccB.classList.remove("hidden-field");ibanB.classList.add("hidden-field");});
+var payI=document.getElementById("mnd-payIban"),payC=document.getElementById("mnd-payCc"),payM=document.getElementById("mnd-payMethod"),ibanB=document.getElementById("mnd-ibanBlock"),ccB=document.getElementById("mnd-ccBlock"),ccExpiryG=document.getElementById("mnd-ccExpiryGroup");
+function syncMndPayerPaymentFields(){
+if(!payM)return;
+var byPayer=payerEnteredByPayer();
+var isCc=payM.value==="cc";
+if(ibanB)ibanB.classList.toggle("hidden-field",isCc);
+if(ccB)ccB.classList.toggle("hidden-field",!isCc);
+if(ccExpiryG){
+var showExpiry=!byPayer&&isCc;
+ccExpiryG.classList.toggle("hidden-field",!showExpiry);
+}
+if(!isCc){
+var ibSt=document.getElementById("mnd-iban-status");
+if(ibSt){ibSt.style.display="none";ibSt.textContent="";}
+}else{
+var ccSt=document.getElementById("mnd-cc-status");
+if(ccSt){ccSt.style.display="none";ccSt.textContent="";}
+}
+}
+payI.addEventListener("click",function(){payI.classList.add("active");payC.classList.remove("active");payM.value="iban";syncMndPayerPaymentFields();});
+payC.addEventListener("click",function(){payC.classList.add("active");payI.classList.remove("active");payM.value="cc";syncMndPayerPaymentFields();});
 
 var payerToggleBar=document.getElementById("mnd-payerToggleBar"),infoSec=document.getElementById("mnd-payerInfoSection");
-function payerInfoOpen(){return payerToggleBar&&payerToggleBar.getAttribute("aria-checked")==="true";}
-function setPayerInfoOpen(on){
+function payerEnteredByPayer(){return payerToggleBar&&payerToggleBar.getAttribute("aria-checked")==="true";}
+function setPayerToggle(checked){
 if(!payerToggleBar||!infoSec)return;
-payerToggleBar.setAttribute("aria-checked",on?"true":"false");
-infoSec.classList.toggle("is-open",on);
-infoSec.setAttribute("aria-hidden",on?"false":"true");
-if(on){infoSec.removeAttribute("hidden");infoSec.style.setProperty("display","block","important");}
+payerToggleBar.setAttribute("aria-checked",checked?"true":"false");
+var showExtra=!checked;
+infoSec.classList.toggle("is-open",showExtra);
+infoSec.setAttribute("aria-hidden",showExtra?"false":"true");
+if(showExtra){infoSec.removeAttribute("hidden");infoSec.style.setProperty("display","block","important");if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons();}catch(x){}}}
 else{infoSec.setAttribute("hidden","");infoSec.style.setProperty("display","none","important");}
-touch();
-if(on&&window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons();}catch(x){}}
+syncMndPayerPaymentFields();
 }
 if(payerToggleBar){
-payerToggleBar.addEventListener("click",function(ev){ev.stopPropagation();setPayerInfoOpen(!payerInfoOpen());});
-payerToggleBar.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();setPayerInfoOpen(!payerInfoOpen());}});
+payerToggleBar.addEventListener("click",function(ev){ev.stopPropagation();setPayerToggle(!payerEnteredByPayer());});
+payerToggleBar.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();setPayerToggle(!payerEnteredByPayer());}});
+setPayerToggle(true);
+syncMndPayerPaymentFields();
 }
 
-function planDisplay(){var v=sel.value;if(!v)return"\u2014";if(v==="custom")return"Custom Plan";var p=planById(v);return p?p.name:"\u2014";}
-function updateReview(){
-try{
-document.getElementById("mnd-rv-mobile").textContent=document.getElementById("mnd-payerMobile").value.trim()||"\u2014";
-document.getElementById("mnd-rv-plan").textContent=planDisplay();
-document.getElementById("mnd-rv-freq").textContent=freqEl.value||"\u2014";
-document.getElementById("mnd-rv-amt").textContent=amtT.value;
-document.getElementById("mnd-rv-ca").textContent=fmtMoney(parseMoney(caEl.value));
-document.getElementById("mnd-rv-mm").textContent=amtT.value==="Variable"?fmtMoney(parseMoney(miEl.value))+" / "+fmtMoney(parseMoney(maEl.value)):"\u2014";
-document.getElementById("mnd-rv-cd").textContent=amtT.value==="Variable"?(window.DirectDebitCcPayTbl?DirectDebitCcPayTbl.recurringCdSummary("mnd"): "\u2014"):(cdVal()||"\u2014");
-document.getElementById("mnd-rv-start").textContent=startEl.value.trim()||"\u2014";
-document.getElementById("mnd-rv-end").textContent=endEl.value.trim()||"\u2014";
-document.getElementById("mnd-rv-life").textContent=(lifeY.value||"0")+"y / "+(lifeM.value||"0")+"m / "+(lifeD.value||"0")+"d";
-}catch(rvErr){}
-}
-
-function validateMobile(){var v=document.getElementById("mnd-payerMobile").value.trim(),em=document.getElementById("mnd-err-mobile"),pm=document.getElementById("mnd-payerMobile");if(!v){if(em){em.classList.add("show");em.style.setProperty("display","block","important");}if(pm)pm.classList.add("input-invalid");return false;}if(em){em.classList.remove("show");em.style.removeProperty("display");}if(pm)pm.classList.remove("input-invalid");return true;}
+function validateContact(){var wa=document.getElementById("mnd-contactWhatsapp"),mo=document.getElementById("mnd-contactMobile"),em=document.getElementById("mnd-err-contact");var hasWa=wa&&wa.value.trim(),hasMo=mo&&mo.value.trim();if(!hasWa&&!hasMo){if(em){em.classList.add("show");em.style.setProperty("display","block","important");}if(wa)wa.classList.add("input-invalid");if(mo)mo.classList.add("input-invalid");return false;}if(em){em.classList.remove("show");em.style.removeProperty("display");}if(wa)wa.classList.remove("input-invalid");if(mo)mo.classList.remove("input-invalid");return true;}
 
 function validatePlanFields(){
 function showE(id,on){var el=document.getElementById("mnd-"+id);if(!el)return;if(on){el.classList.add("show");el.style.setProperty("display","block","important");}else{el.classList.remove("show");el.style.removeProperty("display");}}
@@ -5202,8 +6521,9 @@ if(!freqEl.value){showE("err-frequency",true);freqEl.classList.add("input-invali
 if(amtT.value==="Variable"){showE("err-ca",false);caEl.classList.remove("input-invalid");var miV=parseMoney(miEl.value),maV=parseMoney(maEl.value);if(!(miV>0)){showE("err-min",true);miEl.classList.add("input-invalid");ok=false;}else{showE("err-min",false);miEl.classList.remove("input-invalid");}if(!(maV>0)||maV<miV){showE("err-max",true);maEl.classList.add("input-invalid");ok=false;}else{showE("err-max",false);maEl.classList.remove("input-invalid");}showE("err-cd",false);if(window.DirectDebitCcPayTbl&&!DirectDebitCcPayTbl.validateAll("mnd")) ok=false;}else{var ca=parseMoney(caEl.value);if(!(ca>0)){showE("err-ca",true);caEl.classList.add("input-invalid");ok=false;}else{showE("err-ca",false);caEl.classList.remove("input-invalid");}showE("err-min",false);showE("err-max",false);miEl.classList.remove("input-invalid");maEl.classList.remove("input-invalid");var f=freqEl.value;if(f&&f!=="Daily"){var dv=cdVal();if(!dv){showE("err-cd",true);ok=false;}else showE("err-cd",false);}else showE("err-cd",false);}
 var ly=parseInt(lifeY.value,10)||0,lm=parseInt(lifeM.value,10)||0,ld=parseInt(lifeD.value,10)||0;if(ly+lm+ld===0){showE("err-life",true);ok=false;}else showE("err-life",false);
 var st=parseDMY(startEl.value),en=parseDMY(endEl.value);if(!st){showE("err-start",true);startEl.classList.add("input-invalid");ok=false;}else{showE("err-start",false);startEl.classList.remove("input-invalid");}if(!en){showE("err-end",true);endEl.classList.add("input-invalid");ok=false;}else{showE("err-end",false);endEl.classList.remove("input-invalid");}
-if(payerInfoOpen()){var hasEid=document.getElementById("mnd-eidFile").files.length||document.getElementById("mnd-eidFullName").value.trim()||document.getElementById("mnd-eidNumber").value.trim();var hasPay=payM.value==="iban"?(document.getElementById("mnd-ibanFile").files.length||document.getElementById("mnd-ibanNumber").value.trim()):document.getElementById("mnd-ccNumber").value.trim();if(!hasEid&&!hasPay){showE("err-payer-info",true);ok=false;}else showE("err-payer-info",false);}else showE("err-payer-info",false);
-var mobOk=validateMobile();
+if(!payerEnteredByPayer()){var hasEid=document.getElementById("mnd-eidFile").files.length||document.getElementById("mnd-eidFullName").value.trim()||document.getElementById("mnd-eidNumber").value.trim();var hasPay=payM.value==="iban"?(document.getElementById("mnd-ibanFile").files.length||document.getElementById("mnd-ibanNumber").value.trim()):document.getElementById("mnd-ccNumber").value.trim();if(!hasEid&&!hasPay){showE("err-payer-info",true);ok=false;}else showE("err-payer-info",false);if(payM.value==="cc"){var ccExp=document.getElementById("mnd-ccExpiry");var expVal=ccExp?ccExp.value.trim():"";var expOk=/^\d{2}\/\d{4}$/.test(expVal);if(!expOk){showE("err-ccExpiry",true);if(ccExp)ccExp.classList.add("input-invalid");ok=false;}else{showE("err-ccExpiry",false);if(ccExp)ccExp.classList.remove("input-invalid");}}}else{showE("err-payer-info",false);showE("err-ccExpiry",false);var ccExp0=document.getElementById("mnd-ccExpiry");if(ccExp0)ccExp0.classList.remove("input-invalid");}
+if(window.__mndMandateType==="plan"&&!sel.value){showE("err-plan",true);ok=false;}
+var mobOk=validateContact();
 if(!ok||!mobOk){
 var fe=document.querySelector("#mnd-mandateForm .field-error.show");
 if(fe)fe.scrollIntoView({block:"nearest",behavior:"smooth"});
@@ -5211,20 +6531,55 @@ alert("Please fill all required fields (see messages in red below).");
 }
 return ok&&mobOk;}
 
-document.getElementById("mnd-payerMobile").addEventListener("input",touch);
+["contactWhatsapp","contactMobile"].forEach(function(id){var el=document.getElementById("mnd-"+id);if(el)el.addEventListener("input",touch);});
 document.getElementById("mnd-mandateForm").addEventListener("submit",function(e){e.preventDefault();});
-document.getElementById("mnd-btnSeeSchedule").addEventListener("click",function(){if(!validatePlanFields())return;if(window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.storeDraft("mnd",{from:"mnd",contact:document.getElementById("mnd-payerMobile").value.trim()});window.location.hash="#screen-sch";});
+document.getElementById("mnd-btnSeeSchedule").addEventListener("click",function(){if(!validatePlanFields())return;var cParts=[];var wa=document.getElementById("mnd-contactWhatsapp"),mo=document.getElementById("mnd-contactMobile");if(wa&&wa.value.trim())cParts.push(wa.value.trim());if(mo&&mo.value.trim())cParts.push(mo.value.trim());if(window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.storeDraft("mnd",{from:"mnd",contact:cParts.join(" / ")});if(window.populateSchMandateSummary)window.populateSchMandateSummary();if(window.buildMandateSchedulePreview)window.buildMandateSchedulePreview();window.location.hash="#screen-sch";});
 document.getElementById("mnd-btnCancel").addEventListener("click",function(){if(confirm("Discard changes?"))history.back();});
-document.getElementById("mnd-btnDraft").addEventListener("click",function(){var touched=document.getElementById("mnd-payerMobile").value.trim()||freqEl.value||caEl.value||miEl.value||maEl.value;if(!touched){alert("Enter at least one field to save a draft.");return;}alert("Draft saved (mock).");});
-["payerMobile","payerName","mandateRef","eidFullName","eidNumber","ibanNumber","ccNumber"].forEach(function(id){var el=document.getElementById("mnd-"+id);if(el)el.addEventListener("input",touch);});
+document.getElementById("mnd-btnDraft").addEventListener("click",function(){var wa=document.getElementById("mnd-contactWhatsapp"),mo=document.getElementById("mnd-contactMobile");var touched=(wa&&wa.value.trim())||(mo&&mo.value.trim())||freqEl.value||caEl.value||miEl.value||maEl.value;if(!touched){alert("Enter at least one field to save a draft.");return;}alert("Draft saved (mock).");});
+["mandateRef","eidFullName","eidNumber","ibanNumber","ccNumber","ccExpiry"].forEach(function(id){var el=document.getElementById("mnd-"+id);if(el)el.addEventListener("input",touch);});
 ["eidFile","ibanFile"].forEach(function(id){document.getElementById("mnd-"+id).addEventListener("change",touch);});
 
 document.getElementById("mnd-addPayRow").addEventListener("click",function(){if(window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.addRow("mnd");});
 
-setAmtMode(false);syncCD();
-if(!String(startEl.value||"").trim())startEl.value=todayDMY();
+function prefillMndDemo(){
+var mndWa=document.getElementById("mnd-contactWhatsapp");if(mndWa)mndWa.value="+971 50 123 4567";
+var mndMo=document.getElementById("mnd-contactMobile");if(mndMo)mndMo.value="+971 55 987 6543";
+freqEl.value="Monthly";
+miEl.value="300";
+startEl.value="01/07/2026";
+lifeY.value="1";lifeM.value="6";lifeD.value="0";
 syncEndFromLife();
-updateReview();
+document.getElementById("mnd-mandateRef").value="MND-DEMO-001";
+setTimeout(function(){
+var tb0=document.getElementById("mnd-payTableBody");
+var first=tb0?tb0.querySelector("tr[data-is-first-recurring]")||tb0.querySelector("tr"):null;
+if(first){
+var rn=first.querySelector(".pay-name");if(rn)rn.value="Monthly Service Fee";
+var ra=first.querySelector(".pay-amt");if(ra)ra.value="500";
+var rf=first.querySelector(".pay-row-freq");if(rf){rf.value="Monthly";rf.dispatchEvent(new Event("change"));}
+var uid=first.getAttribute("data-row-id")||"0";
+var mo=document.getElementById("mnd-r"+uid+"-rec-cdMo");if(mo)mo.value="1";
+if(window.updateMndCdSummary)updateMndCdSummary(first);
+}
+if(window.DirectDebitCcPayTbl){
+DirectDebitCcPayTbl.addRow("mnd");
+var tb=document.getElementById("mnd-payTableBody");
+var last=tb?tb.querySelector("tr:last-child"):null;
+if(last){
+DirectDebitCcPayTbl.applyPaymentKindChange(last,"onetime","mnd","mnd");
+var pn=last.querySelector(".pay-name");if(pn)pn.value="Setup Fee";
+var pa=last.querySelector(".pay-amt");if(pa)pa.value="150";
+last.dataset.cdTags="01/07/2026";
+DirectDebitCcPayTbl.refreshOneTimeCd(last,"mnd");
+}
+if(window.recalculateMax)window.recalculateMax("mnd");
+}
+if(window.lucide&&lucide.createIcons)lucide.createIcons();
+},80);
+}
+setAmtMode(false);syncCD();
+if(window.setMandateType)window.setMandateType("custom");
+setTimeout(prefillMndDemo,50);
 if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons();}catch(iconsErr){}}
 })();
 
@@ -5275,12 +6630,6 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
       var ppAmtGrid = document.getElementById("pp001-topAmountGrid"),
         ppVarPay = document.getElementById("pp001-variablePaymentsWrap");
 
-      for (var m = 0; m <= 11; m++) {
-        var o2 = document.createElement("option");
-        o2.value = String(m);
-        o2.textContent = m === 0 ? "0 months" : m + (m === 1 ? " month" : " months");
-        document.getElementById("pp001-lifeMonths").appendChild(o2);
-      }
       var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
       days.forEach(function (d) {
         var opt = document.createElement("option");
@@ -5311,7 +6660,6 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         amtFixed.classList.toggle("active", fixed);
         amtVariable.classList.toggle("active", !fixed);
         amountType.value = fixed ? "Fixed" : "Variable";
-        document.getElementById("pp001-pv-min-wrap").style.display = fixed ? "none" : "block";
         if (!fixed) {
           var mi = document.getElementById("pp001-minAmount");
           if (!(parseMoney(mi.value) > 0)) mi.value = "1";
@@ -5319,6 +6667,11 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         if (ppAmtGrid) {
           ppAmtGrid.classList.toggle("mode-fixed", fixed);
           ppAmtGrid.classList.toggle("mode-variable", !fixed);
+        }
+        var ppMaxWrap = document.getElementById("pp001-maxAfterTableWrap");
+        if (ppMaxWrap) {
+          if (fixed) ppMaxWrap.classList.add("hidden-field");
+          else ppMaxWrap.classList.remove("hidden-field");
         }
         if (ppVarPay && collectionDayGroup) {
           if (fixed) {
@@ -5330,9 +6683,10 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
             ppVarPay.classList.remove("hidden-field");
             collectionDayGroup.classList.add("hidden-field");
             if (window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.initVariable("pp001");
+            if (window.ensureFirstPlanRecurringRow) window.ensureFirstPlanRecurringRow();
+            if (window.recalculateMax) window.recalculateMax("pp001");
           }
         }
-        updatePreview();
         syncPp001ExpectedIncrease();
       }
       amtFixed.addEventListener("click", function () { setAmountMode(true); });
@@ -5340,7 +6694,6 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
 
       collectionAmountEl.addEventListener("input", function () {
         if (suppressCaMirror) return;
-        updatePreview();
       });
 
       function hideAllCdExtras() {
@@ -5394,7 +6747,6 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         syncCollectionDayUI();
         if (window.updateCollectionDayUI) window.updateCollectionDayUI("pp001-cd");
         if (amountType.value === "Variable" && window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.onMandateFreqChange("pp001");
-        updatePreview();
       });
 
       function parseMoney(s) {
@@ -5510,7 +6862,6 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         collectionDay.value = "";
         fillCollectionDayFromPlan(plan);
         suppressCaMirror = false;
-        updatePreview();
       }
 
       function validate() {
@@ -5555,67 +6906,36 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         var lyRaw = parseInt(document.getElementById("pp001-lifeYears").value, 10);
         var ly = isNaN(lyRaw) ? 0 : Math.max(0, lyRaw);
         document.getElementById("pp001-lifeYears").value = String(ly);
-        var lm = parseInt(document.getElementById("pp001-lifeMonths").value, 10) || 0;
+        var lmRaw = parseInt(document.getElementById("pp001-lifeMonths").value, 10);
+        var lm = isNaN(lmRaw) ? 0 : Math.min(11, Math.max(0, lmRaw));
+        document.getElementById("pp001-lifeMonths").value = String(lm);
         if (ly === 0 && lm === 0) { show("err-lifetime", true); ok = false; } else { show("err-lifetime", false); }
 
         return ok;
-      }
-
-      function updatePreview() {
-        var name = (document.getElementById("pp001-planName").value || "").trim();
-        var desc = (document.getElementById("pp001-description").value || "").trim();
-
-        document.getElementById("pp001-pv-name").textContent = name.length ? name : "\u2014";
-        document.getElementById("pp001-pv-freq").textContent = frequencyEl.value || "\u2014";
-        document.getElementById("pp001-pv-amt").textContent = amountType.value;
-        document.getElementById("pp001-pv-ca").textContent = formatMoney(parseMoney(collectionAmountEl.value));
-        if (amountType.value === "Variable") {
-          document.getElementById("pp001-pv-mm").textContent = formatMoney(parseMoney(document.getElementById("pp001-minAmount").value)) + " / " + formatMoney(parseMoney(maxAmountEl.value));
-        }
-        document.getElementById("pp001-pv-day").textContent =
-          amountType.value === "Variable" && window.DirectDebitCcPayTbl ? DirectDebitCcPayTbl.recurringCdSummary("pp001") : collectionDayValue() || "\u2014";
-        var ly = parseInt(document.getElementById("pp001-lifeYears").value, 10) || 0;
-        var lm = parseInt(document.getElementById("pp001-lifeMonths").value, 10) || 0;
-        var parts = [];
-        if (ly) parts.push(ly + (ly === 1 ? " year" : " years"));
-        if (lm) parts.push(lm + (lm === 1 ? " month" : " months"));
-        document.getElementById("pp001-pv-life").textContent = parts.length ? parts.join(", ") : "\u2014";
-        var dw = document.getElementById("pp001-pv-desc-wrap");
-        if (desc) { dw.hidden = false; document.getElementById("pp001-pv-desc").textContent = desc; } else dw.hidden = true;
       }
 
       ["planName", "collectionAmount", "minAmount", "maxAmount", "collectionDay", "description"].forEach(function (id) {
         var el = document.getElementById("pp001-" + id);
         if (!el) return;
         el.addEventListener("input", function () {
-          updatePreview();
           if (id === "maxAmount" && window.calculateEffectiveMax) calculateEffectiveMax("pp001");
         });
       });
       document.getElementById("pp001-lifeYears").addEventListener("input", function () {
         var r = parseInt(document.getElementById("pp001-lifeYears").value, 10);
         if (!isNaN(r)) document.getElementById("pp001-lifeYears").value = String(Math.max(0, r));
-        updatePreview();
         if (amountType.value === "Variable" && window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.onPeriodInputsChange("pp001");
       });
       document.getElementById("pp001-lifeYears").addEventListener("change", function () {
-        updatePreview();
+        if (amountType.value === "Variable" && window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.onPeriodInputsChange("pp001");
+      });
+      document.getElementById("pp001-lifeMonths").addEventListener("input", function () {
+        var r = parseInt(this.value, 10);
+        if (!isNaN(r)) this.value = String(Math.min(11, Math.max(0, r)));
         if (amountType.value === "Variable" && window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.onPeriodInputsChange("pp001");
       });
       document.getElementById("pp001-lifeMonths").addEventListener("change", function () {
-        updatePreview();
         if (amountType.value === "Variable" && window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.onPeriodInputsChange("pp001");
-      });
-      collectionDayWeekly.addEventListener("change", updatePreview);
-      var ppCdDaysIn = document.getElementById("pp001-cd-daysAfterStartInput");
-      if (ppCdDaysIn) {
-        ppCdDaysIn.addEventListener("input", updatePreview);
-        ppCdDaysIn.addEventListener("change", updatePreview);
-      }
-      collectionDayMonthly.addEventListener("input", updatePreview);
-      [cdQ_M, cdQ_D, cdHY_M, cdHY_D, cdA_D, cdA_M].forEach(function (el) {
-        el.addEventListener("input", updatePreview);
-        el.addEventListener("change", updatePreview);
       });
 
       document.getElementById("pp001-planForm").addEventListener("submit", function (e) {
@@ -5633,6 +6953,8 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
           }
           DirectDebitCcPayTbl.storeDraft("pp001", draftExtra);
         }
+        if (window.populateSchPlanSummary) window.populateSchPlanSummary();
+        if (window.buildPlanSchedulePreview) window.buildPlanSchedulePreview();
         window.location.hash = "#screen-sch";
       });
       document.getElementById("pp001-btnSeeSchedule").addEventListener("click", function () {
@@ -5649,6 +6971,8 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
           }
           DirectDebitCcPayTbl.storeDraft("pp001", draftExtra2);
         }
+        if (window.populateSchPlanSummary) window.populateSchPlanSummary();
+        if (window.buildPlanSchedulePreview) window.buildPlanSchedulePreview();
         window.location.hash = "#screen-sch";
       });
       document.getElementById("pp001-btnCancel").addEventListener("click", function () {
@@ -5671,7 +6995,35 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         }
         setAmountMode(false);
         syncCollectionDayUI();
-        updatePreview();
+        (function prefillPp001Demo() {
+          document.getElementById("pp001-planName").value = "Office Lease — Variable";
+          frequencyEl.value = "Monthly";
+          setAmountMode(false);
+          document.getElementById("pp001-minAmount").value = "200";
+          document.getElementById("pp001-lifeYears").value = "1";
+          document.getElementById("pp001-lifeMonths").value = "6";
+          setTimeout(function () {
+            var tb = document.getElementById("pp001-payTableBody");
+            var first = tb ? tb.querySelector("tr[data-is-first-recurring]") || tb.querySelector("tr") : null;
+            if (first) {
+              var rn = first.querySelector(".pay-name");
+              if (rn) rn.value = "Monthly Rent";
+              var ra = first.querySelector(".pay-amt");
+              if (ra) ra.value = "4500";
+              var rf = first.querySelector(".pay-row-freq");
+              if (rf) {
+                rf.value = "Monthly";
+                rf.dispatchEvent(new Event("change"));
+              }
+              var uid = first.getAttribute("data-row-id") || "0";
+              var mo = document.getElementById("pp001-r" + uid + "-rec-cdMo");
+              if (mo) mo.value = "5";
+              if (window.updatePayCdSummary) window.updatePayCdSummary(first, "pp001");
+            }
+            if (window.recalculatePlanMax) window.recalculatePlanMax();
+            else if (window.recalculateMax) window.recalculateMax("pp001");
+          }, 80);
+        })();
       }
       document.getElementById("pp001-addPayRow").addEventListener("click", function () {
         if (window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.addRow("pp001");
@@ -5725,12 +7077,16 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
     var d = window.DirectDebitCcPayTbl && DirectDebitCcPayTbl.readDraft ? DirectDebitCcPayTbl.readDraft() : null;
     if (d && d.source === "mandate") {
       setSchMode(true);
-      var c = document.getElementById("sch-sum-mnd-contact");
-      if (c && d.contact) c.textContent = d.contact;
+      if (window.populateSchMandateSummary) window.populateSchMandateSummary();
+      if (window.buildMandateSchedulePreview) window.buildMandateSchedulePreview();
     } else {
       setSchMode(false);
-      var pn = document.getElementById("sch-sum-plan-name");
-      if (pn && d && d.planName) pn.textContent = d.planName;
+      if (window.populateSchPlanSummary) window.populateSchPlanSummary();
+      else {
+        var pn = document.getElementById("sch-sum-plan-name");
+        if (pn && d && d.planName) pn.textContent = d.planName;
+      }
+      if (window.buildPlanSchedulePreview) window.buildPlanSchedulePreview();
     }
   }
 
