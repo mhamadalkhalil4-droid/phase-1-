@@ -937,6 +937,12 @@
     .cd-popover .cd-inner {
       margin-bottom: 8px;
     }
+    .sch-sched-table .schedule-total-row[data-expandable="true"]:hover {
+      background: #F8F7FB;
+    }
+    .sch-sched-table .schedule-sub-row td {
+      border-bottom: 1px solid #F0EEF6;
+    }
     #screen-mnd #mnd-paymentsTable .freq-readonly {
       min-height: 32px;
       padding: 6px 8px;
@@ -1792,7 +1798,9 @@
                 <div class="form-group" id="mnd-collectionDayGroup">
                   <label id="mnd-collectionDayLabel">Collection day <span class="req">*</span></label>
                   <div id="mnd-cdModeHost"></div>
-                  <div id="mnd-cd-fixedDayDisplay" class="cd-long-fixed-display hidden-field" style="padding:10px 14px;background:#F8F7FB;border:1.5px solid #F2F4F7;border-radius:10px;font-size:14px;color:#4E465E;font-family:Inter,sans-serif;">First day of the next period</div>
+                  <select class="input hidden-field" id="mnd-cd-longPeriodFixed" style="width:100%;">
+                    <option value="first-of-month">First day of the next Month</option>
+                  </select>
                   <div id="mnd-cd-startDateDaysGroup" class="cd-long-start-group hidden-field">
                     <label for="mnd-cd-daysAfterStartInput" style="font-size:13px;font-weight:600;color:#120C24;font-family:Inter,sans-serif;display:block;margin-bottom:6px;">Days after the start date</label>
                     <input type="number" id="mnd-cd-daysAfterStartInput" class="cd-days-after-input" min="1" max="90" placeholder="Enter number of days" style="width:100%;padding:10px 14px;border:1.5px solid #F2F4F7;border-radius:10px;font-size:14px;font-family:Inter,sans-serif;color:#120C24;outline:none;box-sizing:border-box;" />
@@ -1950,13 +1958,19 @@
                     </label>
                     <input class="input" id="mnd-contactWhatsapp" type="tel" placeholder="+971 XX XXX XXXX" />
                   </div>
-                  <div class="form-group" style="margin-bottom:0;">
+                  <div class="form-group" style="margin-bottom:10px;">
                     <label for="mnd-contactMobile" style="font-size:12px;font-weight:600;color:#4E465E;">
                       Mobile Number
                     </label>
                     <input class="input" id="mnd-contactMobile" type="tel" placeholder="+971 XX XXX XXXX" />
                   </div>
-                  <div class="field-error" id="mnd-err-contact">Please fill in at least one contact detail.</div>
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label for="mnd-contactEmail" style="font-size:12px;font-weight:600;color:#4E465E;">
+                      Email Address
+                    </label>
+                    <input class="input" id="mnd-contactEmail" type="email" placeholder="payer@example.com" />
+                  </div>
+                  <div class="field-error" id="mnd-err-contact">Please fill in at least one contact detail (WhatsApp, mobile, or email).</div>
                 </div>
                 <div class="payer-toggle-bar" id="mnd-payerToggleBar"
                   role="switch" tabindex="0" aria-checked="true"
@@ -2180,7 +2194,9 @@
               <div class="form-group" id="pp001-collectionDayGroup">
                 <label for="pp001-collectionDay" id="pp001-collectionDayLabel">Collection day <span style="font-weight:400">(optional)</span></label>
                 <div id="pp001-cdModeHost"></div>
-                <div id="pp001-cd-fixedDayDisplay" class="cd-long-fixed-display hidden-field" style="padding:10px 14px;background:#F8F7FB;border:1.5px solid #F2F4F7;border-radius:10px;font-size:14px;color:#4E465E;font-family:Inter,sans-serif;">First day of the next period</div>
+                <select class="input hidden-field" id="pp001-cd-longPeriodFixed" style="width:100%;">
+                  <option value="first-of-month">First day of the next Month</option>
+                </select>
                 <div id="pp001-cd-startDateDaysGroup" class="cd-long-start-group hidden-field">
                   <label for="pp001-cd-daysAfterStartInput" style="font-size:13px;font-weight:600;color:#120C24;font-family:Inter,sans-serif;display:block;margin-bottom:6px;">Days after the start date</label>
                   <input type="number" id="pp001-cd-daysAfterStartInput" class="cd-days-after-input" min="1" max="90" placeholder="Enter number of days" style="width:100%;padding:10px 14px;border:1.5px solid #F2F4F7;border-radius:10px;font-size:14px;font-family:Inter,sans-serif;color:#120C24;outline:none;box-sizing:border-box;" />
@@ -2342,6 +2358,23 @@
                     display: none;
                   "></p>
                 </div>
+                <div class="form-group" id="pp001-appliedFromGroup" style="display:none;">
+                  <label for="pp001-appliedFrom">
+                    Applied From <span class="req">*</span>
+                  </label>
+                  <p style="font-size:12px;color:#4E465E;font-family:Inter,sans-serif;margin:4px 0 8px;">
+                    Choose the date from which these changes will take effect on existing mandates.
+                  </p>
+                  <input
+                    class="input"
+                    type="date"
+                    id="pp001-appliedFrom"
+                    name="appliedFrom"
+                  />
+                  <div class="field-error" id="pp001-err-appliedFrom">
+                    Please select a date for when the changes will be applied.
+                  </div>
+                </div>
               </div>
 
               <div class="form-group">
@@ -2465,7 +2498,10 @@
             <div><div class="kv-label">Lifetime</div><div class="kv-val" id="sch-sum-plan-life">1 year 6 months</div></div>
           </div>
           <div class="sch-summary-grid hidden-field" id="sch-summaryMandate">
-            <div><div class="kv-label">Payer contact</div><div class="kv-val" id="sch-sum-mnd-contact">+971 50 000 0000</div></div>
+            <div>
+              <div class="kv-label">Payer contact</div>
+              <div id="sch-sum-mnd-contact" style="display:flex;flex-direction:column;gap:3px;"></div>
+            </div>
             <div><div class="kv-label">Frequency</div><div class="kv-val" id="sch-sum-mnd-freq">Monthly</div></div>
             <div><div class="kv-label">Amount type</div><div class="kv-val" id="sch-sum-mnd-amt">Variable</div></div>
             <div><div class="kv-label">Min / Max (AED)</div><div class="kv-val" id="sch-sum-mnd-mm">200 / 500</div></div>
@@ -2479,42 +2515,12 @@
             <table class="sch-sched-table" aria-label="Payment schedule plan mode">
               <thead>
                 <tr>
-                  <th scope="col">Date / Period Reference</th>
-                  <th scope="col">Payment Type</th>
-                  <th scope="col">Amount (AED)</th>
+                  <th scope="col">Collection Date</th>
+                  <th scope="col">Total Amount (AED)</th>
                   <th scope="col">Notes</th>
                 </tr>
               </thead>
               <tbody id="sch-tbody-plan">
-                <tr><td>Month 1 Day 5</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr><td>Month 1 Day 5</td><td>Add-On</td><td>50.00</td><td>Equipment pack</td></tr>
-                <tr class="row-total"><td colspan="2">TOTAL</td><td>400.00</td><td></td></tr>
-                <tr><td>Month 2 Day 5</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr><td>Month 2 Day 5</td><td>Discount</td><td>−25.00</td><td>Loyalty promo</td></tr>
-                <tr class="row-total"><td colspan="2">TOTAL</td><td>325.00</td><td></td></tr>
-                <tr><td>Month 2 Day 18</td><td>One-Time</td><td>120.00</td><td>Registration fee</td></tr>
-                <tr><td>Month 3 Day 5</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr><td>Month 3 Day 5</td><td>Add-On</td><td>30.00</td><td>Supplement</td></tr>
-                <tr class="row-total"><td colspan="2">TOTAL</td><td>380.00</td><td></td></tr>
-                <tr><td>Month 4 Day 5</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr><td>Month 5 Day 5</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr><td>Month 6 Day 5</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr><td>Month 6 Day 12</td><td>Discount</td><td>−40.00</td><td>Mid-year adjustment</td></tr>
-                <tr><td>Month 6 Day 5</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr class="row-total"><td colspan="2">TOTAL</td><td>660.00</td><td>Same day stack</td></tr>
-                <tr><td colspan="4" style="font-weight:700;padding-top:16px;border-top:2px solid var(--mist-lavender)">Fixed mode preview (demo): Monthly · Collection day 5 · AED 500</td></tr>
-                <tr><td>Month 1 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>Month 2 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>Month 3 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>Month 4 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>Month 5 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>Month 6 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>Month 7 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>Month 8 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>Month 9 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>Month 10 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>Month 11 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>Month 12 Day 5</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
               </tbody>
             </table>
           </div>
@@ -2525,42 +2531,12 @@
             <table class="sch-sched-table" aria-label="Payment schedule mandate mode">
               <thead>
                 <tr>
-                  <th scope="col">Date / Period Reference</th>
-                  <th scope="col">Payment Type</th>
-                  <th scope="col">Amount (AED)</th>
+                  <th scope="col">Collection Date</th>
+                  <th scope="col">Total Amount (AED)</th>
                   <th scope="col">Notes</th>
                 </tr>
               </thead>
               <tbody id="sch-tbody-mandate">
-                <tr><td>05/01/2026</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr><td>05/01/2026</td><td>Add-On</td><td>50.00</td><td>Equipment pack</td></tr>
-                <tr class="row-total"><td colspan="2">TOTAL</td><td>400.00</td><td></td></tr>
-                <tr><td>05/02/2026</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr><td>05/02/2026</td><td>Discount</td><td>−25.00</td><td>Loyalty promo</td></tr>
-                <tr class="row-total"><td colspan="2">TOTAL</td><td>325.00</td><td></td></tr>
-                <tr><td>18/02/2026</td><td>One-Time</td><td>120.00</td><td>Registration fee</td></tr>
-                <tr><td>05/03/2026</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr><td>05/03/2026</td><td>Add-On</td><td>30.00</td><td>Supplement</td></tr>
-                <tr class="row-total"><td colspan="2">TOTAL</td><td>380.00</td><td></td></tr>
-                <tr><td>05/04/2026</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr><td>05/05/2026</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr><td>05/06/2026</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr><td>12/06/2026</td><td>Discount</td><td>−40.00</td><td>Mid-year adjustment</td></tr>
-                <tr><td>05/06/2026</td><td>Recurring Payment</td><td>350.00</td><td>—</td></tr>
-                <tr class="row-total"><td colspan="2">TOTAL</td><td>660.00</td><td>Same day stack</td></tr>
-                <tr><td colspan="4" style="font-weight:700;padding-top:16px;border-top:2px solid var(--mist-lavender)">Fixed mode preview (demo): Monthly · Collection day 5 · AED 500 · 01/09/2026 → 01/09/2027</td></tr>
-                <tr><td>05/09/2026</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>05/10/2026</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>05/11/2026</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>05/12/2026</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>05/01/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>05/02/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>05/03/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>05/04/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>05/05/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>05/06/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>05/07/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
-                <tr><td>05/08/2027</td><td>Recurring Payment</td><td>500.00</td><td></td></tr>
               </tbody>
             </table>
           </div>
@@ -2636,7 +2612,7 @@
   };
 
   w.isLongPeriodFrequency = function (freq) {
-    return freq === "Quarterly" || freq === "Half-Yearly" || freq === "Annually";
+    return freq === "Quarterly" || freq === "Half-Yearly" || freq === "Annually" || freq === "One-Time";
   };
 
   w.longPeriodMaxDays = function (freq) {
@@ -2711,9 +2687,9 @@
     var textId = base === "pp001" ? "pp001-collectionDay" : "mnd-collectionDayText";
     var textEl = document.getElementById(textId);
     if (textEl) textEl.classList.add("hidden-field");
-    var fixedDisplay = document.getElementById(idPrefix + "-fixedDayDisplay");
+    var longFixedSel = document.getElementById(base + "-cd-longPeriodFixed");
     var startGroup = document.getElementById(idPrefix + "-startDateDaysGroup");
-    if (fixedDisplay) fixedDisplay.classList.add("hidden-field");
+    if (longFixedSel) longFixedSel.classList.add("hidden-field");
     if (startGroup) startGroup.classList.add("hidden-field");
     var note = document.getElementById(idPrefix + "-daysAfterNote");
     if (note) note.style.display = "none";
@@ -2779,8 +2755,9 @@
 
     if (isLong) {
       if (mode === "fixed") {
-        var fd = document.getElementById(idPrefix + "-fixedDayDisplay");
-        if (fd) fd.classList.remove("hidden-field");
+        var baseLp = w.getFixedCdBase(idPrefix);
+        var lpSel = document.getElementById(baseLp + "-cd-longPeriodFixed");
+        if (lpSel) lpSel.classList.remove("hidden-field");
       } else {
         var sg = document.getElementById(idPrefix + "-startDateDaysGroup");
         if (sg) sg.classList.remove("hidden-field");
@@ -4419,6 +4396,125 @@
     if (window.lucide && lucide.createIcons) lucide.createIcons();
   }
 
+  function getMainRecurringAmountForTable(pfx) {
+    var first = document.querySelector("#" + pfx + "-payTableBody tr[data-is-first-recurring]");
+    if (first) {
+      var am = first.querySelector(".pay-amt");
+      if (am) return parseFloat(am.value) || 0;
+    }
+    return 0;
+  }
+
+  function buildRecurringAddonPeriodTable(addOnFreq, mainFreq, mainAmount, addOnAmount) {
+    var periodMap = {
+      Quarterly: { label: "quarter", slots: 3, slotLabel: "Month" },
+      "Half-Yearly": { label: "half-year", slots: 6, slotLabel: "Month" },
+      Annually: { label: "year", slots: 12, slotLabel: "Month" },
+    };
+    if (mainFreq === "Weekly") {
+      periodMap.Monthly = { label: "month", slots: 4, slotLabel: "Week" };
+      periodMap.Quarterly = { label: "quarter", slots: 13, slotLabel: "Week" };
+    }
+    var period = periodMap[addOnFreq];
+    if (!period) return '<p style="font-size:12px;color:#4E465E;">Select a frequency first.</p>';
+    var html =
+      '<p style="font-size:12px;font-weight:700;color:#120C24;font-family:Inter,sans-serif;margin:0 0 10px;">' +
+      "Select which " +
+      period.slotLabel.toLowerCase() +
+      " within each " +
+      period.label +
+      " to collect this add-on:</p>";
+    html += '<div style="display:flex;flex-direction:column;gap:4px;">';
+    var i;
+    for (i = 1; i <= period.slots; i++) {
+      html +=
+        '<button type="button" class="addon-slot-btn" data-slot="' +
+        i +
+        '" style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border:1.5px solid #EAE5F4;border-radius:8px;background:white;cursor:pointer;font-size:12px;font-family:Inter,sans-serif;color:#120C24;text-align:left;transition:all 0.15s;"' +
+        ' onmouseover="if(!this.classList.contains(\'selected\')){this.style.background=\'#F3F0FF\';this.style.borderColor=\'#7A5CFF\';}"' +
+        ' onmouseout="if(!this.classList.contains(\'selected\')){this.style.background=\'white\';this.style.borderColor=\'#EAE5F4\';}"' +
+        ' onclick="selectAddonSlot(this)">' +
+        "<span>" +
+        period.slotLabel +
+        " " +
+        i +
+        "</span>" +
+        '<span style="color:#4E465E;font-size:11px;">Recurring: AED ' +
+        (mainAmount > 0 ? mainAmount.toFixed(2) : "\u2014") +
+        "</span></button>";
+    }
+    html += "</div>";
+    return html;
+  }
+
+  window.selectAddonSlot = function selectAddonSlot(btn) {
+    var pop = btn.closest(".cd-popover");
+    if (!pop) return;
+    pop.querySelectorAll(".addon-slot-btn").forEach(function (b) {
+      b.classList.remove("selected");
+      b.style.background = "white";
+      b.style.borderColor = "#EAE5F4";
+      b.style.color = "#120C24";
+    });
+    btn.classList.add("selected");
+    btn.style.background = "#7A5CFF";
+    btn.style.borderColor = "#7A5CFF";
+    btn.style.color = "white";
+  };
+
+  function formatRecurringAddonSlotSummary(cdTags) {
+    var m = String(cdTags || "").match(/^RA\|(Quarterly|Half-Yearly|Annually|Monthly)\|(\d+)$/);
+    if (!m) return "";
+    var freq = m[1];
+    var slot = parseInt(m[2], 10);
+    var labels = {
+      Quarterly: { unit: "quarter", slotLabel: "Month" },
+      "Half-Yearly": { unit: "half-year", slotLabel: "Month" },
+      Annually: { unit: "year", slotLabel: "Month" },
+      Monthly: { unit: "month", slotLabel: "Week" },
+    };
+    var L = labels[freq];
+    if (!L) return "Slot " + slot;
+    return L.slotLabel + " " + slot + " of each " + L.unit;
+  }
+  window.formatRecurringAddonSlotSummary = formatRecurringAddonSlotSummary;
+
+  function initRecurringAddonCdPopover(row, ctx, pop) {
+    if (!pop || pop.dataset.inited === "1") return;
+    pop.dataset.inited = "1";
+    var pfx = ctx === "mnd" ? "mnd" : "pp001";
+    var fs = row.querySelector(".pay-rec-addon-freq");
+    var addOnFreq = fs ? fs.value : "";
+    var mainFreq = mandateFreqEl(ctx).value;
+    var mainAmt = getMainRecurringAmountForTable(pfx);
+    var addOnAmtIn = row.querySelector(".pay-amt");
+    var addOnAmt = addOnAmtIn ? parseFloat(addOnAmtIn.value) || 0 : 0;
+    pop.innerHTML =
+      '<p style="font-size:13px;font-weight:700;color:#120C24;font-family:Inter,sans-serif;margin:0 0 12px;">Collection Day</p>' +
+      buildRecurringAddonPeriodTable(addOnFreq, mainFreq, mainAmt, addOnAmt) +
+      '<button type="button" class="cd-popover-done" style="margin-top:12px;width:100%;padding:10px;border-radius:8px;background:#7A5CFF;color:white;border:none;font-size:12px;font-weight:600;font-family:Inter,sans-serif;cursor:pointer;">Done</button>';
+    var doneBtn = pop.querySelector(".cd-popover-done");
+    if (doneBtn) {
+      doneBtn.addEventListener("click", function () {
+        var sel = pop.querySelector(".addon-slot-btn.selected");
+        if (sel) {
+          var slot = sel.getAttribute("data-slot");
+          var fq = row.querySelector(".pay-rec-addon-freq");
+          var af = fq ? fq.value : "";
+          if (af) row.dataset.cdTags = "RA|" + af + "|" + slot;
+        }
+        pop.style.display = "none";
+        updatePayCdSummary(row, ctx);
+        if (window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.refreshAllPaymentDeps(ctx);
+      });
+    }
+    var existing = String(row.dataset.cdTags || "").match(/^RA\|(Quarterly|Half-Yearly|Annually|Monthly)\|(\d+)$/);
+    if (existing) {
+      var btn = pop.querySelector('.addon-slot-btn[data-slot="' + existing[2] + '"]');
+      if (btn) window.selectAddonSlot(btn);
+    }
+  }
+
   function openCdPopoverFixed(btn, ctx) {
     document.querySelectorAll(".cd-popover").forEach(function (p) {
       p.style.display = "none";
@@ -4427,8 +4523,13 @@
     var popover = td && td.querySelector(".cd-popover");
     if (!popover) return;
     var row = btn.closest("tr");
+    var kind = row ? row.getAttribute("data-pay-kind") || "" : "";
     if (row && popover.dataset.inited !== "1") {
-      initPayRowCdPopover(row, ctx);
+      if (kind === "recurring-addon" || kind === "recurring-discount") {
+        initRecurringAddonCdPopover(row, ctx, popover);
+      } else {
+        initPayRowCdPopover(row, ctx);
+      }
       if (window.lucide && lucide.createIcons) lucide.createIcons();
     }
     var rect = btn.getBoundingClientRect();
@@ -4494,6 +4595,20 @@
   function onCompactPayRowFrequencyChange(select, ctx) {
     var row = select.closest("tr");
     if (!row) return;
+    var kind = row.getAttribute("data-pay-kind") || "";
+    if (
+      (kind === "recurring-addon" || kind === "recurring-discount") &&
+      select.classList.contains("pay-rec-addon-freq")
+    ) {
+      row.dataset.cdTags = "";
+      var pop = row.querySelector(".cd-popover");
+      if (pop) {
+        delete pop.dataset.inited;
+        pop.innerHTML = "";
+      }
+      var sum = row.querySelector(".cd-summary");
+      if (sum) sum.textContent = "Not set";
+    }
     var cdSummary = row.querySelector(".cd-summary");
     var cdEditBtn = row.querySelector(".cd-edit-btn");
     if (select.value === "Daily") {
@@ -4538,7 +4653,12 @@
       }
       return;
     }
-    if (k === "addon" || k === "discount" || k === "recurring-addon" || k === "recurring-discount") {
+    if (k === "recurring-addon" || k === "recurring-discount") {
+      var slotSum = formatRecurringAddonSlotSummary(row.dataset.cdTags || "");
+      sum.textContent = slotSum || "Not set";
+      return;
+    }
+    if (k === "addon" || k === "discount") {
       var n = (row.dataset.cdTags || "").split(",").filter(Boolean).length;
       sum.textContent = n ? n + " day" + (n === 1 ? "" : "s") + " selected" : "Not set";
       return;
@@ -4622,7 +4742,7 @@
     editBtn.addEventListener("click", function (e) {
       e.stopPropagation();
       var k = row.getAttribute("data-pay-kind") || "";
-      if (k === "addon" || k === "discount" || k === "recurring-addon" || k === "recurring-discount") {
+      if (k === "addon" || k === "discount") {
         var tblRows = buildAddonPickerRows(ctx, pfx);
         var cur = (row.dataset.cdTags || "").split(",").filter(Boolean);
         openPicker({
@@ -4636,6 +4756,15 @@
             payTbl.refreshAllPaymentDeps(ctx);
           },
         });
+        return;
+      }
+      if (k === "recurring-addon" || k === "recurring-discount") {
+        var pop = row.querySelector(".cd-popover");
+        if (pop && pop.dataset.inited !== "1") {
+          initRecurringAddonCdPopover(row, ctx, pop);
+        }
+        if (pfx === "pp001") window.openPlanCdPopover(editBtn);
+        else window.openCdPopover(editBtn);
         return;
       }
       if (k === "onetime") {
@@ -5427,10 +5556,12 @@
         }
         var amt = parseMoney(row.querySelector(".pay-amt").value);
         var incomplete = (k !== "onetime" && !(amt > 0)) || (k === "onetime" && !(amt > 0));
-        if (k === "addon" || k === "discount" || k === "recurring-addon" || k === "recurring-discount") {
-          if (!(row.dataset.cdTags || "").trim()) incomplete = true;
+        if (k === "recurring-addon" || k === "recurring-discount") {
+          if (!formatRecurringAddonSlotSummary(row.dataset.cdTags || "")) incomplete = true;
           var fsA = row.querySelector(".pay-rec-addon-freq");
           if (fsA && !fsA.value) incomplete = true;
+        } else if (k === "addon" || k === "discount") {
+          if (!(row.dataset.cdTags || "").trim()) incomplete = true;
         }
         if (k === "onetime") {
           if (!(row.dataset.cdTags || "").trim()) incomplete = true;
@@ -5515,15 +5646,20 @@
   window.buildPlanSchedulePreview = function buildPlanSchedulePreview() {
     var tbody = document.getElementById("sch-tbody-plan");
     if (!tbody) return;
+
+    tbody.innerHTML = "";
+
     var ctx = "pp001";
     var pfx = "pp001";
     var pm = getMandateRange(ctx).planMonths || 12;
     var mf = mandateFreqEl(ctx).value;
     var rows = [];
     var pickerMap = {};
+
     buildAddonPickerRows(ctx, pfx).forEach(function (pr) {
       pickerMap[pr.key] = pr.dateLabel;
     });
+
     function tagToLabel(tag) {
       if (pickerMap[tag]) return pickerMap[tag];
       if (tag.indexOf("PP|") === 0) {
@@ -5532,8 +5668,10 @@
       }
       return tag;
     }
+
     var amtTypeEl = document.getElementById("pp001-amountType");
     var isFixed = amtTypeEl && amtTypeEl.value === "Fixed";
+
     if (isFixed) {
       var ca = parseFloat((document.getElementById("pp001-collectionAmount") || {}).value) || 0;
       if (ca > 0) {
@@ -5549,6 +5687,7 @@
         var name = nm && nm.value.trim() ? nm.value.trim() : "\u2014";
         var amt = am ? parseFloat(am.value) : 0;
         if (!(amt > 0)) return;
+
         if (k === "onetime") {
           var ot = ((tr.dataset.cdTags || "").split(",").filter(Boolean)[0] || "").trim();
           rows.push({ date: tagToLabel(ot) || "\u2014", type: "One-Time", amt: amt.toFixed(2), notes: name, sortKey: ot });
@@ -5563,21 +5702,13 @@
             });
           });
         } else if (k === "recurring-addon" || k === "recurring-discount") {
-          var fs = tr.querySelector(".pay-rec-addon-freq");
-          var fq = fs ? fs.value : "";
-          var tagsR = (tr.dataset.cdTags || "").split(",").filter(Boolean);
-          var firstTag = tagsR[0] || "";
-          var dateLbl = tagToLabel(firstTag) || "\u2014";
-          if (!firstTag && fq) {
-            var occRA = genPlanOccurrencesFirst(pm, fq, recCdVal(pfx, fq));
-            if (occRA.length) dateLbl = occRA[0].label;
-          }
+          var slotLbl = tr.dataset.cdTags || "";
           rows.push({
-            date: dateLbl,
+            date: slotLbl || "\u2014",
             type: k === "recurring-addon" ? "Recurring Add-on" : "Recurring Discount",
             amt: (k === "recurring-discount" ? "\u2212" : "") + amt.toFixed(2),
-            notes: name + " (per period)" + (fq ? " \u00b7 " + fq : ""),
-            sortKey: dateLbl,
+            notes: name,
+            sortKey: slotLbl,
           });
         } else if (k === "recurring2") {
           var fs2 = tr.querySelector(".pay-row-freq, .pay-rec2-freq");
@@ -5596,28 +5727,34 @@
         }
       });
     }
+
     rows.sort(function (a, b) {
       var pa = planPeriodIndexFromLabel(ctx, a.sortKey || a.date, mf);
       var pb = planPeriodIndexFromLabel(ctx, b.sortKey || b.date, mf);
       if (pa !== pb) return pa - pb;
       return String(a.date).localeCompare(String(b.date));
     });
-    var html = "";
-    var dayTotals = {};
-    var lastDate = "";
-    rows.forEach(function (r) {
-      if (lastDate && lastDate !== r.date && dayTotals[lastDate] !== undefined) {
-        html += '<tr class="row-total"><td colspan="2">TOTAL \u00b7 ' + esc(lastDate) + "</td><td>" + dayTotals[lastDate].toFixed(2) + "</td><td></td></tr>";
-      }
-      html += "<tr><td>" + esc(r.date) + "</td><td>" + esc(r.type) + "</td><td>" + r.amt + "</td><td>" + esc(r.notes) + "</td></tr>";
-      var num = parseFloat(String(r.amt).replace("\u2212", "-"));
-      if (!isNaN(num)) dayTotals[r.date] = (dayTotals[r.date] || 0) + num;
-      lastDate = r.date;
-    });
-    if (lastDate && dayTotals[lastDate] !== undefined) {
-      html += '<tr class="row-total"><td colspan="2">TOTAL \u00b7 ' + esc(lastDate) + "</td><td>" + dayTotals[lastDate].toFixed(2) + "</td><td></td></tr>";
+
+    if (rows.length === 0) {
+      tbody.innerHTML =
+        '<tr><td colspan="3" style="text-align:center;padding:24px;color:#4E465E;font-size:13px;font-family:Inter,sans-serif;">' +
+        "Fill in the frequency, lifetime, and payment amount to see the schedule." +
+        "</td></tr>";
+      return;
     }
-    if (html) tbody.innerHTML = html;
+
+    var html = window.renderGroupedScheduleHtml ? window.renderGroupedScheduleHtml(rows, null) : "";
+
+    if (html) {
+      tbody.innerHTML = html;
+    } else {
+      tbody.innerHTML =
+        '<tr><td colspan="3" style="text-align:center;padding:24px;color:#4E465E;font-size:13px;font-family:Inter,sans-serif;">' +
+        "Could not render the schedule. Please check that all fields are filled correctly." +
+        "</td></tr>";
+    }
+
+    if (window.lucide && lucide.createIcons) lucide.createIcons();
   };
 
   document.addEventListener("click", function (e) {
@@ -6081,6 +6218,66 @@
     window.__mndMandateType = type;
   };
 
+  function applyPlanLockStyle(el, unlock) {
+    if (!el) return;
+    if (unlock) {
+      el.disabled = false;
+      el.readOnly = false;
+      el.style.background = "";
+      el.style.color = "";
+      el.style.cursor = "";
+      el.style.pointerEvents = "";
+      el.style.opacity = "";
+    } else {
+      el.disabled = true;
+      el.readOnly = true;
+      el.style.background = "#F8F7FB";
+      el.style.color = "#9CA3AF";
+      el.style.cursor = "not-allowed";
+      el.style.pointerEvents = "none";
+      el.style.opacity = "0.7";
+    }
+  }
+
+  window.highlightLockedAmtType = function highlightLockedAmtType() {
+    var amountType = document.getElementById("mnd-amountType");
+    var fixedBtn = document.getElementById("mnd-amtFixed");
+    var varBtn = document.getElementById("mnd-amtVariable");
+    if (!amountType || !fixedBtn || !varBtn) return;
+
+    var isFixed = amountType.value === "Fixed";
+    var activeBtn = isFixed ? fixedBtn : varBtn;
+    var inactiveBtn = isFixed ? varBtn : fixedBtn;
+
+    activeBtn.disabled = true;
+    inactiveBtn.disabled = true;
+    activeBtn.style.background = "#9CA3AF";
+    activeBtn.style.color = "#FFFFFF";
+    activeBtn.style.opacity = "1";
+    activeBtn.style.cursor = "not-allowed";
+    activeBtn.style.pointerEvents = "none";
+
+    inactiveBtn.style.background = "#F3F4F6";
+    inactiveBtn.style.color = "#D1D5DB";
+    inactiveBtn.style.opacity = "0.7";
+    inactiveBtn.style.cursor = "not-allowed";
+    inactiveBtn.style.pointerEvents = "none";
+  };
+
+  window.restoreLockedAmtTypeStyles = function restoreLockedAmtTypeStyles() {
+    var fixedBtn = document.getElementById("mnd-amtFixed");
+    var varBtn = document.getElementById("mnd-amtVariable");
+    [fixedBtn, varBtn].forEach(function (btn) {
+      if (!btn) return;
+      btn.disabled = false;
+      btn.style.background = "";
+      btn.style.color = "";
+      btn.style.opacity = "";
+      btn.style.cursor = "";
+      btn.style.pointerEvents = "";
+    });
+  };
+
   window.lockAllPlanFields = function lockAllPlanFields() {
     var planSel = document.getElementById("mnd-planSelect");
     if (planSel) {
@@ -6089,83 +6286,209 @@
       planSel.style.background = "";
       planSel.style.color = "";
       planSel.style.cursor = "";
+      planSel.style.pointerEvents = "";
+      planSel.style.opacity = "";
     }
-    ["mnd-frequency", "mnd-collectionAmount", "mnd-minAmount", "mnd-maxAmount", "mnd-lifeY", "mnd-lifeM", "mnd-lifeD"].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) {
-        el.readOnly = true;
-        el.disabled = false;
-        el.style.background = "#F8F7FB";
-        el.style.color = "#4E465E";
-        el.style.cursor = "not-allowed";
-      }
+    [
+      "mnd-frequency",
+      "mnd-collectionAmount",
+      "mnd-minAmount",
+      "mnd-maxAmount",
+      "mnd-lifeY",
+      "mnd-lifeM",
+      "mnd-lifeD",
+      "mnd-expectedIncreaseInput",
+      "mnd-cd-longPeriodFixed",
+    ].forEach(function (id) {
+      applyPlanLockStyle(document.getElementById(id));
     });
-    var amtSeg = document.getElementById("mnd-amtFixed");
-    if (amtSeg) {
-      amtSeg.disabled = true;
-      var av = document.getElementById("mnd-amtVariable");
-      if (av) av.disabled = true;
-    }
-    ["mnd-collectionDayWeekly", "mnd-collectionDayMonthly", "mnd-collectionDayText", "mnd-cdQ_M", "mnd-cdQ_D", "mnd-cdHY_M", "mnd-cdHY_D", "mnd-cdA_D", "mnd-cdA_M", "mnd-cd-daysAfterStartInput"].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) {
-        el.disabled = true;
-        el.style.background = "#F8F7FB";
-        el.style.cursor = "not-allowed";
-      }
+    [
+      "mnd-collectionDayWeekly",
+      "mnd-collectionDayMonthly",
+      "mnd-collectionDayText",
+      "mnd-cdQ_M",
+      "mnd-cdQ_D",
+      "mnd-cdHY_M",
+      "mnd-cdHY_D",
+      "mnd-cdA_D",
+      "mnd-cdA_M",
+      "mnd-cd-daysAfterStartInput",
+    ].forEach(function (id) {
+      applyPlanLockStyle(document.getElementById(id));
     });
     var addBtn = document.getElementById("mnd-addPayRow");
-    if (addBtn) addBtn.disabled = true;
-    document.querySelectorAll("#mnd-payTableBody input, #mnd-payTableBody select, #mnd-payTableBody button").forEach(function (el) {
-      if (el.closest && el.closest(".pay-actions-cell")) return;
-      el.disabled = true;
-      el.style.cursor = "not-allowed";
-    });
-    var endEl = document.getElementById("mnd-endDate");
-    if (endEl) {
-      endEl.readOnly = true;
-      endEl.style.background = "#F8F7FB";
-      endEl.style.cursor = "not-allowed";
-    }
+    if (addBtn) applyPlanLockStyle(addBtn);
+    document
+      .querySelectorAll(
+        "#mnd-payTableBody input, #mnd-payTableBody select, #mnd-payTableBody textarea, #mnd-payTableBody button, #mnd-payTableBody .pay-type-dd-trigger"
+      )
+      .forEach(function (el) {
+        applyPlanLockStyle(el);
+      });
+    applyPlanLockStyle(document.getElementById("mnd-endDate"));
+    var expGrp = document.getElementById("mnd-expectedIncreaseGroup");
+    if (expGrp) expGrp.style.pointerEvents = "none";
+    if (window.highlightLockedAmtType) window.highlightLockedAmtType();
   };
 
   window.unlockAllPlanFields = function unlockAllPlanFields() {
-    ["mnd-frequency", "mnd-collectionAmount", "mnd-minAmount", "mnd-maxAmount", "mnd-lifeY", "mnd-lifeM", "mnd-lifeD", "mnd-endDate"].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) {
-        el.readOnly = false;
-        el.disabled = false;
-        el.style.background = "";
-        el.style.color = "";
-        el.style.cursor = "";
-      }
+    [
+      "mnd-frequency",
+      "mnd-collectionAmount",
+      "mnd-minAmount",
+      "mnd-maxAmount",
+      "mnd-lifeY",
+      "mnd-lifeM",
+      "mnd-lifeD",
+      "mnd-endDate",
+      "mnd-expectedIncreaseInput",
+      "mnd-cd-longPeriodFixed",
+    ].forEach(function (id) {
+      applyPlanLockStyle(document.getElementById(id), true);
     });
-    var amtSeg = document.getElementById("mnd-amtFixed");
-    if (amtSeg) {
-      amtSeg.disabled = false;
-      var av = document.getElementById("mnd-amtVariable");
-      if (av) av.disabled = false;
-    }
-    ["mnd-collectionDayWeekly", "mnd-collectionDayMonthly", "mnd-collectionDayText", "mnd-cdQ_M", "mnd-cdQ_D", "mnd-cdHY_M", "mnd-cdHY_D", "mnd-cdA_D", "mnd-cdA_M", "mnd-cd-daysAfterStartInput"].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) {
-        el.disabled = false;
-        el.style.background = "";
-        el.style.cursor = "";
-      }
+    if (window.restoreLockedAmtTypeStyles) window.restoreLockedAmtTypeStyles();
+    [
+      "mnd-collectionDayWeekly",
+      "mnd-collectionDayMonthly",
+      "mnd-collectionDayText",
+      "mnd-cdQ_M",
+      "mnd-cdQ_D",
+      "mnd-cdHY_M",
+      "mnd-cdHY_D",
+      "mnd-cdA_D",
+      "mnd-cdA_M",
+      "mnd-cd-daysAfterStartInput",
+    ].forEach(function (id) {
+      applyPlanLockStyle(document.getElementById(id), true);
     });
-    var addBtn = document.getElementById("mnd-addPayRow");
-    if (addBtn) addBtn.disabled = false;
-    document.querySelectorAll("#mnd-payTableBody input, #mnd-payTableBody select, #mnd-payTableBody button").forEach(function (el) {
-      el.disabled = false;
-      el.style.cursor = "";
-    });
+    applyPlanLockStyle(document.getElementById("mnd-addPayRow"), true);
+    document
+      .querySelectorAll(
+        "#mnd-payTableBody input, #mnd-payTableBody select, #mnd-payTableBody textarea, #mnd-payTableBody button, #mnd-payTableBody .pay-type-dd-trigger"
+      )
+      .forEach(function (el) {
+        applyPlanLockStyle(el, true);
+      });
+    var expGrp = document.getElementById("mnd-expectedIncreaseGroup");
+    if (expGrp) expGrp.style.pointerEvents = "";
     if (window.recalculateMax) window.recalculateMax();
+    if (window.onFrequencyChange) window.onFrequencyChange("mnd");
+  };
+
+  window.toggleScheduleRow = function toggleScheduleRow(row) {
+    if (row.getAttribute("data-expandable") !== "true") return;
+    var isOpen = row.getAttribute("data-open") === "true";
+    var chevron = row.querySelector(".schedule-chevron");
+    var next = row.nextElementSibling;
+    while (next && next.classList.contains("schedule-sub-row")) {
+      next.style.display = isOpen ? "none" : "table-row";
+      next = next.nextElementSibling;
+    }
+    row.setAttribute("data-open", isOpen ? "false" : "true");
+    if (chevron) chevron.style.transform = isOpen ? "rotate(0deg)" : "rotate(90deg)";
+  };
+
+  function escScheduleText(s) {
+    return String(s || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  function renderGroupedScheduleHtml(rows, pdm) {
+    var byDate = {};
+    rows.forEach(function (r) {
+      var d = r.date || "\u2014";
+      if (!byDate[d]) byDate[d] = [];
+      byDate[d].push(r);
+    });
+    var dates = Object.keys(byDate);
+    dates.sort(function (a, b) {
+      if (pdm) {
+        var da = pdm(a),
+          db = pdm(b);
+        if (da && db) return da - db;
+      }
+      return String(a).localeCompare(String(b));
+    });
+    var html = "";
+    dates.forEach(function (date) {
+      var comps = byDate[date];
+      var total = 0;
+      var names = [];
+      comps.forEach(function (c) {
+        var num = parseFloat(String(c.amt).replace("\u2212", "-").replace("\u2212", "-"));
+        if (!isNaN(num)) total += num;
+        names.push(c.notes && c.notes !== "\u2014" ? c.notes : c.type);
+      });
+      var expandable = comps.length > 1;
+      if (expandable) {
+        html +=
+          '<tr class="schedule-total-row" data-expandable="true" data-open="false" onclick="toggleScheduleRow(this)" style="cursor:pointer;">' +
+          '<td style="display:flex;align-items:center;gap:8px;">' +
+          '<i data-lucide="chevron-right" class="schedule-chevron" style="width:14px;height:14px;color:#7A5CFF;transition:transform 0.2s;flex-shrink:0;"></i>' +
+          "<span>" +
+          escScheduleText(date) +
+          "</span></td>" +
+          "<td><strong>AED " +
+          total.toFixed(2) +
+          "</strong></td>" +
+          '<td style="font-size:11px;color:#4E465E;">Total of: ' +
+          escScheduleText(names.join(", ")) +
+          "</td></tr>";
+        comps.forEach(function (c) {
+          html +=
+            '<tr class="schedule-sub-row" style="display:none;background:#F8F7FB;">' +
+            '<td style="padding-left:32px;font-size:12px;color:#4E465E;">' +
+            escScheduleText(c.type) +
+            "</td>" +
+            '<td style="font-size:12px;">AED ' +
+            escScheduleText(String(c.amt).replace("\u2212", "-")) +
+            "</td>" +
+            '<td style="font-size:12px;color:#4E465E;">(' +
+            escScheduleText(c.notes) +
+            ")</td></tr>";
+        });
+      } else {
+        var c0 = comps[0];
+        html +=
+          '<tr class="schedule-total-row" data-expandable="false">' +
+          '<td style="display:flex;align-items:center;gap:8px;">' +
+          '<span style="width:14px;display:inline-block;flex-shrink:0;"></span>' +
+          "<span>" +
+          escScheduleText(date) +
+          "</span></td>" +
+          "<td><strong>AED " +
+          escScheduleText(String(c0.amt).replace("\u2212", "-")) +
+          "</strong></td>" +
+          '<td style="font-size:11px;color:#4E465E;">' +
+          escScheduleText(c0.notes && c0.notes !== "\u2014" ? c0.notes : c0.type) +
+          "</td></tr>";
+      }
+    });
+    return html;
+  }
+  window.renderGroupedScheduleHtml = renderGroupedScheduleHtml;
+
+  window.onFrequencyChange = function onFrequencyChange(prefix) {
+    var freqEl = document.getElementById(prefix + "-frequency");
+    var freq = freqEl ? freqEl.value : "";
+    var isOneTime = freq === "One-Time";
+    var varBtn = document.getElementById(prefix + "-amtVariable");
+    var fixedBtn = document.getElementById(prefix + "-amtFixed");
+    var payWrap = document.getElementById(prefix === "mnd" ? "mnd-variablePaymentsWrap" : "pp001-variablePaymentsWrap");
+    var addBtn = document.getElementById(prefix === "mnd" ? "mnd-addPayRow" : "pp001-addPayRow");
+    if (varBtn) varBtn.style.display = isOneTime ? "none" : "";
+    if (isOneTime && fixedBtn) fixedBtn.click();
+    if (payWrap) payWrap.style.display = isOneTime ? "none" : "";
+    if (addBtn) addBtn.style.display = isOneTime ? "none" : "";
+    if (window.updateCollectionDayUI) window.updateCollectionDayUI(prefix + "-cd");
   };
 
   window.buildMandateSchedulePreview = function buildMandateSchedulePreview() {
     var tbody = document.getElementById("sch-tbody-mandate");
-    if (!tbody || !window.DirectDebitCcPayTbl) return;
+    if (!tbody) return;
+    tbody.innerHTML = "";
     var st = null,
       en = null;
     var startIn = document.getElementById("mnd-startDate");
@@ -6195,16 +6518,14 @@
           rows.push({ date: dm, type: k === "addon" ? "Add-On" : "Discount", amt: (k === "discount" ? "−" : "") + amt.toFixed(2), notes: name });
         });
       } else if (k === "recurring-addon" || k === "recurring-discount") {
-        var fs = tr.querySelector(".pay-rec-addon-freq");
-        var fq = fs ? fs.value : "";
-        var tagsR = (tr.dataset.cdTags || "").split(",").filter(Boolean);
-        var firstTag = tagsR[0] || "";
-        var dmR = firstTag.indexOf("|") >= 0 ? firstTag.split("|")[1] : firstTag;
+        var slotLbl = window.formatRecurringAddonSlotSummary
+          ? window.formatRecurringAddonSlotSummary(tr.dataset.cdTags || "")
+          : "";
         rows.push({
-          date: dmR || "—",
+          date: slotLbl || "\u2014",
           type: k === "recurring-addon" ? "Recurring Add-on" : "Recurring Discount",
-          amt: (k === "recurring-discount" ? "−" : "") + amt.toFixed(2),
-          notes: name + " (per period)" + (fq ? " · " + fq : ""),
+          amt: (k === "recurring-discount" ? "\u2212" : "") + amt.toFixed(2),
+          notes: name,
         });
       } else if (k === "recurring2") {
         var fs2 = tr.querySelector(".pay-row-freq, .pay-rec2-freq");
@@ -6228,21 +6549,12 @@
     rows.sort(function (a, b) {
       var da = pdm ? pdm(a.date) : null,
         db = pdm ? pdm(b.date) : null;
-      if (!da || !db) return 0;
-      return da - db;
+      if (da && db) return da - db;
+      return String(a.date).localeCompare(String(b.date));
     });
-    var html = "";
-    var dayTotals = {};
-    rows.forEach(function (r) {
-      html += "<tr><td>" + r.date + "</td><td>" + r.type + "</td><td>" + r.amt + "</td><td>" + r.notes + "</td></tr>";
-      var key = r.date;
-      var num = parseFloat(String(r.amt).replace("−", "-"));
-      if (!isNaN(num)) dayTotals[key] = (dayTotals[key] || 0) + num;
-    });
-    Object.keys(dayTotals).forEach(function (d) {
-      html += '<tr class="row-total"><td colspan="2">TOTAL · ' + d + "</td><td>" + dayTotals[d].toFixed(2) + "</td><td></td></tr>";
-    });
-    if (html) tbody.innerHTML = html;
+    var html = renderGroupedScheduleHtml(rows, pdm);
+    tbody.innerHTML = html || "";
+    if (html && window.lucide && lucide.createIcons) lucide.createIcons();
   };
 
   window.populateSchMandateSummary = function populateSchMandateSummary() {
@@ -6250,12 +6562,38 @@
       var el = document.getElementById(id);
       if (el) el.textContent = val || "—";
     }
-    var wa = document.getElementById("mnd-contactWhatsapp");
-    var mo = document.getElementById("mnd-contactMobile");
-    var contactParts = [];
-    if (wa && wa.value.trim()) contactParts.push("WhatsApp: " + wa.value.trim());
-    if (mo && mo.value.trim()) contactParts.push("Mobile: " + mo.value.trim());
-    set("sch-sum-mnd-contact", contactParts.length ? contactParts.join(" · ") : "");
+    var contactEl = document.getElementById("sch-sum-mnd-contact");
+    if (contactEl) {
+      var wa = document.getElementById("mnd-contactWhatsapp");
+      var mo = document.getElementById("mnd-contactMobile");
+      var em = document.getElementById("mnd-contactEmail");
+      var lines = [];
+      if (wa && wa.value.trim()) lines.push("WhatsApp: " + wa.value.trim());
+      if (mo && mo.value.trim()) lines.push("Mobile: " + mo.value.trim());
+      if (em && em.value.trim()) lines.push("Email: " + em.value.trim());
+      if (!lines.length) {
+        var draft =
+          window.DirectDebitCcPayTbl && DirectDebitCcPayTbl.readDraft
+            ? DirectDebitCcPayTbl.readDraft()
+            : null;
+        if (draft && draft.contact) {
+          var parts = draft.contact;
+          if (typeof parts === "string") parts = parts.split(" / ");
+          lines = parts;
+        }
+      }
+      contactEl.innerHTML = lines.length
+        ? lines
+            .map(function (line) {
+              return (
+                '<strong style="font-size:13px;color:#120C24;font-family:Inter,sans-serif;display:block;line-height:1.6;">' +
+                line +
+                "</strong>"
+              );
+            })
+            .join("")
+        : '<strong style="font-size:13px;color:#120C24;font-family:Inter,sans-serif;display:block;line-height:1.6;">—</strong>';
+    }
     set("sch-sum-mnd-freq", (document.getElementById("mnd-frequency") || {}).value);
     set("sch-sum-mnd-amt", (document.getElementById("mnd-amountType") || {}).value);
     var mi = document.getElementById("mnd-minAmount");
@@ -6401,9 +6739,10 @@ document.getElementById("mnd-mandateRef").addEventListener("input",function(){to
 
 function hideCD(){cdW.classList.add("hidden-field");wrapM.classList.add("hidden-field");wQ.classList.add("hidden-field");wH.classList.add("hidden-field");wA.classList.add("hidden-field");cdTxt.classList.add("hidden-field");}
 function syncCD(){var f=freqEl.value;hideCD();cdTxt.classList.remove("input-invalid");document.getElementById("mnd-err-cd").classList.remove("show");if(amtT.value==="Variable"){cdG.classList.add("hidden-field");return;}if(!f){cdG.classList.add("hidden-field");return;}if(f==="Daily"){cdG.classList.add("hidden-field");return;}cdG.classList.remove("hidden-field");if(window.updateCollectionDayUI){window.updateCollectionDayUI("mnd-cd");return;}if(f==="Weekly"){cdW.classList.remove("hidden-field");return;}if(f==="Monthly"){wrapM.classList.remove("hidden-field");return;}cdTxt.classList.remove("hidden-field");cdTxt.placeholder=f==="One-Time"?"DD/MM/YYYY":"Description";}
-freqEl.addEventListener("change",function(){syncCD();if(window.updateCollectionDayUI)window.updateCollectionDayUI("mnd-cd");if(amtT.value==="Variable"&&window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.onMandateFreqChange("mnd");markCustom();touch();});
+freqEl.addEventListener("change",function(){syncCD();if(window.updateCollectionDayUI)window.updateCollectionDayUI("mnd-cd");if(window.onFrequencyChange)window.onFrequencyChange("mnd");if(amtT.value==="Variable"&&window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.onMandateFreqChange("mnd");markCustom();touch();});
+freqEl.addEventListener("mousedown",function(e){if(this.disabled)e.preventDefault();},true);
 
-function cdVal(){var f=freqEl.value;var mndMode=window.__cdDayModes&&window.__cdDayModes["mnd-cd"]||"fixed";if(f==="Daily")return"\u2014";if(window.isLongPeriodFrequency&&window.isLongPeriodFrequency(f)){if(mndMode==="fixed")return"First day of the next period";var mndIn=document.getElementById("mnd-cd-daysAfterStartInput");return mndIn&&String(mndIn.value).trim()!==""?String(mndIn.value).trim()+" days after start":"";}if(f==="Weekly")return cdW.value||"";if(f==="Monthly")return cdMo.value?"Day "+cdMo.value:"";return(cdTxt.value||"").trim();}
+function cdVal(){var f=freqEl.value;var mndMode=window.__cdDayModes&&window.__cdDayModes["mnd-cd"]||"fixed";if(f==="Daily")return"\u2014";if(window.isLongPeriodFrequency&&window.isLongPeriodFrequency(f)){if(mndMode==="fixed"){var lpSel=document.getElementById("mnd-cd-longPeriodFixed");if(lpSel&&lpSel.options&&lpSel.options.length){var opt=lpSel.options[lpSel.selectedIndex];return opt?opt.text:"First day of the next Month";}return"First day of the next Month";}var mndIn=document.getElementById("mnd-cd-daysAfterStartInput");return mndIn&&String(mndIn.value).trim()!==""?String(mndIn.value).trim()+" days after start":"";}if(f==="Weekly")return cdW.value||"";if(f==="Monthly")return cdMo.value?"Day "+cdMo.value:"";return(cdTxt.value||"").trim();}
 
 var suppressDateSync=false;
 function addLifeStart(dt,y,m,d){var x=new Date(dt.getTime());x.setFullYear(x.getFullYear()+(y||0));x.setMonth(x.getMonth()+(m||0));x.setDate(x.getDate()+(d||0));return x;}
@@ -6451,7 +6790,10 @@ lifeY.value=String(Math.max(0,p.life.y||0));lifeM.value=String(p.life.m);lifeD.v
 cdMo.value="";cdQ_M.value="";cdQ_D.value="";cdHY_M.value="";cdHY_D.value="";cdA_D.value="";cdA_M.value="";cdTxt.value="";
 if(cd.t==="m"){cdMo.value=String(cd.day);}else if(cd.t==="w"){cdW.value=cd.w;}else if(cd.t==="q"){cdQ_M.value=String(cd.qm);cdQ_D.value=String(cd.qd);}else if(cd.t==="h"){cdHY_M.value=String(cd.hm);cdHY_D.value=String(cd.hd);}else if(cd.t==="a"){cdA_D.value=String(cd.d);cdA_M.value=String(cd.mo);}else if(cd.t==="o"){cdTxt.value=cd.txt;}
 suppressCaMirror=false;
-syncEndFromLife();touch();}
+syncEndFromLife();
+if(window.onFrequencyChange)window.onFrequencyChange("mnd");
+if(window.__mndMandateType==="plan"&&window.highlightLockedAmtType)window.highlightLockedAmtType();
+touch();}
 
 function markCustom(){}
 function touch(){}
@@ -6512,7 +6854,7 @@ setPayerToggle(true);
 syncMndPayerPaymentFields();
 }
 
-function validateContact(){var wa=document.getElementById("mnd-contactWhatsapp"),mo=document.getElementById("mnd-contactMobile"),em=document.getElementById("mnd-err-contact");var hasWa=wa&&wa.value.trim(),hasMo=mo&&mo.value.trim();if(!hasWa&&!hasMo){if(em){em.classList.add("show");em.style.setProperty("display","block","important");}if(wa)wa.classList.add("input-invalid");if(mo)mo.classList.add("input-invalid");return false;}if(em){em.classList.remove("show");em.style.removeProperty("display");}if(wa)wa.classList.remove("input-invalid");if(mo)mo.classList.remove("input-invalid");return true;}
+function validateContact(){var wa=document.getElementById("mnd-contactWhatsapp"),mo=document.getElementById("mnd-contactMobile"),email=document.getElementById("mnd-contactEmail"),err=document.getElementById("mnd-err-contact");var hasWa=wa&&wa.value.trim(),hasMo=mo&&mo.value.trim(),hasEmail=email&&email.value.trim();if(!hasWa&&!hasMo&&!hasEmail){if(err){err.classList.add("show");err.style.setProperty("display","block","important");}if(wa)wa.classList.add("input-invalid");if(mo)mo.classList.add("input-invalid");if(email)email.classList.add("input-invalid");return false;}if(err){err.classList.remove("show");err.style.removeProperty("display");}if(wa)wa.classList.remove("input-invalid");if(mo)mo.classList.remove("input-invalid");if(email)email.classList.remove("input-invalid");return true;}
 
 function validatePlanFields(){
 function showE(id,on){var el=document.getElementById("mnd-"+id);if(!el)return;if(on){el.classList.add("show");el.style.setProperty("display","block","important");}else{el.classList.remove("show");el.style.removeProperty("display");}}
@@ -6531,11 +6873,29 @@ alert("Please fill all required fields (see messages in red below).");
 }
 return ok&&mobOk;}
 
-["contactWhatsapp","contactMobile"].forEach(function(id){var el=document.getElementById("mnd-"+id);if(el)el.addEventListener("input",touch);});
+["contactWhatsapp","contactMobile","contactEmail"].forEach(function(id){var el=document.getElementById("mnd-"+id);if(el)el.addEventListener("input",touch);});
 document.getElementById("mnd-mandateForm").addEventListener("submit",function(e){e.preventDefault();});
-document.getElementById("mnd-btnSeeSchedule").addEventListener("click",function(){if(!validatePlanFields())return;var cParts=[];var wa=document.getElementById("mnd-contactWhatsapp"),mo=document.getElementById("mnd-contactMobile");if(wa&&wa.value.trim())cParts.push(wa.value.trim());if(mo&&mo.value.trim())cParts.push(mo.value.trim());if(window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.storeDraft("mnd",{from:"mnd",contact:cParts.join(" / ")});if(window.populateSchMandateSummary)window.populateSchMandateSummary();if(window.buildMandateSchedulePreview)window.buildMandateSchedulePreview();window.location.hash="#screen-sch";});
+document.getElementById("mnd-btnSeeSchedule").addEventListener("click",function(){
+  if(!validatePlanFields())return;
+  var cParts=[];
+  var wa=document.getElementById("mnd-contactWhatsapp"),mo=document.getElementById("mnd-contactMobile"),email=document.getElementById("mnd-contactEmail");
+  if(wa&&wa.value.trim())cParts.push("WhatsApp: "+wa.value.trim());
+  if(mo&&mo.value.trim())cParts.push("Mobile: "+mo.value.trim());
+  if(email&&email.value.trim())cParts.push("Email: "+email.value.trim());
+  if(window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.storeDraft("mnd",{from:"mnd",source:"mandate",contact:cParts});
+  if(window.setSchMode)window.setSchMode(true);
+  if(window.populateSchMandateSummary)window.populateSchMandateSummary();
+  if(window.buildMandateSchedulePreview){
+    window.buildMandateSchedulePreview();
+  }else if(window.DirectDebitCcSchedule&&window.DirectDebitCcSchedule.build){
+    window.DirectDebitCcSchedule.build("mnd");
+  }else{
+    console.error("Schedule builder not found");
+  }
+  window.location.hash="#screen-sch";
+});
 document.getElementById("mnd-btnCancel").addEventListener("click",function(){if(confirm("Discard changes?"))history.back();});
-document.getElementById("mnd-btnDraft").addEventListener("click",function(){var wa=document.getElementById("mnd-contactWhatsapp"),mo=document.getElementById("mnd-contactMobile");var touched=(wa&&wa.value.trim())||(mo&&mo.value.trim())||freqEl.value||caEl.value||miEl.value||maEl.value;if(!touched){alert("Enter at least one field to save a draft.");return;}alert("Draft saved (mock).");});
+document.getElementById("mnd-btnDraft").addEventListener("click",function(){var wa=document.getElementById("mnd-contactWhatsapp"),mo=document.getElementById("mnd-contactMobile"),email=document.getElementById("mnd-contactEmail");var touched=(wa&&wa.value.trim())||(mo&&mo.value.trim())||(email&&email.value.trim())||freqEl.value||caEl.value||miEl.value||maEl.value;if(!touched){alert("Enter at least one field to save a draft.");return;}alert("Draft saved (mock).");});
 ["mandateRef","eidFullName","eidNumber","ibanNumber","ccNumber","ccExpiry"].forEach(function(id){var el=document.getElementById("mnd-"+id);if(el)el.addEventListener("input",touch);});
 ["eidFile","ibanFile"].forEach(function(id){document.getElementById("mnd-"+id).addEventListener("change",touch);});
 
@@ -6578,6 +6938,7 @@ if(window.lucide&&lucide.createIcons)lucide.createIcons();
 },80);
 }
 setAmtMode(false);syncCD();
+if(window.onFrequencyChange)window.onFrequencyChange("mnd");
 if(window.setMandateType)window.setMandateType("custom");
 setTimeout(prefillMndDemo,50);
 if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons();}catch(iconsErr){}}
@@ -6638,9 +6999,40 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         collectionDayWeekly.appendChild(opt);
       });
 
+      var editParam = new URLSearchParams(window.location.search).get("edit");
+      var planToEdit = findPlanById(editParam);
+      var pp001IsEditMode = !!(editParam && planToEdit);
+
+      function setAppliedFromMinDate() {
+        var field = document.getElementById("pp001-appliedFrom");
+        if (!field) return;
+        var today = new Date();
+        var yyyy = today.getFullYear();
+        var mm = String(today.getMonth() + 1).padStart(2, "0");
+        var dd = String(today.getDate()).padStart(2, "0");
+        field.min = yyyy + "-" + mm + "-" + dd;
+      }
+
+      function syncPp001EditAppliedFromFields() {
+        var appliedFromGroup = document.getElementById("pp001-appliedFromGroup");
+        var expectedIncreaseGroup = document.getElementById("pp001-expectedIncreaseGroup");
+        if (pp001IsEditMode) {
+          if (appliedFromGroup) appliedFromGroup.style.display = "block";
+          if (expectedIncreaseGroup) expectedIncreaseGroup.style.display = "none";
+          setAppliedFromMinDate();
+        } else {
+          if (appliedFromGroup) appliedFromGroup.style.display = "none";
+          syncPp001ExpectedIncrease();
+        }
+      }
+
       function syncPp001ExpectedIncrease() {
         var g = document.getElementById("pp001-expectedIncreaseGroup");
         if (!g) return;
+        if (pp001IsEditMode) {
+          g.style.display = "none";
+          return;
+        }
         var isVar = amountType.value === "Variable";
         g.style.display = isVar ? "block" : "none";
         if (!isVar) {
@@ -6746,8 +7138,16 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
       frequencyEl.addEventListener("change", function () {
         syncCollectionDayUI();
         if (window.updateCollectionDayUI) window.updateCollectionDayUI("pp001-cd");
+        if (window.onFrequencyChange) window.onFrequencyChange("pp001");
         if (amountType.value === "Variable" && window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.onMandateFreqChange("pp001");
       });
+      frequencyEl.addEventListener(
+        "mousedown",
+        function (e) {
+          if (this.disabled) e.preventDefault();
+        },
+        true
+      );
 
       function parseMoney(s) {
         if (!s || !String(s).trim()) return NaN;
@@ -6764,7 +7164,14 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         var ppMode = (window.__cdDayModes && window.__cdDayModes["pp001-cd"]) || "fixed";
         if (f === "Daily") return "\u2014";
         if (window.isLongPeriodFrequency && window.isLongPeriodFrequency(f)) {
-          if (ppMode === "fixed") return "First day of the next period";
+          if (ppMode === "fixed") {
+            var lpSel = document.getElementById("pp001-cd-longPeriodFixed");
+            if (lpSel && lpSel.options && lpSel.options.length) {
+              var opt = lpSel.options[lpSel.selectedIndex];
+              return opt ? opt.text : "First day of the next Month";
+            }
+            return "First day of the next Month";
+          }
           var ppIn = document.getElementById("pp001-cd-daysAfterStartInput");
           return ppIn && String(ppIn.value).trim() !== "" ? String(ppIn.value).trim() + " days after start" : "";
         }
@@ -6862,6 +7269,7 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         collectionDay.value = "";
         fillCollectionDayFromPlan(plan);
         suppressCaMirror = false;
+        if (window.onFrequencyChange) window.onFrequencyChange("pp001");
       }
 
       function validate() {
@@ -6911,6 +7319,19 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         document.getElementById("pp001-lifeMonths").value = String(lm);
         if (ly === 0 && lm === 0) { show("err-lifetime", true); ok = false; } else { show("err-lifetime", false); }
 
+        if (editParam) {
+          var appliedFrom = document.getElementById("pp001-appliedFrom");
+          var appliedFromErr = document.getElementById("pp001-err-appliedFrom");
+          if (!appliedFrom || !appliedFrom.value) {
+            if (appliedFromErr) appliedFromErr.classList.add("show");
+            if (appliedFrom) appliedFrom.classList.add("input-invalid");
+            ok = false;
+          } else {
+            if (appliedFromErr) appliedFromErr.classList.remove("show");
+            if (appliedFrom) appliedFrom.classList.remove("input-invalid");
+          }
+        }
+
         return ok;
       }
 
@@ -6921,6 +7342,19 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
           if (id === "maxAmount" && window.calculateEffectiveMax) calculateEffectiveMax("pp001");
         });
       });
+      var appliedFromEl = document.getElementById("pp001-appliedFrom");
+      if (appliedFromEl) {
+        appliedFromEl.addEventListener("input", function () {
+          var err = document.getElementById("pp001-err-appliedFrom");
+          if (err) err.classList.remove("show");
+          appliedFromEl.classList.remove("input-invalid");
+        });
+        appliedFromEl.addEventListener("change", function () {
+          var err = document.getElementById("pp001-err-appliedFrom");
+          if (err) err.classList.remove("show");
+          appliedFromEl.classList.remove("input-invalid");
+        });
+      }
       document.getElementById("pp001-lifeYears").addEventListener("input", function () {
         var r = parseInt(document.getElementById("pp001-lifeYears").value, 10);
         if (!isNaN(r)) document.getElementById("pp001-lifeYears").value = String(Math.max(0, r));
@@ -6954,7 +7388,6 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
           DirectDebitCcPayTbl.storeDraft("pp001", draftExtra);
         }
         if (window.populateSchPlanSummary) window.populateSchPlanSummary();
-        if (window.buildPlanSchedulePreview) window.buildPlanSchedulePreview();
         window.location.hash = "#screen-sch";
       });
       document.getElementById("pp001-btnSeeSchedule").addEventListener("click", function () {
@@ -6972,22 +7405,21 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
           DirectDebitCcPayTbl.storeDraft("pp001", draftExtra2);
         }
         if (window.populateSchPlanSummary) window.populateSchPlanSummary();
-        if (window.buildPlanSchedulePreview) window.buildPlanSchedulePreview();
         window.location.hash = "#screen-sch";
       });
       document.getElementById("pp001-btnCancel").addEventListener("click", function () {
         window.location.href = "#screen-pp002";
       });
 
-      var editParam = new URLSearchParams(window.location.search).get("edit");
-      var planToEdit = findPlanById(editParam);
       if (planToEdit) {
         editingOriginalName = planToEdit.planName;
         fillFormFromPlan(planToEdit);
         document.getElementById("pp001-pageTitle").textContent = "Edit payment plan";
         var bca = document.getElementById("pp001-breadcrumbAction");
         if (bca) bca.textContent = "Edit payment plan";
+        syncPp001EditAppliedFromFields();
       } else {
+        syncPp001EditAppliedFromFields();
         if (editParam && history.replaceState) {
           try {
             history.replaceState({}, "", "#screen-pp001");
@@ -7041,6 +7473,8 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
           }
         });
       })();
+      syncCollectionDayUI();
+      if (window.onFrequencyChange) window.onFrequencyChange("pp001");
       lucide.createIcons();
     })();
 
@@ -7064,6 +7498,7 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
     if (sumPlan) sumPlan.classList.toggle("hidden-field", !!mandate);
     if (sumMnd) sumMnd.classList.toggle("hidden-field", !mandate);
   }
+  window.setSchMode = setSchMode;
   if (tPlan)
     tPlan.addEventListener("click", function () {
       setSchMode(false);
@@ -7074,18 +7509,22 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
     });
 
   function hydrateFromDraft() {
-    var d = window.DirectDebitCcPayTbl && DirectDebitCcPayTbl.readDraft ? DirectDebitCcPayTbl.readDraft() : null;
+    var d =
+      window.DirectDebitCcPayTbl && DirectDebitCcPayTbl.readDraft
+        ? DirectDebitCcPayTbl.readDraft()
+        : null;
+
     if (d && d.source === "mandate") {
       setSchMode(true);
+      var mndTbody = document.getElementById("sch-tbody-mandate");
+      if (mndTbody) mndTbody.innerHTML = "";
       if (window.populateSchMandateSummary) window.populateSchMandateSummary();
       if (window.buildMandateSchedulePreview) window.buildMandateSchedulePreview();
     } else {
       setSchMode(false);
+      var planTbody = document.getElementById("sch-tbody-plan");
+      if (planTbody) planTbody.innerHTML = "";
       if (window.populateSchPlanSummary) window.populateSchPlanSummary();
-      else {
-        var pn = document.getElementById("sch-sum-plan-name");
-        if (pn && d && d.planName) pn.textContent = d.planName;
-      }
       if (window.buildPlanSchedulePreview) window.buildPlanSchedulePreview();
     }
   }
