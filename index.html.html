@@ -2295,8 +2295,14 @@
                   <div class="form-group" style="flex:1; margin-bottom:0;" id="pp001-wrapMax">
                     <label for="pp001-maxAmount">Max amount (AED) <span class="req">*</span></label>
                     <input class="input" id="pp001-maxAmount" name="maxAmount" inputmode="decimal" placeholder="0.00" />
-                    <p style="font-size:11px;color:#4E465E;font-family:Inter,sans-serif;margin-top:4px;">
+                    <p id="pp001-max-default-note" style="font-size:11px;color:#4E465E;font-family:Inter,sans-serif;margin-top:4px;">
                       Auto-calculated from your payment table. You can increase this but not below the calculated value.
+                    </p>
+                    <p id="pp001-max-edit-note" style="display:none;font-size:11px;color:#4E465E;font-family:Inter,sans-serif;margin-top:4px;line-height:1.5;">
+                      <span style="display:inline-flex;align-items:center;gap:4px;">
+                        <i data-lucide="lock" style="width:12px;height:12px;color:#9CA3AF;flex-shrink:0;"></i>
+                        Auto-calculated. Can only increase above the current approved value.
+                      </span>
                     </p>
                     <p id="pp001-max-warning" style="font-size:12px;color:#FF6B68;font-family:Inter,sans-serif;margin-top:5px;display:none;line-height:1.5;"></p>
                     <div class="field-error" id="pp001-err-maxAmount">Max must be ≥ min.</div>
@@ -2360,7 +2366,7 @@
                 </div>
                 <div class="form-group" id="pp001-appliedFromGroup" style="display:none;">
                   <label for="pp001-appliedFrom">
-                    Applied From <span class="req">*</span>
+                    Effective From <span class="req">*</span>
                   </label>
                   <p style="font-size:12px;color:#4E465E;font-family:Inter,sans-serif;margin:4px 0 8px;">
                     Choose the date from which these changes will take effect on existing mandates.
@@ -2369,7 +2375,7 @@
                     class="input"
                     type="date"
                     id="pp001-appliedFrom"
-                    name="appliedFrom"
+                    name="effectiveFrom"
                   />
                   <div class="field-error" id="pp001-err-appliedFrom">
                     Please select a date for when the changes will be applied.
@@ -2981,48 +2987,100 @@
     document.body.appendChild(overlay);
   };
 
-  w.handleOptionA = function () {
-    var o = document.getElementById("optionABOverlay");
-    if (o) o.remove();
-    w.showSuccessDialog(
-      "Changes have been applied. The current mandates have been cancelled and new ones are being created with the updated terms.",
-      finishEditPlanFlow
-    );
-  };
-
-  w.handleOptionB = function () {
-    var o = document.getElementById("optionABOverlay");
-    if (o) o.remove();
-    w.showSuccessDialog(
-      "Changes have been applied. New mandates have been sent to the bank and the current ones will be cancelled automatically once they are approved.",
-      finishEditPlanFlow
-    );
-  };
-
-  w.showOptionABDialog = function () {
-    var prev = document.getElementById("applyChangesOverlay");
-    if (prev) prev.remove();
+  function applyChangesModalShell(innerHtml) {
     var overlay = document.createElement("div");
-    overlay.id = "optionABOverlay";
+    overlay.id = "applyChangesOverlay";
     overlay.style.cssText =
-      "position:fixed; inset:0; z-index:99999; background:rgba(18,12,36,0.5); display:flex; align-items:center; justify-content:center; padding:16px;";
+      "position:fixed;inset:0;z-index:99999;background:#00000066;display:flex;align-items:center;justify-content:center;padding:16px;";
     overlay.innerHTML =
-      '<div style="background:white; border-radius:16px; padding:28px; max-width:480px; width:100%; box-shadow:0 8px 40px rgba(18,12,36,0.15); font-family:Inter,sans-serif;">' +
-      '<h3 style="font-size:17px; font-weight:700; color:#120C24; margin:0 0 10px;">How would you like to update the existing mandates?</h3>' +
-      '<p style="font-size:13px; color:#4E465E; line-height:1.6; margin:0 0 22px;">New mandates will need to be issued to apply the updated terms. Choose how you would like to handle the transition.</p>' +
-      '<div style="display:flex; flex-direction:column; gap:12px;">' +
-      '<div style="border:1.5px solid #F2F4F7; border-radius:12px; padding:16px;"><p style="font-size:13px; font-weight:700; color:#120C24; margin:0 0 6px;">Option A — Cancel and reissue immediately</p><p style="font-size:12px; color:#4E465E; line-height:1.5; margin:0 0 12px;">The current mandates will be cancelled right away and new ones will be created with the updated terms. Note: there may be a short gap in collections while the new mandates are being approved by the bank.</p><button type="button" onclick="handleOptionA()" style="padding:10px 20px; border-radius:10px; background:#7A5CFF; color:white; font-size:13px; font-weight:600; border:none; cursor:pointer; font-family:Inter,sans-serif;">Choose Option A</button></div>' +
-      '<div style="border:1.5px solid #F2F4F7; border-radius:12px; padding:16px;"><p style="font-size:13px; font-weight:700; color:#120C24; margin:0 0 6px;">Option B — Issue new mandates first, then cancel</p><p style="font-size:12px; color:#4E465E; line-height:1.5; margin:0 0 12px;">New mandates will be sent to the bank immediately. The current mandates will only be cancelled once the new ones are approved — so collections continue without interruption during the transition.</p><button type="button" onclick="handleOptionB()" style="padding:10px 20px; border-radius:10px; background:#7A5CFF; color:white; font-size:13px; font-weight:600; border:none; cursor:pointer; font-family:Inter,sans-serif;">Choose Option B</button></div></div>' +
-      '<button type="button" class="option-ab-cancel" style="width:100%; margin-top:16px; padding:10px; border-radius:10px; background:none; border:1.5px solid #F2F4F7; color:#4E465E; font-size:13px; font-weight:600; cursor:pointer; font-family:Inter,sans-serif;">Cancel — I\'ll decide later</button></div>';
-    overlay.querySelector(".option-ab-cancel").addEventListener("click", function () {
-      w.__ddccSchSaveNewPending = false;
-      overlay.remove();
+      '<div class="apply-changes-modal" style="background:white;border-radius:14px;padding:28px;max-width:560px;width:100%;box-shadow:0 8px 40px rgba(18,12,36,0.15);font-family:Inter,sans-serif;">' +
+      innerHtml +
+      "</div>";
+    return overlay;
+  }
+
+  w.confirmHardApplyCancelFirst = function () {
+    var o = document.getElementById("applyChangesOverlay");
+    if (o) o.remove();
+    w.showSuccessDialog(
+      "Changes are being applied. New mandates will be issued for existing payers.",
+      finishEditPlanFlow
+    );
+  };
+
+  w.confirmHardApplyNewFirst = function () {
+    var o = document.getElementById("applyChangesOverlay");
+    if (o) o.remove();
+    w.showSuccessDialog(
+      "Changes are being applied. New mandates will be issued for existing payers.",
+      finishEditPlanFlow
+    );
+  };
+
+  w.showHardApplyApproachStep = function () {
+    var overlay = document.getElementById("applyChangesOverlay");
+    if (!overlay) return;
+    var modal = overlay.querySelector(".apply-changes-modal");
+    if (!modal) return;
+    modal.innerHTML =
+      '<h3 style="font-size:17px;font-weight:700;color:#120C24;margin:0 0 16px;">Apply Changes</h3>' +
+      '<div style="display:flex;flex-direction:column;gap:12px;">' +
+      '<div style="border:1px solid #EAE5F4;border-radius:10px;padding:16px;">' +
+      '<p style="font-size:12px;color:#4E465E;line-height:1.6;margin:0 0 12px;">Cancel existing mandates and reissue new ones. Any missed collections during the issuance period will be collected automatically once the new mandates are active.</p>' +
+      '<button type="button" class="hard-apply-cancel-first" style="padding:10px 20px;border-radius:10px;background:#7A5CFF;color:white;font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:Inter,sans-serif;">Confirm</button></div>' +
+      '<div style="border:1px solid #EAE5F4;border-radius:10px;padding:16px;">' +
+      '<p style="font-size:12px;color:#4E465E;line-height:1.6;margin:0 0 12px;">Issue new mandates first, then cancel existing ones. The collection difference during the transition period will be recovered automatically once the new mandates are active.</p>' +
+      '<button type="button" class="hard-apply-new-first" style="padding:10px 20px;border-radius:10px;background:#7A5CFF;color:white;font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:Inter,sans-serif;">Confirm</button></div></div>';
+    modal.querySelector(".hard-apply-cancel-first").addEventListener("click", function () {
+      w.confirmHardApplyCancelFirst();
     });
-    overlay.addEventListener("click", function (e) {
-      if (e.target === overlay) {
-        w.__ddccSchSaveNewPending = false;
-        overlay.remove();
-      }
+    modal.querySelector(".hard-apply-new-first").addEventListener("click", function () {
+      w.confirmHardApplyNewFirst();
+    });
+  };
+
+  w.showSoftApplyChangesDialog = function (planName) {
+    var existing = document.getElementById("applyChangesOverlay");
+    if (existing) existing.remove();
+    var overlay = applyChangesModalShell(
+      '<h3 style="font-size:17px;font-weight:700;color:#120C24;margin:0 0 12px;">Apply Changes</h3>' +
+        '<div style="border-left:4px solid #22C55E;padding:12px 14px;margin:0 0 20px;background:#F8F7FB;border-radius:0 8px 8px 0;">' +
+        '<p style="font-size:13px;color:#4E465E;line-height:1.6;margin:0;font-style:italic;">These changes can be applied directly to your existing mandates — no new mandates need to be issued.</p></div>' +
+        '<div style="display:flex;flex-direction:column;gap:10px;">' +
+        '<button type="button" class="soft-apply-existing" style="width:100%;padding:12px 16px;border-radius:10px;background:#7A5CFF;color:white;font-size:14px;font-weight:600;border:none;cursor:pointer;font-family:Inter,sans-serif;">Apply to existing mandates</button>' +
+        '<button type="button" class="soft-apply-new-only" style="width:100%;padding:12px 16px;border-radius:10px;background:white;color:#7A5CFF;font-size:14px;font-weight:600;border:1.5px solid #EAE5F4;cursor:pointer;font-family:Inter,sans-serif;">New mandates only</button></div>'
+    );
+    overlay.dataset.planName = planName || "";
+    overlay.querySelector(".soft-apply-existing").addEventListener("click", function () {
+      overlay.remove();
+      w.showSuccessDialog(
+        "Changes applied successfully. They will take effect on the Effective From date.",
+        finishEditPlanFlow
+      );
+    });
+    overlay.querySelector(".soft-apply-new-only").addEventListener("click", function () {
+      w.handleNewVersionOnly(planName);
+    });
+    document.body.appendChild(overlay);
+  };
+
+  w.showHardApplyChangesDialog = function (planName) {
+    var existing = document.getElementById("applyChangesOverlay");
+    if (existing) existing.remove();
+    var overlay = applyChangesModalShell(
+      '<h3 style="font-size:17px;font-weight:700;color:#120C24;margin:0 0 12px;">Apply Changes</h3>' +
+        '<div style="border-left:4px solid #F59E0B;padding:12px 14px;margin:0 0 20px;background:#F8F7FB;border-radius:0 8px 8px 0;">' +
+        '<p style="font-size:13px;color:#4E465E;line-height:1.6;margin:0;font-style:italic;">These changes affect the core terms of the mandate. New mandates will need to be issued for payers currently on this plan.</p></div>' +
+        '<div style="display:flex;flex-direction:column;gap:10px;">' +
+        '<button type="button" class="hard-apply-new-only" style="width:100%;padding:12px 16px;border-radius:10px;background:white;color:#7A5CFF;font-size:14px;font-weight:600;border:1.5px solid #EAE5F4;cursor:pointer;font-family:Inter,sans-serif;">New mandates only</button>' +
+        '<button type="button" class="hard-apply-existing" style="width:100%;padding:12px 16px;border-radius:10px;background:#7A5CFF;color:white;font-size:14px;font-weight:600;border:none;cursor:pointer;font-family:Inter,sans-serif;">Apply to existing mandates</button></div>'
+    );
+    overlay.dataset.planName = planName || "";
+    overlay.querySelector(".hard-apply-new-only").addEventListener("click", function () {
+      w.handleNewVersionOnly(planName);
+    });
+    overlay.querySelector(".hard-apply-existing").addEventListener("click", function () {
+      w.showHardApplyApproachStep();
     });
     document.body.appendChild(overlay);
   };
@@ -3069,40 +3127,13 @@
   };
 
   w.showApplyChangesDialog = function (planName) {
-    var existing = document.getElementById("applyChangesOverlay");
-    if (existing) existing.remove();
-    var overlay = document.createElement("div");
-    overlay.id = "applyChangesOverlay";
-    overlay.dataset.planName = planName || "";
-    overlay.style.cssText =
-      "position:fixed; inset:0; z-index:99999; background:rgba(18,12,36,0.5); display:flex; align-items:center; justify-content:center; padding:16px;";
-    overlay.innerHTML =
-      '<div style="background:white; border-radius:16px; padding:28px; max-width:460px; width:100%; box-shadow:0 8px 40px rgba(18,12,36,0.15); font-family:Inter,sans-serif;">' +
-      '<h3 style="font-size:17px; font-weight:700; color:#120C24; margin:0 0 10px;">Apply Changes to Mandates</h3>' +
-      '<p style="font-size:13px; color:#4E465E; line-height:1.6; margin:0 0 24px;">Your plan has been updated. Would you like to apply these changes to the existing mandates already linked to this plan, or only apply them to new mandates created from this plan going forward?</p>' +
-      '<div style="display:flex; flex-direction:column; gap:10px;">' +
-      '<button type="button" class="apply-existing-btn" style="width:100%; padding:14px 16px; border-radius:12px; background:#7A5CFF; color:white; font-size:14px; font-weight:600; border:none; cursor:pointer; text-align:left; font-family:Inter,sans-serif;">Apply to existing mandates<div style="font-size:11px; font-weight:400; opacity:0.85; margin-top:3px;">Update the mandates already linked to this plan</div></button>' +
-      '<button type="button" class="apply-new-only-btn" style="width:100%; padding:14px 16px; border-radius:12px; background:#F3F0FF; color:#7A5CFF; font-size:14px; font-weight:600; border:none; cursor:pointer; text-align:left; font-family:Inter,sans-serif;">New mandates only<div style="font-size:11px; font-weight:400; opacity:0.8; margin-top:3px;">Keep the current mandates as they are — the updated plan will only apply to new mandates going forward</div></button>' +
-      '<button type="button" class="apply-close-btn" style="width:100%; margin-top:4px; padding:10px; border-radius:10px; background:none; border:1.5px solid #F2F4F7; color:#4E465E; font-size:13px; font-weight:600; cursor:pointer; font-family:Inter,sans-serif;">Close</button></div></div>';
-    overlay.querySelector(".apply-existing-btn").addEventListener("click", function () {
-      w.showOptionABDialog();
-    });
-    overlay.querySelector(".apply-new-only-btn").addEventListener("click", function () {
-      w.handleNewVersionOnly(planName);
-    });
-    overlay.querySelector(".apply-close-btn").addEventListener("click", function () {
-      w.__ddccSchSaveNewPending = false;
-      overlay.remove();
-      finishEditPlanFlow();
-    });
-    overlay.addEventListener("click", function (e) {
-      if (e.target === overlay) {
-        w.__ddccSchSaveNewPending = false;
-        overlay.remove();
-        finishEditPlanFlow();
-      }
-    });
-    document.body.appendChild(overlay);
+    var changeType =
+      typeof window.classifyPp001Changes === "function" ? window.classifyPp001Changes() : "soft";
+    if (changeType === "hard") {
+      w.showHardApplyChangesDialog(planName);
+    } else {
+      w.showSoftApplyChangesDialog(planName);
+    }
   };
 
 })(window);
@@ -6161,13 +6192,37 @@
 
       maxField.dataset.calculatedMin = calculatedMax.toFixed(2);
 
-      if (calculatedMax > 0) {
+      var isPp001Edit = pfx === "pp001" && window.__pp001IsEditMode;
+      if (isPp001Edit) {
+        var savedMax = parseFloat(maxField.dataset.savedMax) || 0;
+        var displayMax = Math.max(savedMax, calculatedMax);
+        if (displayMax > 0) {
+          maxField.value = displayMax.toFixed(2);
+        } else if (savedMax > 0) {
+          maxField.value = savedMax.toFixed(2);
+        } else {
+          maxField.value = "";
+        }
+        maxField.readOnly = true;
+        maxField.style.background = "#F8F7FB";
+        maxField.style.color = "#4E465E";
+        maxField.style.cursor = "not-allowed";
+      } else if (calculatedMax > 0) {
         maxField.value = calculatedMax.toFixed(2);
+        maxField.readOnly = false;
+        maxField.style.background = "";
+        maxField.style.color = "";
+        maxField.style.cursor = "";
       } else {
         maxField.value = "";
+        maxField.readOnly = false;
+        maxField.style.background = "";
+        maxField.style.color = "";
+        maxField.style.cursor = "";
       }
 
       maxField.onblur = function () {
+        if (window.__pp001IsEditMode && pfx === "pp001") return;
         var entered = parseFloat(this.value) || 0;
         var floor = parseFloat(this.dataset.calculatedMin) || 0;
         var warn = document.getElementById(pfx + "-max-warning");
@@ -6185,11 +6240,6 @@
           this.style.borderColor = "";
         }
       };
-
-      maxField.readOnly = false;
-      maxField.style.background = "";
-      maxField.style.color = "";
-      maxField.style.cursor = "";
     });
 
     if (window.calculateEffectiveMax) {
@@ -7002,16 +7052,116 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
       var editParam = new URLSearchParams(window.location.search).get("edit");
       var planToEdit = findPlanById(editParam);
       var pp001IsEditMode = !!(editParam && planToEdit);
+      window.__pp001IsEditMode = pp001IsEditMode;
 
-      function setAppliedFromMinDate() {
+      function setEffectiveFromDefault() {
         var field = document.getElementById("pp001-appliedFrom");
         if (!field) return;
-        var today = new Date();
-        var yyyy = today.getFullYear();
-        var mm = String(today.getMonth() + 1).padStart(2, "0");
-        var dd = String(today.getDate()).padStart(2, "0");
-        field.min = yyyy + "-" + mm + "-" + dd;
+        var today = new Date().toISOString().split("T")[0];
+        field.min = today;
+        field.value = today;
       }
+
+      function getPp001PayTableSnapshot() {
+        var rows = [];
+        document.querySelectorAll("#pp001-payTableBody tr").forEach(function (tr) {
+          var k = tr.getAttribute("data-pay-kind") || "";
+          var am = tr.querySelector(".pay-amt");
+          var nm = tr.querySelector(".pay-name");
+          rows.push({
+            kind: k,
+            amt: am ? String(am.value || "").trim() : "",
+            name: nm ? String(nm.value || "").trim() : "",
+          });
+        });
+        return JSON.stringify(rows);
+      }
+
+      function setupPp001EditMaxField(plan) {
+        if (!pp001IsEditMode || !plan || plan.amountType !== "Variable") return;
+        var saved =
+          plan.maxAmount != null && !isNaN(Number(plan.maxAmount))
+            ? Number(plan.maxAmount)
+            : parseMoney(maxAmountEl.value) || 0;
+        maxAmountEl.dataset.savedMax = saved.toFixed(2);
+        maxAmountEl.dataset.original = saved.toFixed(2);
+        maxAmountEl.readOnly = true;
+        maxAmountEl.style.background = "#F8F7FB";
+        maxAmountEl.style.cursor = "not-allowed";
+        var defNote = document.getElementById("pp001-max-default-note");
+        var editNote = document.getElementById("pp001-max-edit-note");
+        if (defNote) defNote.style.display = "none";
+        if (editNote) editNote.style.display = "block";
+      }
+
+      function capturePp001EditOriginals(plan) {
+        var ly = parseInt(document.getElementById("pp001-lifeYears").value, 10) || 0;
+        var lm = parseInt(document.getElementById("pp001-lifeMonths").value, 10) || 0;
+        var minVal = parseMoney(document.getElementById("pp001-minAmount").value);
+        var maxVal =
+          plan.maxAmount != null && !isNaN(Number(plan.maxAmount))
+            ? Number(plan.maxAmount)
+            : parseMoney(maxAmountEl.value) || 0;
+        window.__pp001EditOriginals = {
+          planName: plan.planName,
+          frequency: plan.frequency,
+          lifeYears: ly,
+          lifeMonths: lm,
+          collectionDay: collectionDayValue(),
+          minAmount: minVal,
+          maxAmount: maxVal,
+          savedMax: maxVal,
+          payRowCount: document.querySelectorAll("#pp001-payTableBody tr").length,
+          payTableSnapshot: getPp001PayTableSnapshot(),
+        };
+        [
+          ["pp001-planName", plan.planName],
+          ["pp001-frequency", plan.frequency],
+          ["pp001-lifeYears", String(ly)],
+          ["pp001-lifeMonths", String(lm)],
+          ["pp001-minAmount", plan.minAmount != null ? String(plan.minAmount) : ""],
+          ["pp001-maxAmount", maxVal != null ? String(maxVal) : ""],
+        ].forEach(function (pair) {
+          var el = document.getElementById(pair[0]);
+          if (el) el.dataset.original = pair[1];
+        });
+        setupPp001EditMaxField(plan);
+        setTimeout(function () {
+          if (!window.__pp001EditOriginals) return;
+          window.__pp001EditOriginals.payRowCount = document.querySelectorAll("#pp001-payTableBody tr").length;
+          window.__pp001EditOriginals.payTableSnapshot = getPp001PayTableSnapshot();
+          window.__pp001EditOriginals.minAmount = parseMoney(document.getElementById("pp001-minAmount").value);
+          if (window.recalculateMax) window.recalculateMax("pp001");
+          if (window.lucide && lucide.createIcons) lucide.createIcons();
+        }, 150);
+      }
+
+      window.classifyPp001Changes = function classifyPp001Changes() {
+        var o = window.__pp001EditOriginals;
+        if (!o) return "soft";
+        var freq = document.getElementById("pp001-frequency").value;
+        var ly = parseInt(document.getElementById("pp001-lifeYears").value, 10) || 0;
+        var lm = parseInt(document.getElementById("pp001-lifeMonths").value, 10) || 0;
+        var cd = collectionDayValue();
+        var currentMax = parseMoney(maxAmountEl.value);
+        var savedMax = parseFloat(o.savedMax) || 0;
+        var currentMin = parseMoney(document.getElementById("pp001-minAmount").value);
+        var rowCount = document.querySelectorAll("#pp001-payTableBody tr").length;
+        var snap = getPp001PayTableSnapshot();
+
+        if (freq !== o.frequency) return "hard";
+        if (ly !== o.lifeYears || lm !== o.lifeMonths) return "hard";
+        if (currentMax > savedMax + 0.001) return "hard";
+        if (rowCount !== o.payRowCount && (currentMax !== o.maxAmount || currentMin !== o.minAmount)) {
+          return "hard";
+        }
+
+        return "soft";
+      };
+
+      window.getPp001CollectionDayValue = collectionDayValue;
+      window.getPp001PayTableSnapshot = getPp001PayTableSnapshot;
+      window.capturePp001EditOriginals = capturePp001EditOriginals;
 
       function syncPp001EditAppliedFromFields() {
         var appliedFromGroup = document.getElementById("pp001-appliedFromGroup");
@@ -7019,7 +7169,7 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         if (pp001IsEditMode) {
           if (appliedFromGroup) appliedFromGroup.style.display = "block";
           if (expectedIncreaseGroup) expectedIncreaseGroup.style.display = "none";
-          setAppliedFromMinDate();
+          setEffectiveFromDefault();
         } else {
           if (appliedFromGroup) appliedFromGroup.style.display = "none";
           syncPp001ExpectedIncrease();
@@ -7418,7 +7568,9 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         var bca = document.getElementById("pp001-breadcrumbAction");
         if (bca) bca.textContent = "Edit payment plan";
         syncPp001EditAppliedFromFields();
+        capturePp001EditOriginals(planToEdit);
       } else {
+        window.__pp001IsEditMode = false;
         syncPp001EditAppliedFromFields();
         if (editParam && history.replaceState) {
           try {
