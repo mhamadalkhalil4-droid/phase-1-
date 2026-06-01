@@ -2961,6 +2961,74 @@
   }
   w.finishEditPlanFlow = finishEditPlanFlow;
 
+  w.showDestructiveConfirmDialog = function (opts) {
+    opts = opts || {};
+    var existing = document.getElementById("ddccDestructiveConfirmOverlay");
+    if (existing) existing.remove();
+
+    var overlay = document.createElement("div");
+    overlay.id = "ddccDestructiveConfirmOverlay";
+    overlay.style.cssText =
+      "position:fixed;inset:0;z-index:99999;background:#00000066;display:flex;align-items:center;justify-content:center;padding:16px;";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+
+    var modal = document.createElement("div");
+    modal.style.cssText =
+      "background:white;border-radius:14px;padding:28px;max-width:480px;width:100%;box-shadow:0 8px 40px rgba(18,12,36,0.15);font-family:Inter,sans-serif;";
+
+    var titleEl = document.createElement("h3");
+    titleEl.style.cssText = "font-weight:700;font-size:16px;color:#120C24;margin:0;";
+    titleEl.textContent = opts.title || "";
+
+    var messageEl = document.createElement("p");
+    messageEl.style.cssText = "font-size:14px;color:#4E465E;margin-top:8px;margin-bottom:0;line-height:1.5;";
+    messageEl.textContent = opts.message || "";
+
+    var actions = document.createElement("div");
+    actions.style.cssText = "display:flex;justify-content:flex-end;gap:12px;margin-top:24px;";
+
+    var confirmBtn = document.createElement("button");
+    confirmBtn.type = "button";
+    confirmBtn.style.cssText =
+      "background:#FF6B68;color:white;border-radius:8px;padding:10px 20px;font-weight:600;border:none;cursor:pointer;font-family:Inter,sans-serif;font-size:14px;";
+    confirmBtn.textContent = opts.confirmLabel || "Confirm";
+
+    var cancelBtn = document.createElement("button");
+    cancelBtn.type = "button";
+    cancelBtn.style.cssText =
+      "background:white;color:#4E465E;border:1.5px solid #EAE5F4;border-radius:8px;padding:10px 20px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;font-size:14px;";
+    cancelBtn.textContent = opts.cancelLabel || "Cancel";
+
+    function closeDialog() {
+      document.removeEventListener("keydown", onKeydown);
+      overlay.remove();
+    }
+
+    function onKeydown(e) {
+      if (e.key === "Escape") closeDialog();
+    }
+
+    cancelBtn.addEventListener("click", closeDialog);
+    confirmBtn.addEventListener("click", function () {
+      closeDialog();
+      if (typeof opts.onConfirm === "function") opts.onConfirm();
+    });
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) closeDialog();
+    });
+
+    document.addEventListener("keydown", onKeydown);
+    actions.appendChild(confirmBtn);
+    actions.appendChild(cancelBtn);
+    modal.appendChild(titleEl);
+    modal.appendChild(messageEl);
+    modal.appendChild(actions);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+    cancelBtn.focus();
+  };
+
   w.showSuccessDialog = function (message, onDone) {
     var overlay = document.createElement("div");
     overlay.style.cssText =
@@ -4868,9 +4936,23 @@
     if (delBtn) {
       delBtn.addEventListener("click", function () {
         if (row.getAttribute("data-is-first-recurring") === "true") return;
-        row.remove();
-        if (window.recalculateMax) window.recalculateMax(pfx);
-        payTbl.refreshAllPaymentDeps(ctx);
+        if (typeof window.showDestructiveConfirmDialog !== "function") {
+          row.remove();
+          if (window.recalculateMax) window.recalculateMax(pfx);
+          payTbl.refreshAllPaymentDeps(ctx);
+          return;
+        }
+        window.showDestructiveConfirmDialog({
+          title: "Delete payment?",
+          message: "Are you sure you want to delete this payment? This cannot be undone.",
+          confirmLabel: "Yes, delete",
+          cancelLabel: "Cancel",
+          onConfirm: function () {
+            row.remove();
+            if (window.recalculateMax) window.recalculateMax(pfx);
+            payTbl.refreshAllPaymentDeps(ctx);
+          },
+        });
       });
     }
     var dupBtn = row.querySelector(".pay-dup");
@@ -5534,9 +5616,24 @@
           }
         });
         r.querySelector(".pay-del").addEventListener("click", function () {
-          r.remove();
-          if (window.recalculateMax) window.recalculateMax(ctx === "mnd" ? "mnd" : "pp001");
-          self.refreshAllPaymentDeps(ctx);
+          if (r.getAttribute("data-is-first-recurring") === "true") return;
+          if (typeof window.showDestructiveConfirmDialog !== "function") {
+            r.remove();
+            if (window.recalculateMax) window.recalculateMax(ctx === "mnd" ? "mnd" : "pp001");
+            self.refreshAllPaymentDeps(ctx);
+            return;
+          }
+          window.showDestructiveConfirmDialog({
+            title: "Delete payment?",
+            message: "Are you sure you want to delete this payment? This cannot be undone.",
+            confirmLabel: "Yes, delete",
+            cancelLabel: "Cancel",
+            onConfirm: function () {
+              r.remove();
+              if (window.recalculateMax) window.recalculateMax(ctx === "mnd" ? "mnd" : "pp001");
+              self.refreshAllPaymentDeps(ctx);
+            },
+          });
         });
         var amtIn = r.querySelector(".pay-amt");
         if (amtIn) {
@@ -6944,7 +7041,16 @@ document.getElementById("mnd-btnSeeSchedule").addEventListener("click",function(
   }
   window.location.hash="#screen-sch";
 });
-document.getElementById("mnd-btnCancel").addEventListener("click",function(){if(confirm("Discard changes?"))history.back();});
+document.getElementById("mnd-btnCancel").addEventListener("click",function(){
+  if(typeof window.showDestructiveConfirmDialog!=="function"){history.back();return;}
+  window.showDestructiveConfirmDialog({
+    title:"Discard changes?",
+    message:"Are you sure you want to cancel? All unsaved mandate details will be lost.",
+    confirmLabel:"Yes, cancel",
+    cancelLabel:"Keep editing",
+    onConfirm:function(){window.location.hash="#screen-pp002";}
+  });
+});
 document.getElementById("mnd-btnDraft").addEventListener("click",function(){var wa=document.getElementById("mnd-contactWhatsapp"),mo=document.getElementById("mnd-contactMobile"),email=document.getElementById("mnd-contactEmail");var touched=(wa&&wa.value.trim())||(mo&&mo.value.trim())||(email&&email.value.trim())||freqEl.value||caEl.value||miEl.value||maEl.value;if(!touched){alert("Enter at least one field to save a draft.");return;}alert("Draft saved (mock).");});
 ["mandateRef","eidFullName","eidNumber","ibanNumber","ccNumber","ccExpiry"].forEach(function(id){var el=document.getElementById("mnd-"+id);if(el)el.addEventListener("input",touch);});
 ["eidFile","ibanFile"].forEach(function(id){document.getElementById("mnd-"+id).addEventListener("change",touch);});
@@ -7558,7 +7664,22 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         window.location.hash = "#screen-sch";
       });
       document.getElementById("pp001-btnCancel").addEventListener("click", function () {
-        window.location.href = "#screen-pp002";
+        var isEdit = !!window.__pp001IsEditMode;
+        window.showDestructiveConfirmDialog({
+          title: "Discard changes?",
+          message: isEdit
+            ? "Are you sure you want to cancel? All unsaved changes will be lost."
+            : "Are you sure you want to cancel? All unsaved plan details will be lost.",
+          confirmLabel: "Yes, cancel",
+          cancelLabel: "Keep editing",
+          onConfirm: function () {
+            if (typeof window.navigateToPrototypeScreen === "function") {
+              window.navigateToPrototypeScreen("screen-pp002", { dropEditParam: true });
+            } else {
+              window.location.hash = "#screen-pp002";
+            }
+          },
+        });
       });
 
       if (planToEdit) {
@@ -7681,12 +7802,38 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
     }
   }
 
+  function schLeaveDialog(onConfirm) {
+    window.showDestructiveConfirmDialog({
+      title: "Leave this screen?",
+      message: "Are you sure you want to go back? Your schedule will not be saved.",
+      confirmLabel: "Yes, cancel",
+      cancelLabel: "Keep editing",
+      onConfirm: onConfirm,
+    });
+  }
+
+  function schCancelDestination() {
+    var d =
+      window.DirectDebitCcPayTbl && DirectDebitCcPayTbl.readDraft
+        ? DirectDebitCcPayTbl.readDraft()
+        : null;
+    if (d && d.source === "mandate") return "#screen-pp002";
+    return "#screen-pp002";
+  }
+
+  function schBackEditDestination() {
+    var d = DirectDebitCcPayTbl.readDraft();
+    return d && d.source === "mandate" ? "#screen-mnd" : "#screen-pp001";
+  }
+
   document.getElementById("sch-btnCancel").addEventListener("click", function () {
-    window.location.hash = "#screen-pp002";
+    var dest = schCancelDestination();
+    schLeaveDialog(function () {
+      window.location.hash = dest;
+    });
   });
   document.getElementById("sch-btnBackEdit").addEventListener("click", function () {
-    var d = DirectDebitCcPayTbl.readDraft();
-    window.location.hash = d && d.source === "mandate" ? "#screen-mnd" : "#screen-pp001";
+    window.location.hash = schBackEditDestination();
   });
   function isEditingPlanDraft(d) {
     if (!d || d.source !== "plan") return false;
