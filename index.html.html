@@ -1796,7 +1796,7 @@
                 </div>
 
                 <div class="form-group" id="mnd-collectionDayGroup">
-                  <label id="mnd-collectionDayLabel">Collection day <span class="req">*</span></label>
+                  <label id="mnd-collectionDayLabel">Collection day<span style="color:#9CA3AF;font-weight:400;margin-left:4px;">(Optional)</span></label>
                   <div id="mnd-cdModeHost"></div>
                   <select class="input hidden-field" id="mnd-cd-longPeriodFixed" style="width:100%;">
                     <option value="first-of-month">First day of the next Month</option>
@@ -1875,8 +1875,8 @@
                     <div class="form-group" style="flex:1; margin-bottom:0;" id="mnd-wrapMax">
                       <label for="mnd-maxAmount">Max amount (AED) <span class="req">*</span></label>
                       <input class="input" id="mnd-maxAmount" inputmode="decimal" placeholder="0.00" />
-                      <p style="font-size:11px;color:#4E465E;font-family:Inter,sans-serif;margin-top:4px;">
-                        Auto-calculated from your payment table. You can increase this but not below the calculated value.
+                      <p id="mnd-max-default-note" style="font-size:11px;color:#4E465E;font-family:Inter,sans-serif;margin-top:4px;">
+                        Please enter the maximum collection amount manually.
                       </p>
                       <p id="mnd-max-warning" style="font-size:12px;color:#FF6B68;font-family:Inter,sans-serif;margin-top:5px;display:none;line-height:1.5;"></p>
                       <div class="field-error" id="mnd-err-max">Max must be ≥ min.</div>
@@ -2192,7 +2192,7 @@
               </div>
 
               <div class="form-group" id="pp001-collectionDayGroup">
-                <label for="pp001-collectionDay" id="pp001-collectionDayLabel">Collection day <span style="font-weight:400">(optional)</span></label>
+                <label for="pp001-collectionDay" id="pp001-collectionDayLabel">Collection day<span style="color:#9CA3AF;font-weight:400;margin-left:4px;">(Optional)</span></label>
                 <div id="pp001-cdModeHost"></div>
                 <select class="input hidden-field" id="pp001-cd-longPeriodFixed" style="width:100%;">
                   <option value="first-of-month">First day of the next Month</option>
@@ -2296,7 +2296,7 @@
                     <label for="pp001-maxAmount">Max amount (AED) <span class="req">*</span></label>
                     <input class="input" id="pp001-maxAmount" name="maxAmount" inputmode="decimal" placeholder="0.00" />
                     <p id="pp001-max-default-note" style="font-size:11px;color:#4E465E;font-family:Inter,sans-serif;margin-top:4px;">
-                      Auto-calculated from your payment table. You can increase this but not below the calculated value.
+                      Please enter the maximum collection amount manually.
                     </p>
                     <p id="pp001-max-edit-note" style="display:none;font-size:11px;color:#4E465E;font-family:Inter,sans-serif;margin-top:4px;line-height:1.5;">
                       <span style="display:inline-flex;align-items:center;gap:4px;">
@@ -2676,6 +2676,22 @@
 
   w.getFixedCdBase = function (idPrefix) {
     return idPrefix === "pp001-cd" ? "pp001" : "mnd";
+  };
+
+  w.CD_OPTIONAL_LABEL_HTML =
+    '<span style="color:#9CA3AF;font-weight:400;margin-left:4px;">(Optional)</span>';
+  w.setFixedCollectionDayLabel = function (labelEl) {
+    if (!labelEl) return;
+    labelEl.innerHTML = "Collection day" + w.CD_OPTIONAL_LABEL_HTML;
+  };
+
+  w.MAX_HINT_MANUAL = "Please enter the maximum collection amount manually.";
+  w.MAX_HINT_AUTO =
+    "Auto-calculated from your payment table. You may increase this above the calculated value.";
+  w.updateMaxAmountHint = function (pfx, hasRows) {
+    var note = document.getElementById(pfx + "-max-default-note");
+    if (!note) return;
+    note.textContent = hasRows ? w.MAX_HINT_AUTO : w.MAX_HINT_MANUAL;
   };
 
   w.hideFixedCdLegacyFields = function (idPrefix) {
@@ -4889,7 +4905,6 @@
 
   function buildCompactPayRowHtml(pfx, opts) {
     opts = opts || {};
-    var hideDel = opts.isFirst ? ' style="display:none;"' : "";
     return (
       '<td><input type="text" class="input pay-name" placeholder="Optional" /></td>' +
       '<td class="pay-type-td">' +
@@ -4904,9 +4919,7 @@
       '</td>' +
       '<td class="pay-notes-td"><input type="text" class="input pay-notes" placeholder="Notes" /></td>' +
       '<td class="pay-actions-cell">' +
-      '<button type="button" class="icon-act-btn pay-del" title="Delete"' +
-      hideDel +
-      '><i data-lucide="trash-2"></i></button>' +
+      '<button type="button" class="icon-act-btn pay-del" title="Delete"><i data-lucide="trash-2"></i></button>' +
       '<button type="button" class="icon-act-btn pay-dup" title="Duplicate"><i data-lucide="copy"></i></button></td>'
     );
   }
@@ -4935,7 +4948,6 @@
     var delBtn = row.querySelector(".pay-del");
     if (delBtn) {
       delBtn.addEventListener("click", function () {
-        if (row.getAttribute("data-is-first-recurring") === "true") return;
         if (typeof window.showDestructiveConfirmDialog !== "function") {
           row.remove();
           if (window.recalculateMax) window.recalculateMax(pfx);
@@ -5071,8 +5083,8 @@
     initVariable: function (ctx) {
       if (ctx === "mnd" || ctx === "pp001") {
         this.clearVariable(ctx);
-        if (ctx === "mnd" && window.ensureFirstRecurringRow) window.ensureFirstRecurringRow();
-        if (ctx === "pp001" && window.ensureFirstPlanRecurringRow) window.ensureFirstPlanRecurringRow();
+        var pfx = ctx === "mnd" ? "mnd" : "pp001";
+        if (window.recalculateMax) window.recalculateMax(pfx);
         return;
       }
     },
@@ -5616,7 +5628,6 @@
           }
         });
         r.querySelector(".pay-del").addEventListener("click", function () {
-          if (r.getAttribute("data-is-first-recurring") === "true") return;
           if (typeof window.showDestructiveConfirmDialog !== "function") {
             r.remove();
             if (window.recalculateMax) window.recalculateMax(ctx === "mnd" ? "mnd" : "pp001");
@@ -6283,27 +6294,44 @@
 
       if (currentGroup !== null) groups.push(currentGroup);
 
+      var hasRows = rows.length > 0;
       var calculatedMax = groups.length > 0 ? Math.max.apply(null, groups) : 0;
       var maxField = document.getElementById(pfx + "-maxAmount");
       if (!maxField) return;
 
+      if (window.updateMaxAmountHint) window.updateMaxAmountHint(pfx, hasRows);
+
       maxField.dataset.calculatedMin = calculatedMax.toFixed(2);
 
       var isPp001Edit = pfx === "pp001" && window.__pp001IsEditMode;
+      var defNote = document.getElementById("pp001-max-default-note");
+      var editNote = document.getElementById("pp001-max-edit-note");
       if (isPp001Edit) {
-        var savedMax = parseFloat(maxField.dataset.savedMax) || 0;
-        var displayMax = Math.max(savedMax, calculatedMax);
-        if (displayMax > 0) {
-          maxField.value = displayMax.toFixed(2);
-        } else if (savedMax > 0) {
-          maxField.value = savedMax.toFixed(2);
-        } else {
+        if (!hasRows) {
           maxField.value = "";
+          maxField.readOnly = false;
+          maxField.style.background = "";
+          maxField.style.color = "";
+          maxField.style.cursor = "";
+          if (defNote) defNote.style.display = "";
+          if (editNote) editNote.style.display = "none";
+        } else {
+          var savedMax = parseFloat(maxField.dataset.savedMax) || 0;
+          var displayMax = Math.max(savedMax, calculatedMax);
+          if (displayMax > 0) {
+            maxField.value = displayMax.toFixed(2);
+          } else if (savedMax > 0) {
+            maxField.value = savedMax.toFixed(2);
+          } else {
+            maxField.value = "";
+          }
+          maxField.readOnly = true;
+          maxField.style.background = "#F8F7FB";
+          maxField.style.color = "#4E465E";
+          maxField.style.cursor = "not-allowed";
+          if (defNote) defNote.style.display = "none";
+          if (editNote) editNote.style.display = "block";
         }
-        maxField.readOnly = true;
-        maxField.style.background = "#F8F7FB";
-        maxField.style.color = "#4E465E";
-        maxField.style.cursor = "not-allowed";
       } else if (calculatedMax > 0) {
         maxField.value = calculatedMax.toFixed(2);
         maxField.readOnly = false;
@@ -6875,7 +6903,7 @@ function fmtDMY(dt){if(!dt||isNaN(dt.getTime()))return"";var d=dt.getDate().toSt
 function todayDMY(){return fmtDMY(new Date());}
 
 var amtGrid=document.getElementById("mnd-topAmountGrid"),varPay=document.getElementById("mnd-variablePaymentsWrap");
-function setAmtMode(fixed){amtFixed.classList.toggle("active",fixed);amtVar.classList.toggle("active",!fixed);amtT.value=fixed?"Fixed":"Variable";if(!fixed&&!(parseMoney(miEl.value)>0))miEl.value="1";if(amtGrid){amtGrid.classList.toggle("mode-fixed",fixed);amtGrid.classList.toggle("mode-variable",!fixed);}var maxWrap=document.getElementById("mnd-maxAfterTableWrap");if(maxWrap){if(fixed)maxWrap.classList.add("hidden-field");else maxWrap.classList.remove("hidden-field");}if(varPay){if(fixed){varPay.classList.add("hidden-field");cdG.classList.remove("hidden-field");if(window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.clearVariable("mnd");syncCD();}else{varPay.classList.remove("hidden-field");cdG.classList.add("hidden-field");if(window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.initVariable("mnd");if(window.ensureFirstRecurringRow)window.ensureFirstRecurringRow();if(window.recalculateMax)window.recalculateMax("mnd");}}if(window.syncMndExpectedIncreaseGroup)window.syncMndExpectedIncreaseGroup();}
+function setAmtMode(fixed){amtFixed.classList.toggle("active",fixed);amtVar.classList.toggle("active",!fixed);amtT.value=fixed?"Fixed":"Variable";if(!fixed&&!(parseMoney(miEl.value)>0))miEl.value="1";if(amtGrid){amtGrid.classList.toggle("mode-fixed",fixed);amtGrid.classList.toggle("mode-variable",!fixed);}var maxWrap=document.getElementById("mnd-maxAfterTableWrap");if(maxWrap){if(fixed)maxWrap.classList.add("hidden-field");else maxWrap.classList.remove("hidden-field");}if(varPay){if(fixed){varPay.classList.add("hidden-field");cdG.classList.remove("hidden-field");if(window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.clearVariable("mnd");syncCD();}else{varPay.classList.remove("hidden-field");cdG.classList.add("hidden-field");if(window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.initVariable("mnd");}}if(window.syncMndExpectedIncreaseGroup)window.syncMndExpectedIncreaseGroup();}
 amtFixed.addEventListener("click",function(){setAmtMode(true);markCustom();touch();});
 amtVar.addEventListener("click",function(){setAmtMode(false);markCustom();touch();});
 
@@ -6885,7 +6913,7 @@ document.getElementById("mnd-minAmount").addEventListener("input",function(){mar
 document.getElementById("mnd-mandateRef").addEventListener("input",function(){touch();});
 
 function hideCD(){cdW.classList.add("hidden-field");wrapM.classList.add("hidden-field");wQ.classList.add("hidden-field");wH.classList.add("hidden-field");wA.classList.add("hidden-field");cdTxt.classList.add("hidden-field");}
-function syncCD(){var f=freqEl.value;hideCD();cdTxt.classList.remove("input-invalid");document.getElementById("mnd-err-cd").classList.remove("show");if(amtT.value==="Variable"){cdG.classList.add("hidden-field");return;}if(!f){cdG.classList.add("hidden-field");return;}if(f==="Daily"){cdG.classList.add("hidden-field");return;}cdG.classList.remove("hidden-field");if(window.updateCollectionDayUI){window.updateCollectionDayUI("mnd-cd");return;}if(f==="Weekly"){cdW.classList.remove("hidden-field");return;}if(f==="Monthly"){wrapM.classList.remove("hidden-field");return;}cdTxt.classList.remove("hidden-field");cdTxt.placeholder=f==="One-Time"?"DD/MM/YYYY":"Description";}
+function syncCD(){var f=freqEl.value;hideCD();cdTxt.classList.remove("input-invalid");document.getElementById("mnd-err-cd").classList.remove("show");if(amtT.value==="Variable"){cdG.classList.add("hidden-field");return;}if(!f){cdG.classList.add("hidden-field");return;}if(f==="Daily"){cdG.classList.add("hidden-field");return;}cdG.classList.remove("hidden-field");if(window.setFixedCollectionDayLabel)window.setFixedCollectionDayLabel(cdLab);if(window.updateCollectionDayUI){window.updateCollectionDayUI("mnd-cd");return;}if(f==="Weekly"){cdW.classList.remove("hidden-field");return;}if(f==="Monthly"){wrapM.classList.remove("hidden-field");return;}cdTxt.classList.remove("hidden-field");cdTxt.placeholder=f==="One-Time"?"DD/MM/YYYY":"Description";}
 freqEl.addEventListener("change",function(){syncCD();if(window.updateCollectionDayUI)window.updateCollectionDayUI("mnd-cd");if(window.onFrequencyChange)window.onFrequencyChange("mnd");if(amtT.value==="Variable"&&window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.onMandateFreqChange("mnd");markCustom();touch();});
 freqEl.addEventListener("mousedown",function(e){if(this.disabled)e.preventDefault();},true);
 
@@ -7007,7 +7035,7 @@ function validatePlanFields(){
 function showE(id,on){var el=document.getElementById("mnd-"+id);if(!el)return;if(on){el.classList.add("show");el.style.setProperty("display","block","important");}else{el.classList.remove("show");el.style.removeProperty("display");}}
 var ok=true;
 if(!freqEl.value){showE("err-frequency",true);freqEl.classList.add("input-invalid");ok=false;}else{showE("err-frequency",false);freqEl.classList.remove("input-invalid");}
-if(amtT.value==="Variable"){showE("err-ca",false);caEl.classList.remove("input-invalid");var miV=parseMoney(miEl.value),maV=parseMoney(maEl.value);if(!(miV>0)){showE("err-min",true);miEl.classList.add("input-invalid");ok=false;}else{showE("err-min",false);miEl.classList.remove("input-invalid");}if(!(maV>0)||maV<miV){showE("err-max",true);maEl.classList.add("input-invalid");ok=false;}else{showE("err-max",false);maEl.classList.remove("input-invalid");}showE("err-cd",false);if(window.DirectDebitCcPayTbl&&!DirectDebitCcPayTbl.validateAll("mnd")) ok=false;}else{var ca=parseMoney(caEl.value);if(!(ca>0)){showE("err-ca",true);caEl.classList.add("input-invalid");ok=false;}else{showE("err-ca",false);caEl.classList.remove("input-invalid");}showE("err-min",false);showE("err-max",false);miEl.classList.remove("input-invalid");maEl.classList.remove("input-invalid");var f=freqEl.value;if(f&&f!=="Daily"){var dv=cdVal();if(!dv){showE("err-cd",true);ok=false;}else showE("err-cd",false);}else showE("err-cd",false);}
+if(amtT.value==="Variable"){showE("err-ca",false);caEl.classList.remove("input-invalid");var miV=parseMoney(miEl.value),maV=parseMoney(maEl.value);var mndTb=document.getElementById("mnd-payTableBody");var mndTableEmpty=!mndTb||!mndTb.querySelectorAll("tr").length;var errMaxEl=document.getElementById("mnd-err-max");if(!(miV>0)){showE("err-min",true);miEl.classList.add("input-invalid");ok=false;}else{showE("err-min",false);miEl.classList.remove("input-invalid");}if(!(maV>0)){if(errMaxEl)errMaxEl.textContent=mndTableEmpty?"Please enter a maximum collection amount.":"Max must be ≥ min.";showE("err-max",true);maEl.classList.add("input-invalid");ok=false;}else if(maV<miV){if(errMaxEl)errMaxEl.textContent="Max must be ≥ min.";showE("err-max",true);maEl.classList.add("input-invalid");ok=false;}else{if(errMaxEl)errMaxEl.textContent="Max must be ≥ min.";showE("err-max",false);maEl.classList.remove("input-invalid");}showE("err-cd",false);if(window.DirectDebitCcPayTbl&&!DirectDebitCcPayTbl.validateAll("mnd")) ok=false;}else{var ca=parseMoney(caEl.value);if(!(ca>0)){showE("err-ca",true);caEl.classList.add("input-invalid");ok=false;}else{showE("err-ca",false);caEl.classList.remove("input-invalid");}showE("err-min",false);showE("err-max",false);miEl.classList.remove("input-invalid");maEl.classList.remove("input-invalid");showE("err-cd",false);}
 var ly=parseInt(lifeY.value,10)||0,lm=parseInt(lifeM.value,10)||0,ld=parseInt(lifeD.value,10)||0;if(ly+lm+ld===0){showE("err-life",true);ok=false;}else showE("err-life",false);
 var st=parseDMY(startEl.value),en=parseDMY(endEl.value);if(!st){showE("err-start",true);startEl.classList.add("input-invalid");ok=false;}else{showE("err-start",false);startEl.classList.remove("input-invalid");}if(!en){showE("err-end",true);endEl.classList.add("input-invalid");ok=false;}else{showE("err-end",false);endEl.classList.remove("input-invalid");}
 if(!payerEnteredByPayer()){var hasEid=document.getElementById("mnd-eidFile").files.length||document.getElementById("mnd-eidFullName").value.trim()||document.getElementById("mnd-eidNumber").value.trim();var hasPay=payM.value==="iban"?(document.getElementById("mnd-ibanFile").files.length||document.getElementById("mnd-ibanNumber").value.trim()):document.getElementById("mnd-ccNumber").value.trim();if(!hasEid&&!hasPay){showE("err-payer-info",true);ok=false;}else showE("err-payer-info",false);if(payM.value==="cc"){var ccExp=document.getElementById("mnd-ccExpiry");var expVal=ccExp?ccExp.value.trim():"";var expOk=/^\d{2}\/\d{4}$/.test(expVal);if(!expOk){showE("err-ccExpiry",true);if(ccExp)ccExp.classList.add("input-invalid");ok=false;}else{showE("err-ccExpiry",false);if(ccExp)ccExp.classList.remove("input-invalid");}}}else{showE("err-payer-info",false);showE("err-ccExpiry",false);var ccExp0=document.getElementById("mnd-ccExpiry");if(ccExp0)ccExp0.classList.remove("input-invalid");}
@@ -7068,6 +7096,7 @@ syncEndFromLife();
 document.getElementById("mnd-mandateRef").value="MND-DEMO-001";
 setTimeout(function(){
 var tb0=document.getElementById("mnd-payTableBody");
+if(tb0&&!tb0.querySelectorAll("tr").length&&window.DirectDebitCcPayTbl)DirectDebitCcPayTbl.addRow("mnd");
 var first=tb0?tb0.querySelector("tr[data-is-first-recurring]")||tb0.querySelector("tr"):null;
 if(first){
 var rn=first.querySelector(".pay-name");if(rn)rn.value="Monthly Service Fee";
@@ -7331,8 +7360,6 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
             ppVarPay.classList.remove("hidden-field");
             collectionDayGroup.classList.add("hidden-field");
             if (window.DirectDebitCcPayTbl) DirectDebitCcPayTbl.initVariable("pp001");
-            if (window.ensureFirstPlanRecurringRow) window.ensureFirstPlanRecurringRow();
-            if (window.recalculateMax) window.recalculateMax("pp001");
           }
         }
         syncPp001ExpectedIncrease();
@@ -7369,11 +7396,8 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
         }
         collectionDayGroup.classList.remove("hidden-field");
 
-        collectionDayLabel.innerHTML = "Collection day <span style=\"font-weight:400\">(optional)</span>";
-        if (f === "Weekly") {
-          collectionDayLabel.innerHTML = "Collection day <span style=\"font-weight:400\">(optional, day of week)</span>";
-        } else if (f === "Monthly") {
-          collectionDayLabel.innerHTML = "Collection day <span style=\"font-weight:400\">(optional, calendar day)</span>";
+        if (window.setFixedCollectionDayLabel) {
+          window.setFixedCollectionDayLabel(collectionDayLabel);
         }
         if (window.updateCollectionDayUI) {
           window.updateCollectionDayUI("pp001-cd");
@@ -7560,10 +7584,21 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
           show("err-collectionAmount", false); collectionAmountEl.classList.remove("input-invalid");
           var mi = parseMoney(document.getElementById("pp001-minAmount").value);
           var ma = parseMoney(maxAmountEl.value);
+          var ppTb = document.getElementById("pp001-payTableBody");
+          var ppTableEmpty = !ppTb || !ppTb.querySelectorAll("tr").length;
+          var errMaxAmt = document.getElementById("pp001-err-maxAmount");
           if (!(mi > 0)) { show("err-minAmount", true); document.getElementById("pp001-minAmount").classList.add("input-invalid"); ok = false; }
           else { show("err-minAmount", false); document.getElementById("pp001-minAmount").classList.remove("input-invalid"); }
-          if (!(ma > 0) || ma < mi) { show("err-maxAmount", true); maxAmountEl.classList.add("input-invalid"); ok = false; }
-          else { show("err-maxAmount", false); maxAmountEl.classList.remove("input-invalid"); }
+          if (!(ma > 0)) {
+            if (errMaxAmt) errMaxAmt.textContent = ppTableEmpty ? "Please enter a maximum collection amount." : "Max must be ≥ min.";
+            show("err-maxAmount", true); maxAmountEl.classList.add("input-invalid"); ok = false;
+          } else if (ma < mi) {
+            if (errMaxAmt) errMaxAmt.textContent = "Max must be ≥ min.";
+            show("err-maxAmount", true); maxAmountEl.classList.add("input-invalid"); ok = false;
+          } else {
+            if (errMaxAmt) errMaxAmt.textContent = "Max must be ≥ min.";
+            show("err-maxAmount", false); maxAmountEl.classList.remove("input-invalid");
+          }
           if (window.DirectDebitCcPayTbl && !DirectDebitCcPayTbl.validateAll("pp001")) ok = false;
         }
 
@@ -7709,6 +7744,9 @@ if(window.lucide&&typeof lucide.createIcons==="function"){try{lucide.createIcons
           document.getElementById("pp001-lifeMonths").value = "6";
           setTimeout(function () {
             var tb = document.getElementById("pp001-payTableBody");
+            if (tb && !tb.querySelectorAll("tr").length && window.DirectDebitCcPayTbl) {
+              DirectDebitCcPayTbl.addRow("pp001");
+            }
             var first = tb ? tb.querySelector("tr[data-is-first-recurring]") || tb.querySelector("tr") : null;
             if (first) {
               var rn = first.querySelector(".pay-name");
